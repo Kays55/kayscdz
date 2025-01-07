@@ -536,7 +536,7 @@ onTextMessage(function(mode, text)
       Target.Id = nil
       Target.get = nil
       g_game.cancelAttack()
-      CaveBot.setOff()
+      CaveBot.delay(60000)
       g_game.setChaseMode(1)
       g_game.setSafeFight(false)
       NameTarget = p:getName()
