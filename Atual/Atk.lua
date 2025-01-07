@@ -511,13 +511,13 @@ onAttackingCreatureChange(function(creature, oldCreature)
   if autoatackcave2.isOff() then return end
   if creature and creature:isPlayer() then
     TargetBot.setOff()
-    CaveBot.setOff()
+    CaveBot.delay(60000)
     g_game.setChaseMode(1)
     g_game.setSafeFight(false)
   end
   if oldCreature and oldCreature:isPlayer() then
     TargetBot.setOn()
-    CaveBot.setOn()
+    CaveBot.delay(200)
     g_game.setChaseMode(0)
     g_game.setSafeFight(true)
   end
