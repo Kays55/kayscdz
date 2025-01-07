@@ -3,10 +3,9 @@ setDefaultTab("Dsc")
 -------------------
 local discordTimes = {}
  -- insert your webhook link below
-local webhook = "https://discord.com/api/webhooks/1227437377165725778/Tx5IiNpDtKlAVlo5jl9_3wKoiHNvSknAdMko7kN2NGO144naCKxXMbN149cgVldNepoG"
 
 local default_data = {
-  username = "CDZBot", -- name discord displays the message from
+  username = "CDZ Drop", -- name discord displays the message from
 }
 
 local embed = {
@@ -80,10 +79,9 @@ end
 
 local discordTimes = {}
  -- insert your webhook link below
-local WH0 = "https://discord.com/api/webhooks/1229409297155231845/WSYK3iGJ4at3Q8L9dQo4YB2JhTBU9_8vUjXFY9JbUT-bdv0mQp_mdf01Qq9y4hUtvVJL"
 
 local dd3 = {
-  username = "MeliantenaCave", -- name discord displays the message from
+  username = "Player In Cave", -- name discord displays the message from
 }
 
 local embed = {
@@ -163,10 +161,9 @@ end)
 
 local discordTimes = {}
  -- insert your webhook link below
-local WH2 = "https://discord.com/api/webhooks/1230592876044488867/8o6hzubkjUmDGLAKIzwmggPf9A5LyFrIFZSKLzN9pWtQ3VSzHIJXdXFPxbFR9Txz_W-R"
 
 local dd3 = {
-  username = "Puliça", -- name discord displays the message from
+  username = "Player Attack", -- name discord displays the message from
 }
 
 local embed = {
@@ -245,10 +242,10 @@ end)
 
 local discordTimes = {}
  -- insert your webhook link below
-local WH1 = "https://discord.com/api/webhooks/1247907241835888740/ijDl3rscpEBTDXJ-Mh0mLTNJnldtyJ87g4kZsAAayVMgW-J0zs2ZlOHAyLR_MuWBtGV-"
+
 
 local dd5 = {
-  username = "CeifadorSinistro", -- name discord displays the message from
+  username = "Just Frag", -- name discord displays the message from
 }
 
 local embed = {
@@ -318,10 +315,10 @@ onTextMessage(function(mode, text)
 setDefaultTab("Dsc")
 local discordTimes = {}
  -- insert your webhook link below
-local pmWK = "https://discord.com/api/webhooks/1287728440056877173/sVYg-_iRzk5RzXuyYsRbyZ0CvPShCJobjGgnPCqGoqPS5kDelLQRWkJmLXd1fRZdYrDv"
+
 
 local DiscName1 = {
-  username = "PMs Pain", -- name discord displays the message from
+  username = "PMs", -- name discord displays the message from
 }
 
 local embed = {
@@ -383,7 +380,7 @@ end)
 ---------------------------------------------------------
 
 local discordTimes = {}
-local webhookeveryone = "https://discord.com/api/webhooks/1310431487333629983/tE-ah0L79xqUUqpkKUCAiQOrP4yDMDMK12ZJNSLhltLhjFkDrZcUaxfHUDbh13BB-mrG"
+
 
 local default_dataeveryone = {
   username = "CapBot",
