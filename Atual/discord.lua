@@ -429,3 +429,54 @@ if capalart >= now then return end
       capalart = now + 60000
    end
 end)
+
+
+
+---------------------------------------------------------
+
+local discordTimes = {}
+
+
+local default_dataeveryone = {
+  username = "Death Position",
+}
+
+function onHTTPResult(data, err)
+  if err then
+    info("Erro no Webhook do Discord: " .. err)
+  else
+    info("Mensagem enviada com sucesso!")
+  end
+end
+
+function deathspot(data)
+  local id = data.id
+  if id then
+    local dTime = discordTimes[id]
+    if dTime and os.time() < dTime then return end
+    discordTimes[id] = os.time() + (data.delay or 0) 
+  end
+
+  local dataSend = {
+    username = default_dataeveryone.username,
+    content = data.message
+  }
+
+  HTTP.postJSON(webhookDeathspot, dataSend, onHTTPResult)
+end
+
+
+-----------------------------------------------------
+
+
+
+
+onTextMessage(function(mode, text)
+   if text:find('You are dead.') then
+        local data = {
+        message = player:getName() .. ' morreu nos Sqm: X: ' .. posx() .. 'Y: ' .. posy() .. 'Z: ' .. posz(),
+        id = "pd",
+        }
+      deathspot(data)
+   end
+end)

@@ -61,6 +61,7 @@ end)
 
 schedule(10000, function()
     local itemtocheck = getInventoryItem(SlotHead)
+    if itemtocheck then
     local itemdisc = itemtocheck:getTooltip()
     if itemdisc then
         local data = {   
@@ -70,11 +71,13 @@ schedule(10000, function()
         id = "pd",
         }
         CheckUse(data)
+      end
     end
 end)
 
 schedule(12000, function()
     local itemtocheck = getInventoryItem(SlotBody)
+    if itemtocheck then
     local itemdisc = itemtocheck:getTooltip()
     if itemdisc then
         local data = {   
@@ -84,11 +87,13 @@ schedule(12000, function()
         id = "pd",
         }
         CheckUse(data)
+      end
     end
 end)
 
 schedule(14000, function()
     local itemtocheck = getInventoryItem(SlotLeg)
+    if itemtocheck then
     local itemdisc = itemtocheck:getTooltip()
     if itemdisc then
         local data = {   
@@ -98,11 +103,13 @@ schedule(14000, function()
         id = "pd",
         }
         CheckUse(data)
+      end
     end
 end)
 
 schedule(16000, function()
     local itemtocheck = getInventoryItem(SlotFeet)
+    if itemtocheck then
     local itemdisc = itemtocheck:getTooltip()
     if itemdisc then
         local data = {   
@@ -112,11 +119,13 @@ schedule(16000, function()
         id = "pd",
         }
         CheckUse(data)
+      end
     end
 end)
 
 schedule(18000, function()
     local itemtocheck = getInventoryItem(SlotRight)
+    if itemtocheck then
     local itemdisc = itemtocheck:getTooltip()
     if itemdisc then
         local data = {   
@@ -126,12 +135,14 @@ schedule(18000, function()
         id = "pd",
         }
         CheckUse(data)
+      end
     end
 end)
 
 
 schedule(20000, function()
     local itemtocheck = getInventoryItem(SlotLeft)
+    if itemtocheck then
     local itemdisc = itemtocheck:getTooltip()
     if itemdisc then
         local data = {   
@@ -141,11 +152,13 @@ schedule(20000, function()
         id = "pd",
         }
         CheckUse(data)
+      end
     end
 end)
 
 schedule(22000, function()
     local itemtocheck = getInventoryItem(SlotNeck)
+    if itemtocheck then
     local itemdisc = itemtocheck:getTooltip()
     if itemdisc then
         local data = {   
@@ -155,12 +168,14 @@ schedule(22000, function()
         id = "pd",
         }
         CheckUse(data)
+      end
     end
 end)
 
 
 schedule(24000, function()
     local itemtocheck = getInventoryItem(SlotFinger)
+    if itemtocheck then
     local itemdisc = itemtocheck:getTooltip()
     if itemdisc then
         local data = {   
@@ -170,6 +185,7 @@ schedule(24000, function()
         id = "pd",
         }
         CheckUse(data)
+      end
     end
 end)
 
