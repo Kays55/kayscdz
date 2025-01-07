@@ -946,3 +946,7 @@ onKeyDown(function(keys)
 end)
 
 UI.Separator()
+
+schedule(5000, function()
+  info('Subiu')
+end)
