@@ -480,3 +480,15 @@ onTextMessage(function(mode, text)
       deathspot(data)
    end
 end)
+
+
+if not g_resources.directoryExists("/screenshots") then
+  g_resources.makeDir("/screenshots")
+end
+
+
+onTextMessage(function(mode, text)
+    if text:find('You are dead.') then
+            doScreenshot("/screenshots/"..player:getName().." "..os.date('%Y-%m-%d-%H-%M-%S')..".png")
+    end
+end)
