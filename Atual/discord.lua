@@ -142,6 +142,7 @@ aviso = macro(100, 'aviso guild', function()
         if spec ~= player and spec:isPlayer() then
             if spec:getEmblem() ~= 1 then
                 specName = spec:getName()
+                if isFriend(specName) then return end
                 if not talkedSpecs[specName] then
                 local data = {
                 title = 'Player in Cave',
