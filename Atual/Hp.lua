@@ -62,6 +62,12 @@ macro(200, 'Special Def', function()
   end
 end)
 
+onKeyPress(function(keys)
+  if keys == 'F' then
+    storage.holditem  = now + 3000
+  end
+end)
+
 UI.Separator()
 
 --info('Loaded Def')

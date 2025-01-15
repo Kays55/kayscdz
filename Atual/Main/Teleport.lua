@@ -252,7 +252,7 @@ end
 onTalk(function(name, level, mode, text, channelId, pos)
   if (name ~= 'Caronte Travel') then return; end              
   if (mode ~= 51) then return; end
-  if (text:find('Para onde gostaria de ir?')) then 
+  if (text:find('para onde gostaria de ir')) then 
       TPArconte.show();
   else
       TPArconte.close();
