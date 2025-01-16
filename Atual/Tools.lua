@@ -619,7 +619,7 @@ local function searchAndMoveItems()
   return false
 end
 
-macro(1000, "Move Frags", searchAndMoveItems)
+movefragsdrops = macro(1000, "Move Frags", searchAndMoveItems)
 
 
 local toKeep = {
@@ -786,7 +786,7 @@ local toKeep = {
   [14912] = {'Raro','Épico','Lendario','Mitico'},
   [14861] = {'Incomum','Raro','Épico','Lendario','Mitico'},
 }
-macro(1000, "Move Rarity", function()
+moveequipsdrops = macro(1000, "Move Rarity", function()
   for _, c in pairs(getContainers()) do
     if c:getName() == 'the backpack' then
     for _, i in ipairs(c:getItems()) do
