@@ -5358,7 +5358,7 @@ info(targetsense)
 end)
 
 
-local ItemsToMove = {11755,13302,12272,13294,13298,13368,13882,13369,13831,13295,13882,13928,13881,13879,14251,13660,13297,13299,13194,13713,14824,13305,13304,13375,13880,12271,13657,14601,14594,14342,14599,14592,14602.13832,14088,13772,13773,14027}
+local ItemsToMove = {11755,13302,12272,13294,13298,13368,13882,13369,13831,13295,13882,13928,13881,13879,14251,13660,13297,13299,13194,13713,14824,13305,13304,13375,13880,12271,13657,14601,14594,14342,14599,14592,14602,13832,14088,13772,13773,14027,14090,14586,14089,13522,14936,13372,13373}
 
 local function searchAndMoveItems()
     for _, container in pairs(getContainers()) do
@@ -5374,12 +5374,20 @@ local function searchAndMoveItems()
   return false
 end
 
-macro(1000, "Move Frags", searchAndMoveItems)
+movefragsdrops = macro(1000, "Move Frags", searchAndMoveItems)
 
 
 local toKeep = {
   -- id / rarity to KEEP
   -- Arma>Shield>Helmet>Armor>Legs>Boots>Ring
+  -- Dubhe Set
+  [13527] = {'Raro','Épico','Lendario','Mitico'},
+  [13760] = {'Raro','Épico','Lendario','Mitico'},
+  [13523] = {'Raro','Épico','Lendario','Mitico'},
+  [13524] = {'Raro','Épico','Lendario','Mitico'},
+  [13525] = {'Raro','Épico','Lendario','Mitico'},
+  [13526] = {'Raro','Épico','Lendario','Mitico'},
+  [3050] = {'Raro','Épico','Lendario','Mitico'},
   -- Escorpião Set
   [14727] = {'Raro','Épico','Lendario','Mitico'},
   [13760] = {'Raro','Épico','Lendario','Mitico'},
@@ -5508,8 +5516,32 @@ local toKeep = {
   [15069] = {'Raro','Épico','Lendario','Mitico'},
   [15070] = {'Raro','Épico','Lendario','Mitico'},
   --[14356] = {'Incomum','Raro','Épico','Lendario','Mitico'},
+  -- Aries Retro Set
+  [14920] = {'Raro','Épico','Lendario','Mitico'},
+  [14921] = {'Raro','Épico','Lendario','Mitico'},
+  [14916] = {'Raro','Épico','Lendario','Mitico'},
+  [14917] = {'Raro','Épico','Lendario','Mitico'},
+  [14918] = {'Raro','Épico','Lendario','Mitico'},
+  [14919] = {'Raro','Épico','Lendario','Mitico'},
+  --[14356] = {'Incomum','Raro','Épico','Lendario','Mitico'},
+  -- Aries Renegado Set
+  [14927] = {'Raro','Épico','Lendario','Mitico'},
+  [14928] = {'Raro','Épico','Lendario','Mitico'},
+  [14923] = {'Raro','Épico','Lendario','Mitico'},
+  [14924] = {'Raro','Épico','Lendario','Mitico'},
+  [14925] = {'Raro','Épico','Lendario','Mitico'},
+  [14926] = {'Raro','Épico','Lendario','Mitico'},
+  --[14356] = {'Incomum','Raro','Épico','Lendario','Mitico'},
+  -- Wyvern Set
+  [14913] = {'Raro','Épico','Lendario','Mitico'},
+  [14914] = {'Raro','Épico','Lendario','Mitico'},
+  [14909] = {'Raro','Épico','Lendario','Mitico'},
+  [14910] = {'Raro','Épico','Lendario','Mitico'},
+  [14911] = {'Raro','Épico','Lendario','Mitico'},
+  [14912] = {'Raro','Épico','Lendario','Mitico'},
+  [14861] = {'Incomum','Raro','Épico','Lendario','Mitico'},
 }
-macro(1000, "Move Rarity", function()
+moveequipsdrops = macro(1000, "Move Rarity", function()
   for _, c in pairs(getContainers()) do
     if c:getName() == 'the backpack' then
     for _, i in ipairs(c:getItems()) do
