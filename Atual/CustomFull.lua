@@ -3098,7 +3098,7 @@ end
 onTalk(function(name, level, mode, text, channelId, pos)
   if (name ~= 'Athena Travel') then return; end              
   if (mode ~= 51) then return; end
-  if (text:find('Para onde gostaria de ir?')) then 
+  if (text:find('para onde gostaria de ir?')) then 
       TpMinoru.show();
   else
       TpMinoru.close();
