@@ -4426,14 +4426,6 @@ if g_game.isAttacking() then return end
   end
 end)
 
-
-onKeyDown(function(keys)
-  if not c.enabled then return end
-  if keys == config.esc then
-    target = nil
-  end
-end)
-
 ---------------------------------------------------------------------
 
 
