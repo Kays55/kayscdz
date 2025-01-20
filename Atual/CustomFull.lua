@@ -1293,9 +1293,7 @@ bypassdoormacro = macro(100, 'Bypassdoor', function()
   msg:addU8(opcode);
   msg:addU8(1);
   msg:addString(codePanel:getText());
-  schedule(2000, function()
   ProtocolGame:send(msg);
-  end)
   window:hide();
 end)
 
