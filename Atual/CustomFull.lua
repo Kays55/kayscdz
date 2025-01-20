@@ -3098,7 +3098,7 @@ end
 onTalk(function(name, level, mode, text, channelId, pos)
   if (name ~= 'Athena Travel') then return; end              
   if (mode ~= 51) then return; end
-  if (text:find('para onde gostaria de ir?')) then 
+  if (text:find('Para onde gostaria de ir?')) then 
       TpMinoru.show();
   else
       TpMinoru.close();
@@ -3164,6 +3164,27 @@ MainWindow
       margin-top: 5
       width: 165
 
+    Button
+      !text: tr('Icy Mountain')
+      anchors.top: prev.bottom
+      anchors.left: parent.left
+      margin-top: 5
+      width: 165
+
+    Button
+      !text: tr('Freezing Pillars')
+      anchors.top: prev.bottom
+      anchors.left: parent.left
+      margin-top: 5
+      width: 165
+
+    Button
+      !text: tr('Sky Forest')
+      anchors.top: prev.bottom
+      anchors.left: parent.left
+      margin-top: 5
+      width: 165
+
   VerticalScrollBar  
     id: mainScroll
     anchors.top: parent.top
@@ -3223,11 +3244,17 @@ end
 onTalk(function(name, level, mode, text, channelId, pos)
   if (name ~= 'Caronte Travel') then return; end              
   if (mode ~= 51) then return; end
-  if (text:find('Para onde gostaria de ir?')) then 
+  if (text:find('para onde gostaria de ir')) then 
       TPArconte.show();
   else
       TPArconte.close();
   end
+end);
+
+onKeyDown(function(keys)
+    if (keys == 'Escape' and ArconteUI:isVisible())  then
+        TPArconte.close();
+    end
 end);
 
 onKeyDown(function(keys)
