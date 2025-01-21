@@ -5559,12 +5559,12 @@ moveequipsdrops = macro(1000, "Move Rarity", function()
 end)
 
 ----------------------------------------------------
-storage.durability = nil
 onTextMessage(function(mode, text)
 local _, startIndex = text:find('Arm:');
 local endIndex, _ = text:find(',');
 local _, efistartIndex = text:find('Durability: ');
 local efiendIndex, _ = text:find('It');
+if text:find('ring') or text:find('glove') or text:find('shield') or text:find('sword') or text:find('reaper') then return end
   if text:find('You see a') and startIndex and endIndex then
     storage.ActualArm = tonumber(text:sub(startIndex+1, endIndex-1))
     if (text:find('dubhe')) and text:find('Arm:') then
@@ -5635,6 +5635,7 @@ local efiendIndex, _ = text:find('It');
   end
 end)
 
+------------------------------------------------------------------------------------------------------
 
 onTalk(function(name, level, mode, text, channelId, pos)
   if (name ~= 'Blessing') then return; end              
