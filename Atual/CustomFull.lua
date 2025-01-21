@@ -6177,5 +6177,5 @@ onTextMessage(function(mode, text)
 end)
 
 
-
 loaded = true
+info(loaded)
