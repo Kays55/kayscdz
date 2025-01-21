@@ -5627,9 +5627,9 @@ if text:find('ring') or text:find('glove') or text:find('shield') or text:find('
     if (text:find('wyvern')) and text:find('Arm:') then
       storage.BaseArm = 335
     end
-    local storage.CalcEficience = (((storage.ActualArm*(100))/storage.BaseArm))
+    storage.CalcEficience = (((storage.ActualArm*(100))/storage.BaseArm))
     if storage.CalcEficience then
-        local adaptformula = storage.CalcEficience - 100
+        adaptformula = storage.CalcEficience - 100
       modules.game_textmessage.displayGameMessage('A Eficiencia da Raridade: ' .. math.ceil(adaptformula) .. '%')
     end
   end
