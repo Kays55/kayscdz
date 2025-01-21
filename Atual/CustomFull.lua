@@ -6179,3 +6179,5 @@ end)
 
 loaded = true
 info(loaded)
+
+version = 1.0
