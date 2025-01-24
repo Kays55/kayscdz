@@ -4910,6 +4910,12 @@ onPlayerHealthChange(function(healthPercent)
   end
 end)
 
+onKeyPress(function(keys)
+  if keys == 'X' then
+    storage.holditem  = now + 3000
+  end
+end)
+
 macro(200, 'Adapt Master', function()
   if storage.holditem > now then
     moveToSlot(storage.Idrevive, 2)
