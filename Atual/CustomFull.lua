@@ -5631,7 +5631,7 @@ if text:find('ring') or text:find('glove') or text:find('shield') or text:find('
       storage.BaseArm = 350
     end
     if (text:find('wyvern')) and text:find('Arm:') then
-      storage.BaseArm = 335
+      storage.BaseArm = 350
     end
     storage.CalcEficience = (((storage.ActualArm*(100))/storage.BaseArm))
     if storage.CalcEficience then
