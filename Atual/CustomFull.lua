@@ -5364,7 +5364,7 @@ info(targetsense)
 end)
 
 
-local ItemsToMove = {11755,13302,12272,13294,13298,13368,13882,13369,13831,13295,13882,13928,13881,13879,14251,13660,13297,13299,13194,13713,14824,13305,13304,13375,13880,12271,13657,14601,14594,14342,14599,14592,14602,13832,14088,13772,13773,14027,14090,14586,14089,13522,14936,13372,13373}
+local ItemsToMove = {11755,13302,12272,13294,13298,13368,13882,13369,13831,13295,13882,13928,13881,13879,14251,13660,13297,13299,13194,13713,14824,13305,13304,13375,13880,12271,13657,14601,14594,14342,14599,14592,14602,13832,14088,13772,13773,14027,14090,14586,14089,13522,14936,13372,13373,13300}
 
 local function searchAndMoveItems()
     for _, container in pairs(getContainers()) do
@@ -5538,6 +5538,14 @@ local toKeep = {
   [14925] = {'Raro','Épico','Lendario','Mitico'},
   [14926] = {'Raro','Épico','Lendario','Mitico'},
   --[14356] = {'Incomum','Raro','Épico','Lendario','Mitico'},
+  -- Aries Set
+  [13956] = {'Raro','Épico','Lendario','Mitico'},
+  [13959] = {'Raro','Épico','Lendario','Mitico'},
+  [13952] = {'Raro','Épico','Lendario','Mitico'},
+  [13953] = {'Raro','Épico','Lendario','Mitico'},
+  [13954] = {'Raro','Épico','Lendario','Mitico'},
+  [13955] = {'Raro','Épico','Lendario','Mitico'},
+  [13958] = {'Incomum','Raro','Épico','Lendario','Mitico'},
   -- Wyvern Set
   [14913] = {'Raro','Épico','Lendario','Mitico'},
   [14914] = {'Raro','Épico','Lendario','Mitico'},
