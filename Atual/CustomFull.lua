@@ -5545,7 +5545,7 @@ local toKeep = {
   [13953] = {'Raro','Épico','Lendario','Mitico'},
   [13954] = {'Raro','Épico','Lendario','Mitico'},
   [13955] = {'Raro','Épico','Lendario','Mitico'},
-  [13958] = {'Incomum','Raro','Épico','Lendario','Mitico'},
+  [13958] = {'Raro','Épico','Lendario','Mitico'},
   -- Wyvern Set
   [14913] = {'Raro','Épico','Lendario','Mitico'},
   [14914] = {'Raro','Épico','Lendario','Mitico'},
@@ -6195,3 +6195,5 @@ loaded = true
 info(loaded)
 
 version = 1.1
+
+
