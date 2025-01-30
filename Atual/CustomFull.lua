@@ -3759,6 +3759,51 @@ end)
 --ATK
 setDefaultTab("Atk")
 
+
+local panelName = "killSteal"
+local ui = setupUI([[
+Panel
+  height: 30
+  
+  BotLabel
+    id: help
+    anchors.top: parent.top
+    anchors.left: parent.left
+    anchors.right: parent.right
+    text-align: center
+    margin-left: 0
+
+  HorizontalScrollBar
+    id: HP
+    anchors.bottom: parent.bottom
+    anchors.left: parent.left
+    anchors.right: parent.right
+    margin-top: 0
+    minimum: 1
+    maximum: 100
+    step: 1
+    
+]], parent)
+
+if not storage[panelName] then
+  storage[panelName] = {
+      hp = 60
+  }
+end
+
+updateHpText = function()
+    ui.help:setText("Execute: " .. storage[panelName].hp .. "% HP")
+end
+updateHpText()
+ui.HP.onValueChange = function(scroll, value)
+  storage[panelName].hp = value
+  updateHpText()
+end
+ui.HP:setValue(storage[panelName].hp)
+
+
+---------------------------------------
+
 storage.cdrultimate = now
 specialcast = macro(100, 'Spam Special', function()
   if not g_game.isAttacking() then return end
@@ -3840,7 +3885,7 @@ end)
 macro(100, 'Combo C/Execute', function()
  if not g_game.isAttacking() then return end
  Lockin = g_game.getAttackingCreature()
- if Lockin:isPlayer() and Lockin:getHealthPercent() < 40 then
+ if Lockin:isPlayer() and Lockin:getHealthPercent() <= storage[panelName].hp then
   say(storage.ultimate)
 end
 combo()
