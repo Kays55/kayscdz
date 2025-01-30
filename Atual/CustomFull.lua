@@ -4604,7 +4604,7 @@ macro(200, function()
   end
 end)
 
-UI.Lavel('Reparo Cave')
+UI.Label('Reparo Cave')
 
 UI.TextEdit(storage.mindurability or "80", function(widget, newText)
 storage.mindurability = newText
