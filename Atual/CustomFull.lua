@@ -4756,7 +4756,7 @@ storage.HammerRValue = tonumber(storage.textRValue)
 end)
 
 idmartelo = 7437
-macro(200, 'reparoMartelo', function()
+macro(1000, 'reparoMartelo', function()
   if getInventoryItem(SlotHead) and CheckDurabilityHelmet() <= storage.HammerRValue then
     useWith(7437, getHead())
     info('Reparo Helmet')
