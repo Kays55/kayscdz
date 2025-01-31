@@ -4757,37 +4757,37 @@ end)
 
 idmartelo = 7437
 macro(200, 'reparoMartelo', function()
-  if CheckDurabilityHelmet() <= storage.HammerRValue then
+  if getInventoryItem(SlotHead) and CheckDurabilityHelmet() <= storage.HammerRValue then
     useWith(7437, getHead())
     info('Reparo Helmet')
     delay(1000)
   end
-  if CheckDurabilityArmor() <= storage.HammerRValue then
+  if getInventoryItem(SlotArmor) and CheckDurabilityArmor() <= storage.HammerRValue then
     useWith(7437, getBody())
     info('Reparo Armor')
     delay(1000)
   end
-  if CheckDurabilityLegs() <= storage.HammerRValue then
+  if getInventoryItem(Slotlegs) and CheckDurabilityLegs() <= storage.HammerRValue then
     useWith(7437, getLeg())
     info('Reparo Legs')
     delay(1000)
   end
-  if CheckDurabilityBoots() <= storage.HammerRValue then
+  if getInventoryItem(SlotFeet) and CheckDurabilityBoots() <= storage.HammerRValue then
     useWith(7437, getFeet())
     info('Reparo Boots')
     delay(1000)
   end
-  if CheckDurabilityRight() <= storage.HammerRValue then
+  if getInventoryItem(SlotRight) and CheckDurabilityRight() <= storage.HammerRValue then
     useWith(7437, getRight())
     info('Reparo Right')
     delay(1000)
   end
-  if CheckDurabilityLeft() <= storage.HammerRValue then
+  if getInventoryItem(SlotLeft) and CheckDurabilityLeft() <= storage.HammerRValue then
     useWith(7437, getLeft())
     delay(1000)
     info('Reparo Left')
   end
-  if CheckDurabilityRing() <= storage.HammerRValue then
+  if getInventoryItem(SlotFinger) and CheckDurabilityRing() <= storage.HammerRValue then
     useWith(7437, getFinger())
     delay(1000)
     info('Reparo Ring')
