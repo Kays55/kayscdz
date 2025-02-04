@@ -3039,6 +3039,13 @@ MainWindow
       margin-top: 5
       width: 165
 
+    Button
+      !text: tr('Canvas')
+      anchors.top: prev.bottom
+      anchors.left: parent.left
+      margin-top: 5
+      width: 165
+
   VerticalScrollBar  
     id: mainScroll
     anchors.top: parent.top
