@@ -4578,6 +4578,11 @@ end)
 
 setDefaultTab("Cave")
 
+travel = function(city)
+NPC.say('hi')
+NPC.say(city)
+NPC.say('yes')
+end
 
 onKeyDown(function(keys)
   if keys == 'F12' then
