@@ -2742,6 +2742,18 @@ if player:getTitle() == ('Aiolia [Odin]') then
   info('Load: ' .. player:getTitle())
 end
 
+if player:getTitle() == ('Sirius [Cao Maior]') then
+  storage.elemento = 'Fire'
+  storage.combo1 = 'Grande Punho Esmagador'
+  storage.combo2 = 'Grande Choque De Montanhas'
+  storage.combo3 = 'Great Clash Of Mountains'
+  storage.combo4 = 'ultimate ' .. storage.elemento --contelação:  ' .. storage.elemento --contelação:  Gemeos Divino'
+  storage.sspell = nil
+  storage.ultimate = nil
+  storage.sense = 'sense'
+  info('Load: ' .. player:getTitle())
+end
+
 end)
 
 configmode = false
