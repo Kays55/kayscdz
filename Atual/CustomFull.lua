@@ -5647,7 +5647,7 @@ info(targetsense)
 end)
 
 
-local ItemsToMove = {11755,13302,12272,13294,13298,13368,13882,13369,13831,13295,13882,13928,13881,13879,14251,13660,13297,13299,13194,13713,14824,13305,13304,13375,13880,12271,13657,14601,14594,14342,14599,14592,14602,13832,14088,13772,13773,14027,14090,14586,14089,13522,14936,13372,13373,13300,15129,15120,15119,15132,15099,15109,15136,15123,15133,15126,15134,15141,15131,15127,15144,15128,15112,15139,13303,15130,12270,15103}
+local ItemsToMove = {11755,13302,12272,13294,13298,13368,13882,13369,13831,13295,13882,13928,13881,13879,14251,13660,13297,13299,13194,13713,14824,13305,13304,13375,13880,12271,13657,14601,14594,14342,14599,14592,14602,13832,14088,13772,13773,14027,14090,14586,14089,13522,14936,13372,13373,13300,15129,15120,15119,15132,15099,15109,15136,15123,15133,15126,15134,15141,15131,15127,15144,15128,15112,15139,13303,15130,12270,15103,15135,14115}
 
 local function searchAndMoveItems()
     for _, container in pairs(getContainers()) do
@@ -5727,7 +5727,7 @@ local toKeep = {
   [14882] = {'Raro','Épico','Lendario','Mitico'},
   -- Sagitario Set
   [14193] = {'Raro','Épico','Lendario','Mitico'},
-  --[14016] = {'Raro','Épico','Lendario','Mitico'},
+  [15155] = {'Raro','Épico','Lendario','Mitico'},
   [14189] = {'Raro','Épico','Lendario','Mitico'},
   [14190] = {'Raro','Épico','Lendario','Mitico'},
   [14191] = {'Raro','Épico','Lendario','Mitico'},
@@ -5796,7 +5796,7 @@ local toKeep = {
   [14718] = {'Incomum','Raro','Épico','Lendario','Mitico'},
   [14719] = {'Incomum','Raro','Épico','Lendario','Mitico'},
   [14720] = {'Incomum','Raro','Épico','Lendario','Mitico'},
-  --[14356] = {'Incomum','Raro','Épico','Lendario','Mitico'},
+  [14724] = {'Incomum','Raro','Épico','Lendario','Mitico'},
   -- Griffon Set
   [15071] = {'Raro','Épico','Lendario','Mitico'},
   [15072] = {'Raro','Épico','Lendario','Mitico'},
@@ -5829,13 +5829,21 @@ local toKeep = {
   [13954] = {'Raro','Épico','Lendario','Mitico'},
   [13955] = {'Raro','Épico','Lendario','Mitico'},
   [13958] = {'Raro','Épico','Lendario','Mitico'},
+  -- Sirene Set
+  [14122] = {'Raro','Épico','Lendario','Mitico'},
+  --[13958] = {'Raro','Épico','Lendario','Mitico'},
+  [14118] = {'Raro','Épico','Lendario','Mitico'},
+  [14119] = {'Raro','Épico','Lendario','Mitico'},
+  [14120] = {'Raro','Épico','Lendario','Mitico'},
+  [14121] = {'Raro','Épico','Lendario','Mitico'},
+  [14855] = {'Raro','Épico','Lendario','Mitico'},
   -- Wyvern Set
-  [14913] = {'Raro','Épico','Lendario','Mitico'},
-  [14914] = {'Raro','Épico','Lendario','Mitico'},
-  [14909] = {'Raro','Épico','Lendario','Mitico'},
-  [14910] = {'Raro','Épico','Lendario','Mitico'},
-  [14911] = {'Raro','Épico','Lendario','Mitico'},
-  [14912] = {'Raro','Épico','Lendario','Mitico'},
+  [14913] = {'Incomum','Raro','Épico','Lendario','Mitico'},
+  [14914] = {'Incomum','Raro','Épico','Lendario','Mitico'},
+  [14909] = {'Incomum','Raro','Épico','Lendario','Mitico'},
+  [14910] = {'Incomum','Raro','Épico','Lendario','Mitico'},
+  [14911] = {'Incomum','Raro','Épico','Lendario','Mitico'},
+  [14912] = {'Incomum','Raro','Épico','Lendario','Mitico'},
   [14861] = {'Incomum','Raro','Épico','Lendario','Mitico'},
 }
 moveequipsdrops = macro(1000, "Move Rarity", function()
@@ -6478,5 +6486,3 @@ loaded = true
 info(loaded)
 
 version = 1.1
-
-
