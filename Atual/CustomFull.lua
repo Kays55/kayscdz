@@ -6049,18 +6049,6 @@ end
    }
    sendDiscordWebhook(data)
    end
-   epictext = text:find('Épico')
-   if epictext then
-   -- info('true')
-   outtext = text:sub(epictext+6)
-  local data = {   
-   title = 'Drop',
-     name = player:getName(),
-     message = '[Epico] '.. outtext .. ' Loc: X: '.. posx() .. 'Y: ' .. posy() .. 'Z: ' .. posz(),
-     id = "pd",
-  }
-  sendDiscordWebhook(data)
-   end
  end)
 -------------------------------------------------------------------------------------------------------------------------
 
