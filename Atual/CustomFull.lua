@@ -9,6 +9,30 @@ closeLoginAdvice = function()
         end
     end
 end
+
+local _G = modules._G;
+local game_console = modules.game_console;
+local game_textmessage = modules.game_textmessage;
+
+if (_G.connected_function == nil) then
+    _G.connected_function = game_textmessage.displayColoredLootMessage;
+end
+
+game_textmessage.displayColoredLootMessage = function(text)
+
+    game_console.addText(text, {}, "Server Log");
+    return _G.connected_function(text);
+end
+
+
+getBlessCharges = function()
+local skillsWindow = modules.game_skills.skillsWindow;
+local widget = skillsWindow:recursiveGetChildById("blessCharges");
+local charges = widget:getChildById("value"):getText()
+local NCharges = tonumber(charges)
+return NCharges
+end
+
 ---
 
 
