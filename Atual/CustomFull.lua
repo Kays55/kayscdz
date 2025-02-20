@@ -6536,4 +6536,4 @@ end)
 loaded = true
 info(loaded)
 
-version = 1.2
+version = 1.3
