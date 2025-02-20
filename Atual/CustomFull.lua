@@ -4649,6 +4649,10 @@ end
 
 end
 
+end
+
+end
+
 onKeyDown(function(keys)
   if keys == 'F12' then
     if CaveBot.isOn() then
@@ -6542,4 +6546,4 @@ end)
 loaded = true
 info(loaded)
 
-version = '1.2'
+version = 1.3
