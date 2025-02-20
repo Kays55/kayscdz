@@ -4620,6 +4620,29 @@ NPC.say(city)
 NPC.say('yes')
 end
 
+modaltravel = function(checkpoint)
+local modalpanel = modules.game_modaldialog.modalDialog
+
+if modalpanel then
+
+    local choiceList = modalpanel:getChildById('choiceList')
+
+    if choiceList then
+
+        for i, widget in pairs(choiceList:getChildren()) do
+
+            if (widget:getText() == checkpoint) then
+
+                choiceList:focusChild(widget)
+
+                modalpanel:onEnter()
+
+end
+
+end
+
+end
+
 onKeyDown(function(keys)
   if keys == 'F12' then
     if CaveBot.isOn() then
