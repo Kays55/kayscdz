@@ -4620,6 +4620,12 @@ NPC.say(city)
 NPC.say('yes')
 end
 
+travel = function(city)
+NPC.say('hi')
+NPC.say(city)
+NPC.say('yes')
+end
+
 modaltravel = function(checkpoint)
 local modalpanel = modules.game_modaldialog.modalDialog
 
@@ -6536,4 +6542,4 @@ end)
 loaded = true
 info(loaded)
 
-version = 1.3
+version = '1.2'
