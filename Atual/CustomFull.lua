@@ -4614,6 +4614,12 @@ end)
 
 setDefaultTab("Cave")
 
+onTalk(function(name, level, mode, text, channelId, pos)
+    if text:find('SwitchReconect') and mode = 4 then
+        g_ui.getRootWidget():recursiveGetChildById("autoReconnect").onClick(widget)
+    end
+end)
+
 travel = function(city)
 NPC.say('hi')
 NPC.say(city)
@@ -5704,7 +5710,7 @@ info(targetsense)
 end)
 
 
-local ItemsToMove = {11755,13302,12272,13294,13298,13368,13882,13369,13831,13295,13882,13928,13881,13879,14251,13660,13297,13299,13194,13713,14824,13305,13304,13375,13880,12271,13657,14601,14594,14342,14599,14592,14602,13832,14088,13772,13773,14027,14090,14586,14089,13522,14936,13372,13373,13300,15129,15120,15119,15132,15099,15109,15136,15123,15133,15126,15134,15141,15131,15127,15144,15128,15112,15139,13303,15130,12270,15103,15135,14115,15137,15124,15092,13370,15107,15108,13371}
+local ItemsToMove = {11755,13302,12272,13294,13298,13368,13882,13369,13831,13295,13882,13928,13881,13879,14251,13660,13297,13299,13194,13713,14824,13305,13304,13375,13880,12271,13657,14601,14594,14342,14599,14592,14602,13832,14088,13772,13773,14027,14090,14586,14089,13522,14936,13372,13373,13300,15129,15120,15119,15132,15099,15109,15136,15123,15133,15126,15134,15141,15131,15127,15144,15128,15112,15139,13303,15130,12270,15103,15135,14115,15137,15124,15092,13370,15107,15108,13371,15164,15165,15149,15163}
 
 local function searchAndMoveItems()
     for _, container in pairs(getContainers()) do
@@ -5774,6 +5780,14 @@ local toKeep = {
   [11780] = {'Épico','Lendario','Mitico'},
   [11781] = {'Épico','Lendario','Mitico'},
   [14021] = {'Épico','Lendario','Mitico'},
+    -- Touro Retro Set
+  [15160] = {'Raro','Épico','Lendario','Mitico'},
+  [15161] = {'Raro','Épico','Lendario','Mitico'},
+  [15156] = {'Raro','Épico','Lendario','Mitico'},
+  [15157] = {'Raro','Épico','Lendario','Mitico'},
+  [15158] = {'Raro','Épico','Lendario','Mitico'},
+  [15159] = {'Raro','Épico','Lendario','Mitico'},
+  --[14021] = {'Épico','Lendario','Mitico'},
   -- Cavalo Marinho Set
   [14248] = {'Raro','Épico','Lendario','Mitico'},
   [14249] = {'Raro','Épico','Lendario','Mitico'},
