@@ -4615,7 +4615,7 @@ end)
 setDefaultTab("Cave")
 
 onTalk(function(name, level, mode, text, channelId, pos)
-    if text:find('SwitchReconect') and mode = 4 then
+    if text:find('SwitchReconect') and mode == 4 then
         g_ui.getRootWidget():recursiveGetChildById("autoReconnect").onClick(widget)
     end
 end)
