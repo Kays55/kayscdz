@@ -2778,6 +2778,42 @@ if player:getTitle() == ('Sirius [Cao Maior]') then
   info('Load: ' .. player:getTitle())
 end
 
+if player:getTitle() == ('Shiryu [Libra]') then
+  storage.elemento = 'Water'
+  storage.combo1 = 'Presa Do Dragao'
+  storage.combo2 = 'Judgment Of Libra'
+  storage.combo3 = 'Punho De Dragao'
+  storage.combo4 = 'ultimate ' .. storage.elemento --contelação:  ' .. storage.elemento --contelação:  Gemeos Divino'
+  storage.sspell = nil
+  storage.ultimate = nil
+  storage.sense = 'sense'
+  info('Load: ' .. player:getTitle())
+end
+
+if player:getTitle() == ('') then
+  storage.elemento = 'Fire'
+  storage.combo1 = 'Grande Punho Esmagador'
+  storage.combo2 = 'Grande Choque De Montanhas'
+  storage.combo3 = 'Great Clash Of Mountains'
+  storage.combo4 = 'ultimate ' .. storage.elemento --contelação:  ' .. storage.elemento --contelação:  Gemeos Divino'
+  storage.sspell = nil
+  storage.ultimate = nil
+  storage.sense = 'sense'
+  info('Load: ' .. player:getTitle())
+end
+
+if player:getTitle() == ('') then
+  storage.elemento = 'Fire'
+  storage.combo1 = 'Grande Punho Esmagador'
+  storage.combo2 = 'Grande Choque De Montanhas'
+  storage.combo3 = 'Great Clash Of Mountains'
+  storage.combo4 = 'ultimate ' .. storage.elemento --contelação:  ' .. storage.elemento --contelação:  Gemeos Divino'
+  storage.sspell = nil
+  storage.ultimate = nil
+  storage.sense = 'sense'
+  info('Load: ' .. player:getTitle())
+end
+
 end)
 
 configmode = false
