@@ -3851,7 +3851,18 @@ specialcast = macro(100, 'Spam Special', function()
   end
 end)
 
---
+----------------------------------------
+macro(250, "Melee Special", function()
+  if not g_game.isAttacking() then return end
+  local target = g_game.getAttackingCreature()
+  local dist = getDistanceBetween(pos(),target:getPosition())
+  if dist == 1 then
+    say(storage.ultimate)
+    delay(1000)
+  end
+end)
+
+-----------------------------
 
 local max_distance = 5
 
