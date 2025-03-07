@@ -2790,23 +2790,23 @@ if player:getTitle() == ('Shiryu [Libra]') then
   info('Load: ' .. player:getTitle())
 end
 
-if player:getTitle() == ('') then
-  storage.elemento = 'Fire'
-  storage.combo1 = 'Grande Punho Esmagador'
-  storage.combo2 = 'Grande Choque De Montanhas'
-  storage.combo3 = 'Great Clash Of Mountains'
-  storage.combo4 = 'ultimate ' .. storage.elemento --contelação:  ' .. storage.elemento --contelação:  Gemeos Divino'
-  storage.sspell = nil
-  storage.ultimate = nil
-  storage.sense = 'sense'
+  if player:getTitle() == ('Pandora TLC') then
+ storage.elemento = 'Dark'
+ storage.combo1 = 'Flagelo'
+ storage.combo2 = 'Campo Do Vacuo'
+ storage.combo3 = 'Alabarda Sombria'
+ storage.combo4 = 'ultimate ' .. storage.elemento --contelação:  ' .. storage.elemento
+ storage.ultimate = 'Caixa Do Infortunio'
+ storage.sspell = nil
+ storage.sense = 'sense'
   info('Load: ' .. player:getTitle())
 end
 
-if player:getTitle() == ('') then
-  storage.elemento = 'Fire'
-  storage.combo1 = 'Grande Punho Esmagador'
-  storage.combo2 = 'Grande Choque De Montanhas'
-  storage.combo3 = 'Great Clash Of Mountains'
+if player:getTitle() == ('Degel [Aquario]') then
+  storage.elemento = 'Water'
+  storage.combo1 = 'Diamond Dust Requiem'
+  storage.combo2 = 'Frozen Galaxia'
+  storage.combo3 = 'Frostbite Execution'
   storage.combo4 = 'ultimate ' .. storage.elemento --contelação:  ' .. storage.elemento --contelação:  Gemeos Divino'
   storage.sspell = nil
   storage.ultimate = nil
