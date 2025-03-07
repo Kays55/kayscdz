@@ -2814,6 +2814,18 @@ if player:getTitle() == ('Degel [Aquario]') then
   info('Load: ' .. player:getTitle())
 end
 
+if player:getTitle() == ('Kardia [Escorpiao]') then
+  storage.elemento = 'Fire'
+  storage.combo1 = 'Stinger Strike'
+  storage.combo2 = 'Crimson Fang'
+  storage.combo3 = 'Venomous Barrage'
+  storage.combo4 = 'ultimate ' .. storage.elemento --contelação:  ' .. storage.elemento --contelação:  Gemeos Divino'
+  storage.sspell = nil
+  storage.ultimate = nil
+  storage.sense = 'sense'
+  info('Load: ' .. player:getTitle())
+end
+
 end)
 
 configmode = false
