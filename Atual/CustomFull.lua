@@ -4673,6 +4673,12 @@ end)
 
 setDefaultTab("Cave")
 
+onTextMessage(function(mode, text)
+    if text:find('Server saved') then
+        caveBot.gotoLabel('gocave')
+    end
+end)
+
 onTalk(function(name, level, mode, text, channelId, pos)
     if text:find('SwitchReconect') and mode == 4 then
         g_ui.getRootWidget():recursiveGetChildById("autoReconnect").onClick(widget)
