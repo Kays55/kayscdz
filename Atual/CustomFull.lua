@@ -6015,6 +6015,19 @@ moveequipsdrops = macro(1000, "Move Rarity", function()
   end
 end)
 
+
+macro(1000, "Move Legendary", function()
+  for _, c in pairs(getContainers()) do
+    if c:getName() == 'the backpack' then
+    for _, i in ipairs(c:getItems()) do
+          if i:getTooltip():find('Lendario') or i:getTooltip():find('Mitico') then
+            g_game.move(i, {x = 65535, y = SlotAmmo, z = 0}, i:getCount())
+          end
+        end
+    end
+  end
+end)
+
 ----------------------------------------------------
 onTextMessage(function(mode, text)
 local _, startIndex = text:find('Arm:');
