@@ -6666,7 +6666,9 @@ onTextMessage(function(mode, text)
     if text:find('You are dead.') then
             doScreenshot("/screenshots/"..player:getName().." "..os.date('%Y-%m-%d-%H-%M-%S')..".png")
     end
-end
+end)
+
+
 setDefaultTab('Main')
 info(loaded)
 
