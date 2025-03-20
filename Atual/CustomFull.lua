@@ -1,5 +1,6 @@
 --Lib
 
+setDefaultTab("Main")
 
 local configName = modules.game_bot.contentsPanel.config:getCurrentOption().text
 
@@ -21,11 +22,11 @@ local luaFiles = {
   "TabsLoad",
 --  "main",
 --  "items",
---  "vlib",
+  "vlib",
 --  "new_cavebot_lib",
 --  "configs", -- do not change this and above
---  "extras",
---  "cavebot",
+  "extras",
+  "cavebot",
 --  "playerlist",
 --  "BotServer",
 --  "alarms",
@@ -45,7 +46,7 @@ local luaFiles = {
 --  "antiRs",
 --  "depot_withdraw",
 --  "eat_food",
---  "equip",
+-- "equip",
 --  "exeta",
 --  "analyzer",
 --  "spy_level",
@@ -62,48 +63,48 @@ for i, file in ipairs(luaFiles) do
 end
 
 
-setDefaultTab("Cave")
+--setDefaultTab("Cave")
 
-CaveBot = {} -- global namespace
-CaveBot.Extensions = {}
-importStyle("/cavebot/cavebot.otui")
-importStyle("/cavebot/config.otui")
-importStyle("/cavebot/editor.otui")
-importStyle("/cavebot/supply.otui")
-dofile("/cavebot/actions.lua")
-dofile("/cavebot/config.lua")
-dofile("/cavebot/editor.lua")
-dofile("/cavebot/example_functions.lua")
-dofile("/cavebot/recorder.lua")
-dofile("/cavebot/walking.lua")
+--CaveBot = {} -- global namespace
+--CaveBot.Extensions = {}
+--importStyle("/cavebot/cavebot.otui")
+--importStyle("/cavebot/config.otui")
+--importStyle("/cavebot/editor.otui")
+--importStyle("/cavebot/supply.otui")
+--dofile("/cavebot/actions.lua")
+--dofile("/cavebot/config.lua")
+--dofile("/cavebot/editor.lua")
+--dofile("/cavebot/example_functions.lua")
+--dofile("/cavebot/recorder.lua")
+--dofile("/cavebot/walking.lua")
  --in this section you can add extensions, check extension_template.lua
-dofile("/cavebot/extension_template.lua")
-dofile("/cavebot/depositer.lua")
-dofile("/cavebot/supply.lua")
+--dofile("/cavebot/extension_template.lua")
+--dofile("/cavebot/depositer.lua")
+--dofile("/cavebot/supply.lua")
  --main cavebot file, must be last
-dofile("/cavebot/cavebot.lua")
+--dofile("/cavebot/cavebot.lua")
 
 mvphunt = macro(200, 'MVP Hunt', function() end)
 
 ----------------------------------------------------
 
 
-setDefaultTab("Target")
+--setDefaultTab("Target")
 
-TargetBot = {} -- global namespace
-importStyle("/targetbot/looting.otui")
-importStyle("/targetbot/target.otui")
-importStyle("/targetbot/creature_editor.otui")
-dofile("/targetbot/creature.lua")
-dofile("/targetbot/creature_attack.lua")
-dofile("/targetbot/creature_editor.lua")
-dofile("/targetbot/creature_priority.lua")
-dofile("/targetbot/looting.lua")
-dofile("/targetbot/walking.lua")
+--TargetBot = {} -- global namespace
+--importStyle("/targetbot/looting.otui")
+--importStyle("/targetbot/target.otui")
+--importStyle("/targetbot/creature_editor.otui")
+--dofile("/targetbot/creature.lua")
+--dofile("/targetbot/creature_attack.lua")
+--dofile("/targetbot/creature_editor.lua")
+--dofile("/targetbot/creature_priority.lua")
+--dofile("/targetbot/looting.lua")
+--dofile("/targetbot/walking.lua")
  --main targetbot file, must be last
-dofile("/targetbot/target.lua")
+--dofile("/targetbot/target.lua")
 
-info('Loaded Target')
+--info('Loaded Target')
 
 
 ------------------------
