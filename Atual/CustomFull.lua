@@ -6667,8 +6667,15 @@ onTextMessage(function(mode, text)
             doScreenshot("/screenshots/"..player:getName().." "..os.date('%Y-%m-%d-%H-%M-%S')..".png")
     end
 end
-
+setDefaultTab('Main')
 info(loaded)
 
+
 loaded = true
-version = 1.4
+version = 1.5
+
+
+
+UI.Button("InfoVersion", function()
+    info(version)
+end)
