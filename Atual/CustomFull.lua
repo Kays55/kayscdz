@@ -5119,6 +5119,40 @@ macro(200, 'No Pot Stop', function()
 end)
 
 ------------------------------------------------------------
+
+
+-- load all otui files, order doesn't matter
+local configName = modules.game_bot.contentsPanel.config:getCurrentOption().text
+
+local configFiles = g_resources.listDirectoryFiles("/bot/" .. configName .. "/vBot", true, false)
+for i, file in ipairs(configFiles) do
+  local ext = file:split(".")
+  if ext[#ext]:lower() == "ui" or ext[#ext]:lower() == "otui" then
+    g_ui.importStyle(file)
+  end
+end
+
+local function loadScript(name)
+  return dofile("/vBot/" .. name .. ".lua")
+end
+
+-- here you can set manually order of scripts
+-- libraries should be loaded first
+local luaFiles = {
+  "items",
+  "vlib",
+  "new_cavebot_lib",
+  "configs", -- do not change this and above
+  "cavebot",
+  "analyzer",
+  "depositer_config",
+}
+
+for i, file in ipairs(luaFiles) do
+  loadScript(file)
+end
+
+
 --CaveBot = {} -- global namespace
 --CaveBot.Extensions = {}
 --importStyle("/cavebot/cavebot.otui")
@@ -5144,7 +5178,7 @@ mvphunt = macro(200, 'MVP Hunt', function() end)
 
 
 
-setDefaultTab("Target")
+--setDefaultTab("Target")
 
 --TargetBot = {} -- global namespace
 --importStyle("/targetbot/looting.otui")
@@ -6632,40 +6666,7 @@ onTextMessage(function(mode, text)
     if text:find('You are dead.') then
             doScreenshot("/screenshots/"..player:getName().." "..os.date('%Y-%m-%d-%H-%M-%S')..".png")
     end
-end)
-
-
--- load all otui files, order doesn't matter
-local configName = modules.game_bot.contentsPanel.config:getCurrentOption().text
-
-local configFiles = g_resources.listDirectoryFiles("/bot/" .. configName .. "/vBot", true, false)
-for i, file in ipairs(configFiles) do
-  local ext = file:split(".")
-  if ext[#ext]:lower() == "ui" or ext[#ext]:lower() == "otui" then
-    g_ui.importStyle(file)
-  end
 end
-
-local function loadScript(name)
-  return dofile("/vBot/" .. name .. ".lua")
-end
-
--- here you can set manually order of scripts
--- libraries should be loaded first
-local luaFiles = {
-  "items",
-  "vlib",
-  "new_cavebot_lib",
-  "configs", -- do not change this and above
-  "cavebot",
-  "analyzer",
-  "depositer_config",
-}
-
-for i, file in ipairs(luaFiles) do
-  loadScript(file)
-end
-
 
 info(loaded)
 
