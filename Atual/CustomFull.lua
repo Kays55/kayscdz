@@ -2972,6 +2972,7 @@ if name == 'Grande Mestre' and text:find('faltam') then
   end
 end
 end)
+mvphunt = macro(200, 'mvphunt', function() end)
 
 onTextMessage(function(mode, text)
   if mvphunt.isOff() then return end
