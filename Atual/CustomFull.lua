@@ -3520,6 +3520,9 @@ macro(200, function()
       if startIndex and endIndex then
         durabilityPercentage = itemdisc:sub(startIndex+11, endIndex-5)
         storage.durability = tonumber(durabilityPercentage)
+        if text:find('Broken') then
+            storage.durability = 0
+        end
       end
       if storage.durability == nil then
         storage.durability = 0
