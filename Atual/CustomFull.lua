@@ -47,9 +47,58 @@ if (_G.connected_function == nil) then
 end
 
 game_textmessage.displayColoredLootMessage = function(text)
+    local _text = {};
+    for i = 1, #text, 2 do
+        local msg = text[i];
+        msg = msg:trim();
+        table.insert(_text, msg);
+    end
+    _text = table.concat(_text, " ");
+    for _, callback in ipairs(_callbacks.onTextMessage) do
+        callback(nil, _text);
+    end
 
     game_console.addText(text, {}, "Server Log");
     return _G.connected_function(text);
+end
+
+
+onTextMessage(function(mode, text)
+    if (mode == nil) then
+        info(text)
+    end
+end)
+
+local OutputMessage = modules._G.OutputMessage;
+local SpecialOpcode = modules._G.SpecialOpcode;
+local scheduleEvent = modules._G.scheduleEvent;
+
+local sendMsg = function(id, sequence)
+    local msg = OutputMessage.create()
+    msg:addU8(SpecialOpcode)
+    msg:addU8(11)
+    msg:addU8(1)
+    msg:addU8(id)
+    msg:addU8(sequence and 1 or 0)
+    g_game.getProtocolGame():send(msg)
+end
+
+local currentDay = os.date("*t").day;
+local sendClaim = function()
+    sendMsg(currentDay, true);
+    sendMsg(currentDay);
+end
+
+
+if (storage.daily == nil) then
+    storage.daily = {};
+end
+local config = storage.daily;
+local name=name();
+
+if (currentDay ~= config[name]) then
+    config[name] = currentDay;
+    sendClaim();
 end
 
 
