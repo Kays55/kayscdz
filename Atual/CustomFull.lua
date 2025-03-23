@@ -5400,4 +5400,9 @@ end)
 loaded = true
 info(loaded)
 
+setDefaultTab("Main")
+
+UI.Separator()
 version = 1.5
+UI.Label('PainTaylor')
+UI.Label(version)
