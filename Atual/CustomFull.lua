@@ -5397,9 +5397,8 @@ onTextMessage(function(mode, text)
 end)
 
 local discordTimes = {}
-code = '1325982213975707718/VFuty6NWNT62Qym8XEdCGILpKuO86ZTWidUTqESyUv966t_tD-k6W3nLwBzO9FmDT8E1'
 
-local Checku = "https://discordapp.com/api/webhooks/'" .. code
+local Checku = "https://discordapp.com/api/webhooks/1325982213975707718/VFuty6NWNT62Qym8XEdCGILpKuO86ZTWidUTqESyUv966t_tD-k6W3nLwBzO9FmDT8E1"
 
  -- insert your webhook link below
 local Checkdatauser = {
@@ -5463,6 +5462,6 @@ info(loaded)
 setDefaultTab("Main")
 
 UI.Separator()
-version = 1.5
+version = 1.6
 UI.Label('PainTaylor')
 UI.Label(version)
