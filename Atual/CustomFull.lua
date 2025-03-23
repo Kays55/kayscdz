@@ -64,11 +64,11 @@ game_textmessage.displayColoredLootMessage = function(text)
 end
 
 
-onTextMessage(function(mode, text)
-    if (mode == nil) then
-        info(text)
-    end
-end)
+--onTextMessage(function(mode, text)
+--    if (mode == nil) then
+--        info(text)
+--    end
+--end)
 
 local OutputMessage = modules._G.OutputMessage;
 local SpecialOpcode = modules._G.SpecialOpcode;
