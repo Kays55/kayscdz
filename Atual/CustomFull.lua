@@ -60,9 +60,7 @@ game_textmessage.displayColoredLootMessage = function(text)
 
     game_console.addText(text, {}, "Server Log");
     return _G.connected_function(text);
-    closeLoginAdvice()
 end
-
 
 --onTextMessage(function(mode, text)
 --    if (mode == nil) then
@@ -100,6 +98,9 @@ local name=name();
 if (currentDay ~= config[name]) then
     config[name] = currentDay;
     sendClaim();
+    schedule(1000, function()
+        closeLoginAdvice()
+    end)
 end
 
 
