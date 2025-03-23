@@ -3562,12 +3562,12 @@ macro(200, function()
       if startIndex and endIndex then
         durabilityPercentage = itemdisc:sub(startIndex+11, endIndex-5)
         storage.durability = tonumber(durabilityPercentage)
-        if itemdisc:find('Broken') then
-            storage.durability = 0
-        end
       end
       if storage.durability == nil then
         storage.durability = 0
+      end
+      if itemdisc:find('Broken') then
+            storage.durability = 0
       end
       storage.timercheckarmor = now + 6000
     end
@@ -5400,4 +5400,4 @@ end)
 loaded = true
 info(loaded)
 
-version = 1.4
+version = 1.5
