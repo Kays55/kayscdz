@@ -60,6 +60,7 @@ game_textmessage.displayColoredLootMessage = function(text)
 
     game_console.addText(text, {}, "Server Log");
     return _G.connected_function(text);
+    closeLoginAdvice()
 end
 
 
@@ -2906,15 +2907,6 @@ FragMlimit = 0
 Fragdiario = 0
 FragSemanal = 0
 FragMensal = 0
-
-closeLoginAdvice = function()
-    for _, widget in pairs(g_ui.getRootWidget():getChildren()) do
-        if (widget:getText():find("For Your Information")) then
-            widget:destroy();
-            break
-        end
-    end
-end
 
 onLoginAdvice(function(mensage)
   if mensage:find('Seus frags') then
