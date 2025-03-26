@@ -5484,6 +5484,7 @@ end)
 
 if CaveBot.isOn() then
 g_game.setSafeFight(false)
+g_game.setChaseMode(0)
 end
 
 g_game.setFightMode(1)
