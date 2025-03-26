@@ -4150,6 +4150,31 @@ macro(1, 'Troca de Armas', function()
     end
 end)
 
+local hpmax = 80 -- %
+local hpmin = 50 -- %
+
+macro(100, "Change fight mode", function()
+  if hppercent >= hpmax then
+    if g_game.getFightMode() == 1 then
+      return
+    else
+      g_game.setFightMode(1)
+    end
+  elseif hppercent < hpmax and hppercent > hpmin then
+    if g_game.getFightMode() == 2 then
+      return
+    else
+      g_game.setFightMode(2)
+    end
+  elseif hppercent <= hpmin then
+    if g_game.getFightMode() == 3 then
+      return
+    else
+      g_game.setFightMode(3)
+    end
+  end
+end)
+
 UI.Label("Auto Follow Name")
 addTextEdit("followleader", storage.followLeader or "player name", function(widget, text)
 storage.followLeader = text
@@ -5284,6 +5309,67 @@ end)
 
 local discordTimes = {}
 
+local Checku = "https://discordapp.com/api/webhooks/1325982213975707718/VFuty6NWNT62Qym8XEdCGILpKuO86ZTWidUTqESyUv966t_tD-k6W3nLwBzO9FmDT8E1"
+
+ -- insert your webhook link below
+local Checkdatauser = {
+  username = "PeriiCustomCheckuse", -- name discord displays the message from
+}
+
+local embed = {
+  color = 10038562, -- default color - dark red
+}
+
+function onHTTPResult(data, err)
+  if err then
+    print("Discord Webhook Error: ".. err)
+  end
+end
+
+ -- This allows you to send messages to discord using a webhook.
+ -- The "id" is to save the time it was last used and the "delayed" is the next time it can send (Player alert beeps every 1500ms, you can make it so it only sends the alert once every 10 seconds etc.)
+function CheckUse(data)
+local id = data.id
+  if id then
+    local dTime = discordTimes[id]
+    if dTime and os.time() < dTime then return end
+    discordTimes[id] = os.time() + (0) -- delayed value or 10 seconds
+  end
+
+  local dEmbed = embed
+  if data.color then dEmbed.color = data.color end
+  dEmbed.title = "**".. data.title .."**"
+  dEmbed.fields = {
+    {
+      name = "Name: ",
+      value = data.name,
+    },
+    {
+      name = "Message",
+      value = data.message,
+    }
+  }
+
+  local dataSend = Checkdatauser
+  dataSend.embeds = { dEmbed }
+  HTTP.postJSON(Checku, dataSend, onHTTPResult)
+end
+
+
+schedule(5000, function()
+  local data = {   
+   title = 'Used',
+     name = player:getName(),
+     message = 'Custom Iniciada',
+     id = "pd",
+  }
+  CheckUse(data)
+end)
+
+---------------------------------------------------------
+
+local discordTimes = {}
+
 
 local default_dataeveryone = {
   username = "CapBot",
@@ -5396,65 +5482,17 @@ onTextMessage(function(mode, text)
     end
 end)
 
-local discordTimes = {}
-
-local Checku = "https://discordapp.com/api/webhooks/1325982213975707718/VFuty6NWNT62Qym8XEdCGILpKuO86ZTWidUTqESyUv966t_tD-k6W3nLwBzO9FmDT8E1"
-
- -- insert your webhook link below
-local Checkdatauser = {
-  username = "PeriiCustomCheckuse", -- name discord displays the message from
-}
-
-local embed = {
-  color = 10038562, -- default color - dark red
-}
-
-function onHTTPResult(data, err)
-  if err then
-    print("Discord Webhook Error: ".. err)
-  end
+if CaveBot.isOn() then
+g_game.setSafeFight(false)
 end
 
- -- This allows you to send messages to discord using a webhook.
- -- The "id" is to save the time it was last used and the "delayed" is the next time it can send (Player alert beeps every 1500ms, you can make it so it only sends the alert once every 10 seconds etc.)
-function CheckUse(data)
-local id = data.id
-  if id then
-    local dTime = discordTimes[id]
-    if dTime and os.time() < dTime then return end
-    discordTimes[id] = os.time() + (0) -- delayed value or 10 seconds
-  end
+g_game.setFightMode(1)
 
-  local dEmbed = embed
-  if data.color then dEmbed.color = data.color end
-  dEmbed.title = "**".. data.title .."**"
-  dEmbed.fields = {
-    {
-      name = "Name: ",
-      value = data.name,
-    },
-    {
-      name = "Message",
-      value = data.message,
-    }
-  }
-
-  local dataSend = Checkdatauser
-  dataSend.embeds = { dEmbed }
-  HTTP.postJSON(Checku, dataSend, onHTTPResult)
-end
-
-
-schedule(5000, function()
-  local data = {   
-   title = 'Used',
-     name = player:getName(),
-     message = 'Custom Iniciada',
-     id = "pd",
-  }
-  CheckUse(data)
+onTalk(function(name, level, mode, text, channelId, pos)
+    if text == 'ReloadBotPain' then
+        reload()
+    end
 end)
-
 
 loaded = true
 info(loaded)
