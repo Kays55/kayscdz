@@ -5483,7 +5483,7 @@ onTextMessage(function(mode, text)
 end)
 
 if CaveBot.isOn() then
-g_game.setSafeFight(false)
+--g_game.setSafeFight(false)
 g_game.setChaseMode(0)
 end
 
