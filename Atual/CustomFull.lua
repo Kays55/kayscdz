@@ -5500,6 +5500,6 @@ info(loaded)
 setDefaultTab("Main")
 
 UI.Separator()
-version = 1.6
+version = 1.1
 UI.Label('PainTaylor')
 UI.Label(version)
