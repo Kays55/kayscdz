@@ -5421,7 +5421,7 @@ end
 onTextMessage(function(mode, text)
     if text:find('Loot of an MVP') then
   local data = {   
-   title = 'Used',
+   title = 'MVP Loot',
      name = player:getName(),
      message = text,
      id = "pd",
