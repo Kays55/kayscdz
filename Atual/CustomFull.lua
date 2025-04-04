@@ -1734,6 +1734,18 @@ if player:getTitle() == ('Kardia [Escorpiao]') then
   info('Load: ' .. player:getTitle())
 end
 
+if player:getTitle() == ('Kardia [Escorpiao]') then
+  storage.elemento = 'Light'
+  storage.combo1 = 'Garra Reluzente'
+  storage.combo2 = 'Impacto Luminoso'
+  storage.combo3 = 'Presas Solares'
+  storage.combo4 = 'ultimate ' .. storage.elemento --contelação:  ' .. storage.elemento --contelação:  Gemeos Divino'
+  storage.sspell = nil
+  storage.ultimate = 'Assassin Cosmic'
+  storage.sense = 'sense'
+  info('Load: ' .. player:getTitle())
+end
+
 end)
 
 configmode = false
