@@ -3757,7 +3757,7 @@ end)
 
 macro(200, function()
   if repairhammer.isOff() then return end
-  if gCheckDurabilityLegs() <= storage.HammerRValue then
+  if CheckDurabilityLegs() <= storage.HammerRValue then
     useWith(7437, getLeg())
     info('Reparo Legs')
     delay(1000)
