@@ -3739,16 +3739,16 @@ repairhammer = macro(1000, 'reparoMartelo', function()end)
 
 macro(200, function()
   if repairhammer.isOff() then return end
-  if getInventoryItem(SlotHead) and CheckDurabilityHelmet() <= storage.HammerRValue then
+  if CheckDurabilityHelmet() <= storage.HammerRValue then
     useWith(7437, getHead())
     info('Reparo Helmet')
-    delay(1000)
+    delay(10)
   end
 end)
 
 macro(200, function()
   if repairhammer.isOff() then return end
-  if getInventoryItem(SlotArmor) and CheckDurabilityArmor() <= storage.HammerRValue then
+  if CheckDurabilityArmor() <= storage.HammerRValue then
     useWith(7437, getBody())
     info('Reparo Armor')
     delay(1000)
@@ -3757,7 +3757,7 @@ end)
 
 macro(200, function()
   if repairhammer.isOff() then return end
-  if getInventoryItem(Slotlegs) and CheckDurabilityLegs() <= storage.HammerRValue then
+  if gCheckDurabilityLegs() <= storage.HammerRValue then
     useWith(7437, getLeg())
     info('Reparo Legs')
     delay(1000)
@@ -3766,7 +3766,7 @@ end)
   
 macro(200, function()
   if repairhammer.isOff() then return end
-  if getInventoryItem(SlotFeet) and CheckDurabilityBoots() <= storage.HammerRValue then
+  if CheckDurabilityBoots() <= storage.HammerRValue then
     useWith(7437, getFeet())
     info('Reparo Boots')
     delay(1000)
@@ -3775,7 +3775,7 @@ end)
 
 macro(200, function()
   if repairhammer.isOff() then return end
-  if getInventoryItem(SlotRight) and CheckDurabilityRight() <= storage.HammerRValue then
+  if CheckDurabilityRight() <= storage.HammerRValue then
     useWith(7437, getRight())
     info('Reparo Right')
     delay(1000)
@@ -3784,7 +3784,7 @@ end)
 
 macro(200, function()
   if repairhammer.isOff() then return end
-  if getInventoryItem(SlotLeft) and CheckDurabilityLeft() <= storage.HammerRValue then
+  if CheckDurabilityLeft() <= storage.HammerRValue then
     useWith(7437, getLeft())
     delay(1000)
     info('Reparo Left')
@@ -3793,7 +3793,7 @@ end)
 
 macro(200, function()
   if repairhammer.isOff() then return end
-  if getInventoryItem(SlotFinger) and CheckDurabilityRing() <= storage.HammerRValue then
+  if CheckDurabilityRing() <= storage.HammerRValue then
     useWith(7437, getFinger())
     delay(1000)
     info('Reparo Ring')
@@ -5601,6 +5601,6 @@ info(loaded)
 setDefaultTab("Main")
 
 UI.Separator()
-version = 1.3
+version = 1.2
 UI.Label('PainTaylor')
 UI.Label(version)
