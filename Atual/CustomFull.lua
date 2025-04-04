@@ -197,6 +197,14 @@ return true
 end
 end
 
+thorentrance = function()
+if (posx() >= 2432 and posx() <= 2441) and (posy() >=1054 and posy() <= 1061) and posz() == 8 then
+return true
+else
+return false
+end
+end
+
 setDefaultTab("Main")
 ---------------------------------------------
 local ProtocolGame = g_game.getProtocolGame();
