@@ -1734,6 +1734,30 @@ if player:getTitle() == ('Kardia [Escorpiao]') then
   info('Load: ' .. player:getTitle())
 end
 
+if player:getTitle() == ('Kasa [Lymnades]') then
+  storage.elemento = 'Earth'
+  storage.combo1 = 'Salamander Shock'
+  storage.combo2 = 'Salamandra Satanica'
+  storage.combo3 = 'Salamander Destruction'
+  storage.combo4 = 'ultimate ' .. storage.elemento --contelação:  ' .. storage.elemento --contelação:  Gemeos Divino'
+  storage.sspell = nil
+  storage.ultimate = nil
+  storage.sense = 'sense'
+  info('Load: ' .. player:getTitle())
+end
+
+if player:getTitle() == ('Caronte de [Aqueronte]') then
+  storage.elemento = 'Water'
+  storage.combo1 = 'Roringu Ooru'
+  storage.combo2 = 'Remo Giratorio'
+  storage.combo3 = 'Redemoinho Esmagador'
+  storage.combo4 = 'ultimate ' .. storage.elemento --contelação:  ' .. storage.elemento --contelação:  Gemeos Divino'
+  storage.sspell = nil
+  storage.ultimate = nil
+  storage.sense = 'sense'
+  info('Load: ' .. player:getTitle())
+end
+
 if player:getTitle() == ('Regulus [Leao]') then
   storage.elemento = 'Light'
   storage.combo1 = 'Garra Reluzente'
