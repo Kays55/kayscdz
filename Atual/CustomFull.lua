@@ -1758,7 +1758,7 @@ if player:getTitle() == ('Caronte de [Aqueronte]') then
   info('Load: ' .. player:getTitle())
 end
 
-if player:getTitle() == ('Caronte de [Aqueronte]') then
+if player:getTitle() == ('Loki [Deus]') then
   storage.elemento = 'Dark'
   storage.combo1 = 'Cadeia Do Caos'
   storage.combo2 = 'Dominio Da Ilusao'
