@@ -1758,6 +1758,18 @@ if player:getTitle() == ('Caronte de [Aqueronte]') then
   info('Load: ' .. player:getTitle())
 end
 
+if player:getTitle() == ('Caronte de [Aqueronte]') then
+  storage.elemento = 'Dark'
+  storage.combo1 = 'Cadeia Do Caos'
+  storage.combo2 = 'Dominio Da Ilusao'
+  storage.combo3 = 'Furia De Fenrir'
+  storage.combo4 = 'ultimate ' .. storage.elemento --contelação:  ' .. storage.elemento --contelação:  Gemeos Divino'
+  storage.sspell = nil
+  storage.ultimate = 'Machado Do Crepusculo'
+  storage.sense = 'sense'
+  info('Load: ' .. player:getTitle())
+end
+
 if player:getTitle() == ('Regulus [Leao]') then
   storage.elemento = 'Light'
   storage.combo1 = 'Garra Reluzente'
