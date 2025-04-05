@@ -1734,7 +1734,7 @@ if player:getTitle() == ('Kardia [Escorpiao]') then
   info('Load: ' .. player:getTitle())
 end
 
-if player:getTitle() == ('Kardia [Escorpiao]') then
+if player:getTitle() == ('Regulus [Leao]') then
   storage.elemento = 'Light'
   storage.combo1 = 'Garra Reluzente'
   storage.combo2 = 'Impacto Luminoso'
