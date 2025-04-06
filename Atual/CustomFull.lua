@@ -1770,6 +1770,18 @@ if player:getTitle() == ('Loki [Deus]') then
   info('Load: ' .. player:getTitle())
 end
 
+if player:getTitle() == ('Shun [Andromeda Celeste]') then
+  storage.elemento = 'Earth'
+  storage.combo1 = 'Correntes Celestiais'
+  storage.combo2 = 'Espiral De Andromeda'
+  storage.combo3 = 'Corrente Celestial Suprema'
+  storage.combo4 = 'ultimate ' .. storage.elemento --contelação:  ' .. storage.elemento --contelação:  Gemeos Divino'
+  storage.sspell = nil
+  storage.ultimate = nil
+  storage.sense = 'sense'
+  info('Load: ' .. player:getTitle())
+end
+
 if player:getTitle() == ('Regulus [Leao]') then
   storage.elemento = 'Light'
   storage.combo1 = 'Garra Reluzente'
