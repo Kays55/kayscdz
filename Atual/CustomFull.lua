@@ -1846,7 +1846,7 @@ if player:getTitle() == ('Shun [Andromeda Celeste]') then
   info('Load: ' .. player:getTitle())
 end
 
-if player:getTitle() == ('Shun [Andromeda Celeste]') then
+if player:getTitle() == ('Hagen [Merak]') then
   storage.elemento = 'Fire'
   storage.combo1 = 'Inferno Scorch'
   storage.combo2 = 'Yunibasu Furijingu'
