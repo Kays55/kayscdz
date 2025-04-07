@@ -1846,6 +1846,18 @@ if player:getTitle() == ('Shun [Andromeda Celeste]') then
   info('Load: ' .. player:getTitle())
 end
 
+if player:getTitle() == ('Shun [Andromeda Celeste]') then
+  storage.elemento = 'Fire'
+  storage.combo1 = 'Inferno Scorch'
+  storage.combo2 = 'Yunibasu Furijingu'
+  storage.combo3 = 'Great Fire Crush'
+  storage.combo4 = 'ultimate ' .. storage.elemento --contelação:  ' .. storage.elemento --contelação:  Gemeos Divino'
+  storage.sspell = nil
+  storage.ultimate = 'Assassin Cosmic'
+  storage.sense = 'sense'
+  info('Load: ' .. player:getTitle())
+end
+
 if player:getTitle() == ('Regulus [Leao]') then
   storage.elemento = 'Light'
   storage.combo1 = 'Garra Reluzente'
