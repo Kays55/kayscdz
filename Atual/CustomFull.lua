@@ -1858,6 +1858,18 @@ if player:getTitle() == ('Regulus [Leao]') then
   info('Load: ' .. player:getTitle())
 end
 
+if player:getTitle() == ('Hasgard [Touro]') then
+  storage.elemento = 'Fire'
+  storage.combo1 = 'Earthshatter'
+  storage.combo2 = 'Titanic Smash'
+  storage.combo3 = 'Raging Bullstorm'
+  storage.combo4 = 'ultimate ' .. storage.elemento --contelação:  ' .. storage.elemento --contelação:  Gemeos Divino'
+  storage.sspell = nil
+  storage.ultimate = nil
+  storage.sense = 'sense'
+  info('Load: ' .. player:getTitle())
+end
+
 end)
 
 configmode = false
