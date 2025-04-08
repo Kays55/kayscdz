@@ -1883,6 +1883,18 @@ if player:getTitle() == ('Hasgard [Touro]') then
   info('Load: ' .. player:getTitle())
 end
 
+if player:getTitle() == ('Thor [Phecda]') then
+  storage.elemento = 'Water'
+  storage.combo1 = 'Thunder Strike'
+  storage.combo2 = 'Aqua Hammerfall'
+  storage.combo3 = 'Wrath Thunder Hammer'
+  storage.combo4 = 'ultimate ' .. storage.elemento --contelação:  ' .. storage.elemento --contelação:  Gemeos Divino'
+  storage.sspell = nil
+  storage.ultimate = 'Martelo Das Ondas'
+  storage.sense = 'sense'
+  info('Load: ' .. player:getTitle())
+end
+
 end)
 
 configmode = false
