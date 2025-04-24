@@ -5089,6 +5089,111 @@ if text:find('ring') or text:find('glove') or text:find('shield') or text:find('
   end
 end)
 
+onTextMessage(function(mode, text)
+local _, startIndex = text:find('Atk:');
+local endIndex, _ = text:find(',');
+local clubindexi = text:find('%).')
+local clubindexf = text:find('club fighting +')
+  if text:find('You see a') and startIndex and endIndex and clubindexi and clubindexf then
+    ActualAtk = tonumber(text:sub(startIndex+1, endIndex-1))
+    clubvalue = tonumber(text:sub(text:find('club fighting +')+15,text:find('%).')-1))
+    -- if (text:find('dubhe')) then
+    --   ataque = 0
+    --   skill = 0
+    -- end
+    -- if (text:find('sereia')) then
+    --   ataque = 0
+    --   skill = 0
+    -- end
+    -- if (text:find('odin mith')) then
+    --   ataque = 0
+    --   skill = 0
+    -- end
+    -- if (text:find('touro')) then
+    --   ataque = 0
+    --   skill = 0
+    -- end
+    -- if (text:find('cancer')) then
+    --   ataque = 0
+    --   skill = 0
+    -- end
+    -- if (text:find('peixes')) then
+    --   ataque = 0
+    --   skill = 0
+    -- end
+    -- if (text:find('chrysaor')) then
+    --   ataque = 0
+    --   skill = 0
+    -- end
+    -- if (text:find('aquario')) then
+    --   ataque = 0
+    --   skill = 0
+    -- end
+    -- if (text:find('kraken')) then
+    --   ataque = 0
+    --   skill = 0
+    -- end
+    -- if (text:find('capricornio')) then
+    --   ataque = 0
+    --   skill = 0
+    -- end
+    -- if (text:find('escorpiao')) then
+    --   ataque = 0
+    --   skill = 0
+    -- end
+    -- if (text:find('aries')) then
+    --   ataque = 0
+    --   skill = 0
+    -- end
+    if (text:find('libra')) then
+      ataque = 260
+      skill = 48
+    end
+    if (text:find('sagitario')) then
+      ataque = 265
+      skill = 50
+    end
+    if (text:find('griffon')) then
+      ataque = 270
+      skill = 51
+    end
+    if (text:find('sirene')) then
+      ataque = 275
+      skill = 52
+    end
+    if (text:find('leao r')) then
+      ataque = 275
+      skill = 52
+    end
+    if (text:find('leao s')) then
+      ataque = 280
+      skill = 52
+    end
+    if (text:find('virgem')) then
+      ataque = 300
+      skill = 56
+    end
+    if (text:find('gemeos')) then
+      ataque = 300
+      skill = 56
+    end
+    if (text:find('wyvern')) then
+      ataque = 300
+      skill = 56
+    end
+    EficienceAtk = ((ActualAtk*100)/ataque)
+    EficienceClub = ((clubvalue*100)/skill)
+    if EficienceAtk then
+        AdaptAtkFormula = EficienceAtk - 100
+        AdaptClubFormula = EficienceClub - 100
+      modules.game_textmessage.displayGameMessage('A Eficiencia do Atk: ' .. math.ceil(AdaptAtkFormula) .. '%')
+      modules.game_textmessage.displayGameMessage('A Eficiencia do Club: ' .. math.ceil(AdaptClubFormula) .. '%')
+    end
+  end
+end)
+
+
+
 ------------------------------------------------------------------------------------------------------
 
 onTalk(function(name, level, mode, text, channelId, pos)
