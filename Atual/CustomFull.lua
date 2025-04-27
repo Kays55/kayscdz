@@ -4772,7 +4772,7 @@ info(targetsense)
 end)
 
 
-local ItemsToMove = {11755,13302,12272,13294,13298,13368,13882,13369,13831,13295,13882,13928,13881,13879,14251,13660,13297,13299,13194,13713,14824,13305,13304,13375,13880,12271,13657,14601,14594,14342,14599,14592,14602,13832,14088,13772,13773,14027,14090,14586,14089,13522,14936,13372,13373,13300,15129,15120,15119,15132,15099,15109,15136,15123,15133,15126,15134,15141,15131,15127,15144,15128,15112,15139,13303,15130,12270,15103,15135,14115,15137,15124,15092,13370,15107,15108,13371,15164,15165,15149,15163,15111,15110,15145,15105,15100,14087,15101,13296,15363,15364,15166,15167}
+local ItemsToMove = {11755,13302,12272,13294,13298,13368,13882,13369,13831,13295,13882,13928,13881,13879,14251,13660,13297,13299,13194,13713,14824,13305,13304,13375,13880,12271,13657,14601,14594,14342,14599,14592,14602,13832,14088,13772,13773,14027,14090,14586,14089,13522,14936,13372,13373,13300,15129,15120,15119,15132,15099,15109,15136,15123,15133,15126,15134,15141,15131,15127,15144,15128,15112,15139,13303,15130,12270,15103,15135,14115,15137,15124,15092,13370,15107,15108,13371,15164,15165,15149,15163,15111,15110,15145,15105,15100,14087,15101,13296,15363,15364,15166,15167,15374,15375,15143,13480,14343,15477}
 
 local function searchAndMoveItems()
     for _, container in pairs(getContainers()) do
@@ -4994,6 +4994,22 @@ local toKeep = {
   [14911] = {'Incomum','Raro','Épico','Lendario','Mitico'},
   [14912] = {'Incomum','Raro','Épico','Lendario','Mitico'},
   [14861] = {'Incomum','Raro','Épico','Lendario','Mitico'},
+  --Gemeos renegado
+  [15437] = {'Incomum','Raro','Épico','Lendario','Mitico'},
+  [15438] = {'Incomum','Raro','Épico','Lendario','Mitico'},
+  [15433] = {'Incomum','Raro','Épico','Lendario','Mitico'},
+  [15434] = {'Incomum','Raro','Épico','Lendario','Mitico'},
+  [15435] = {'Incomum','Raro','Épico','Lendario','Mitico'},
+  [15436] = {'Incomum','Raro','Épico','Lendario','Mitico'},
+  --[14861] = {'Incomum','Raro','Épico','Lendario','Mitico'},
+  --Draco Marinho
+  [15400] = {'Incomum','Raro','Épico','Lendario','Mitico'},
+  [15401] = {'Incomum','Raro','Épico','Lendario','Mitico'},
+  [15396] = {'Incomum','Raro','Épico','Lendario','Mitico'},
+  [15397] = {'Incomum','Raro','Épico','Lendario','Mitico'},
+  [15398] = {'Incomum','Raro','Épico','Lendario','Mitico'},
+  [15399] = {'Incomum','Raro','Épico','Lendario','Mitico'},
+  --[14861] = {'Incomum','Raro','Épico','Lendario','Mitico'},
 }
 moveequipsdrops = macro(1000, "Move Rarity", function()
   for _, c in pairs(getContainers()) do
@@ -5071,6 +5087,9 @@ if text:find('ring') or text:find('glove') or text:find('shield') or text:find('
     end
     if (text:find('leao')) and text:find('Arm:') then
       storage.BaseArm = 345
+    end
+    if (text:find('dragao marinho')) and text:find('Arm:') then
+      storage.BaseArm = 350
     end
     if (text:find('virgem')) and text:find('Arm:') then
       storage.BaseArm = 350
@@ -5168,6 +5187,10 @@ local clubindexf = text:find('club fighting +')
     if (text:find('leao s')) then
       ataque = 280
       skill = 52
+    end
+    if (text:find('dragao marinho')) then
+      ataque = 295
+      skill = 53
     end
     if (text:find('virgem')) then
       ataque = 300
@@ -5867,6 +5890,6 @@ info(loaded)
 setDefaultTab("Main")
 
 UI.Separator()
-version = 1.2
+version = 1.3
 UI.Label('PainTaylor')
 UI.Label(version)
