@@ -5884,10 +5884,12 @@ onTalk(function(name, level, mode, text, channelId, pos)
     end
 end)
 
+
+setDefaultTab("Main")
+
 loaded = true
 info(loaded)
 
-setDefaultTab("Main")
 
 UI.Separator()
 version = 1.3
