@@ -5888,7 +5888,9 @@ end)
 setDefaultTab("Main")
 
 loaded = true
-info(loaded)
+if loaded == true then
+info('loaded')
+end
 
 
 UI.Separator()
