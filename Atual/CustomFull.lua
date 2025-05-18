@@ -1859,6 +1859,19 @@ if player:getTitle() == ('Hagen [Merak]') then
   info('Load: ' .. player:getTitle())
 end
 
+if player:getTitle() == ('Thor [Phecda]') then
+  storage.elemento = 'Water'
+  storage.combo1 = 'Thunder Strike'
+  storage.combo2 = 'Aqua Hammerfall'
+  storage.combo3 = 'Wrath Thunder Hammer'
+  storage.combo4 = 'ultimate ' .. storage.elemento --contelação:  ' .. storage.elemento --contelação:  Gemeos Divino'
+  storage.sspell = nil
+  storage.ultimate = 'Martelo Das Ondas'
+  storage.sense = 'sense'
+  info('Load: ' .. player:getTitle())
+end
+
+
 if player:getTitle() == ('Regulus [Leao]') then
   storage.elemento = 'Light'
   storage.combo1 = 'Garra Reluzente'
@@ -1883,17 +1896,18 @@ if player:getTitle() == ('Hasgard [Touro]') then
   info('Load: ' .. player:getTitle())
 end
 
-if player:getTitle() == ('Thor [Phecda]') then
-  storage.elemento = 'Water'
-  storage.combo1 = 'Thunder Strike'
-  storage.combo2 = 'Aqua Hammerfall'
-  storage.combo3 = 'Wrath Thunder Hammer'
+if player:getTitle() == ('Albafica [Peixes]') then
+  storage.elemento = 'Fire'
+  storage.combo1 = 'Rosa Carmesim'
+  storage.combo2 = 'Petalas Cortantes'
+  storage.combo3 = 'Danca Das Rosas'
   storage.combo4 = 'ultimate ' .. storage.elemento --contelação:  ' .. storage.elemento --contelação:  Gemeos Divino'
   storage.sspell = nil
-  storage.ultimate = 'Martelo Das Ondas'
+  storage.ultimate = nil
   storage.sense = 'sense'
   info('Load: ' .. player:getTitle())
 end
+
 
 end)
 
@@ -5695,8 +5709,6 @@ end)
 ----------------------------------------------------------------
 
 local discordTimes = {}
-
-local LinkSpotUser = "https://discord.com/api/webhooks/1356333418358636610/y64lxNBlloXnLEZuudRP9DCxf0AC9QAz3rcMFU6tarX3tMqDs87mHT8uYulv99RybwJj"
 
  -- insert your webhook link below
 local LootSpotUser = {
