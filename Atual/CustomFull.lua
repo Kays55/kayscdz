@@ -278,10 +278,13 @@ local OutputMessage = modules._G.OutputMessage;
 local opcode = 16;
 local SpecialOpcode = modules._G.SpecialOpcode;
 
-bypassdoormacro = macro(100, 'Bypassdoor', function()
+
+function bypassdoor()
   local window = modules.game_antibotcode.MainWindow;
   if (window:isHidden()) then return; end
-
+    timer = math.random(5000, 13000)
+    schedule(timer, function()
+        CaveBot.delay(timer)
   local codePanel = window:getChildById("codePanel");
   local msg = OutputMessage.create();
   msg:addU8(SpecialOpcode);
@@ -290,7 +293,8 @@ bypassdoormacro = macro(100, 'Bypassdoor', function()
   msg:addString(codePanel:getText());
   ProtocolGame:send(msg);
   window:hide();
-end)
+    end)
+end
 
 
 Stopbypass = macro(200, 'StopByPass',function()end)
