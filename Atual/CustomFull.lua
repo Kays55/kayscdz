@@ -283,8 +283,9 @@ function bypassdoor()
   local window = modules.game_antibotcode.MainWindow;
   if (window:isHidden()) then return; end
     timer = math.random(5000, 13000)
+    --info(timer)
+    CaveBot.delay(timer)
     schedule(timer, function()
-        CaveBot.delay(timer)
   local codePanel = window:getChildById("codePanel");
   local msg = OutputMessage.create();
   msg:addU8(SpecialOpcode);
