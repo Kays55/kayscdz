@@ -1430,7 +1430,7 @@ if player:getTitle() == ('Unnamed [Andromeda Negro]') then
   info('Load: ' .. player:getTitle())
 end
 
-if player:getTitle() == ('Poseidon [Deus]') then
+if player:getTitle() == ('Poseidon [Deus Dos Mares]') then
   storage.elemento = 'Light'
   storage.combo1 = 'vento artico'
   storage.combo2 = 'divine marine destruction'
@@ -1695,7 +1695,7 @@ if player:getTitle() == ('Tremy [Flecha]') then
   info('Load: ' .. player:getTitle())
 end
 
-if player:getTitle() == ('Hades [Deus]') then
+if player:getTitle() == ('Hades [Deus Dos Mortos]') then
     storage.elemento = 'Dark'
   storage.combo1 = 'Yami Raitoningu'
   storage.combo2 = 'Naraku No Seiken'
@@ -1707,7 +1707,7 @@ if player:getTitle() == ('Hades [Deus]') then
   info('Load: ' .. player:getTitle())
 end
 
-if player:getTitle() == ('Athena [Deusa]') then
+if player:getTitle() == ('Athena [Deusa Da Guerra]') then
     storage.elemento = 'Light'
   storage.combo1 = 'Divine Justice'
   storage.combo2 = 'Judgment Of Athena'
@@ -1828,7 +1828,7 @@ if player:getTitle() == ('Caronte de [Aqueronte]') then
   info('Load: ' .. player:getTitle())
 end
 
-if player:getTitle() == ('Loki [Deus]') then
+if player:getTitle() == ('Loki [Deus Da Mentira]') then
   storage.elemento = 'Dark'
   storage.combo1 = 'Cadeia Do Caos'
   storage.combo2 = 'Dominio Da Ilusao'
