@@ -5913,7 +5913,7 @@ end)
 
 onTalk(function(name, level, mode, text, channelId, pos)
     if name ~= player:getName() then return end
-    if text == storage.ultimate then
+    if text:lower() == storage.ultimate:lower() then
         storage.SpecialCount = storage.SpecialCount +1
     end
 end)
