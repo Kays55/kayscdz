@@ -5902,6 +5902,68 @@ onTalk(function(name, level, mode, text, channelId, pos)
     end
 end)
 
+storage.SpecialCount = 0
+
+onKeyDown(function(keys)
+    if keys == 'Ctrl+P' then
+        storage.SpecialCount = 0
+    end
+end)
+
+
+onTalk(function(name, level, mode, text, channelId, pos)
+    if name ~= player:getName() then return end
+    if text == storage.ultimate then
+        storage.SpecialCount = storage.SpecialCount +1
+    end
+end)
+
+onTextMessage(function(mode, text)
+  local segundos = string.match(text, "Aguarde o cooldown %[(%d+)s%]")
+  if segundos then
+    segundos = tonumber(segundos)
+    if segundos >= 19 then
+        MiliSegundos = segundos * 1000
+        SpecialCdr = now + MiliSegundos
+    end
+  end
+end)
+
+
+SPCx,SPCy = 150, 0
+
+
+local widget = setupUI([[
+Panel
+  height: 400
+  width: 900
+]], g_ui.getRootWidget())
+
+local SpecialHud = g_ui.loadUIFromString([[
+Label
+  color: white
+  background-color: black
+  opacity: 0.85
+  text-horizontal-auto-resize: true  
+]], widget)
+
+ 
+
+macro(1, function()
+    if SpecialCdr and storage.SpecialCount then
+        if SpecialCdr <= now then
+            SpecialHud:setText('Special:  Ok! Count: ' .. (storage.SpecialCount))
+            SpecialHud:setColor('green')
+        else
+            SpecialHud:setText('Special: ' .. (SpecialCdr - now) .. ' Count: ' .. (storage.SpecialCount))
+            --SpecialHud:setColor('Red')
+        end
+    end
+end)
+ 
+
+SpecialHud:setPosition({y = SPCy+50, x =  SPCx+300})
+
 
 setDefaultTab("Main")
 
