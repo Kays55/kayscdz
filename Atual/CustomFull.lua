@@ -5981,6 +5981,6 @@ info('loaded')
 end
 
 UI.Separator()
-version = 1.3
+version = 1.4
 UI.Label('PainTaylor')
 UI.Label(version)
