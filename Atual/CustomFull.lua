@@ -114,68 +114,68 @@ end
 
 --Vocations
 
-local VOCATION_CLASS_BRONZE = 1;
-local VOCATION_CLASS_SILVER = 2;
-local VOCATION_CLASS_GOLD = 3;
-local VOCATION_CLASS_DIVINE = 4;
+-- local VOCATION_CLASS_BRONZE = 1;
+-- local VOCATION_CLASS_SILVER = 2;
+-- local VOCATION_CLASS_GOLD = 3;
+-- local VOCATION_CLASS_DIVINE = 4;
 
 
 
-changeVocation = function(level_or_name, class)
-     --modules.game_changevocation.updateVocationsList()
+-- changeVocation = function(level_or_name, class)
+--      --modules.game_changevocation.updateVocationsList()
 
-  local VocationsRadio = modules.game_changevocation.VocationsRadio;
-  local widgets = VocationsRadio.widgets;
-  if (table.size(widgets) == 0 or widgets[1].vocation == nil) then
-    return schedule(100, function() changeVocation(level_or_name, class) end);
-  end
+--   local VocationsRadio = modules.game_changevocation.VocationsRadio;
+--   local widgets = VocationsRadio.widgets;
+--   if (table.size(widgets) == 0 or widgets[1].vocation == nil) then
+--     return schedule(100, function() changeVocation(level_or_name, class) end);
+--   end
   
-  local is_level = false;
-  local as_num = tonumber(level_or_name);
-  if (as_num ~= nil) then
-    is_level = true;
-  end
+--   local is_level = false;
+--   local as_num = tonumber(level_or_name);
+--   if (as_num ~= nil) then
+--     is_level = true;
+--   end
   
 
-  local data = {};
-  for _, child in ipairs(widgets) do
-    if (class == nil or child.vocation.class == class) then
-      table.insert(data, {
-        name = child.vocation.name,
-        level = child.vocation.level,
-        widget = child
-      })
-    end
-  end
+--   local data = {};
+--   for _, child in ipairs(widgets) do
+--     if (class == nil or child.vocation.class == class) then
+--       table.insert(data, {
+--         name = child.vocation.name,
+--         level = child.vocation.level,
+--         widget = child
+--       })
+--     end
+--   end
   
-  if (is_level) then
-    table.sort(data, function(a, b)
-      local distA = math.abs(a.level - as_num);
-      local distB = math.abs(b.level - as_num);
+--   if (is_level) then
+--     table.sort(data, function(a, b)
+--       local distA = math.abs(a.level - as_num);
+--       local distB = math.abs(b.level - as_num);
       
-      return distA < distB;
-    end)
+--       return distA < distB;
+--     end)
     
-    local widget = data[1].widget;
-    VocationsRadio:selectWidget(widget);
-    modules.game_changevocation.confirm();
+--     local widget = data[1].widget;
+--     VocationsRadio:selectWidget(widget);
+--     modules.game_changevocation.confirm();
     
-    return;
-  end
+--     return;
+--   end
   
-  local name = level_or_name:trim():lower();
+--   local name = level_or_name:trim():lower();
   
-  for _, value in ipairs(data) do
+--   for _, value in ipairs(data) do
     
-    if (value.name:trim():lower() == name) then
-      local widget = value.widget;
-      VocationsRadio:selectWidget(widget);
-      modules.game_changevocation.confirm();
-      return;
-    end
-  end
+--     if (value.name:trim():lower() == name) then
+--       local widget = value.widget;
+--       VocationsRadio:selectWidget(widget);
+--       modules.game_changevocation.confirm();
+--       return;
+--     end
+--   end
   
-end
+-- end
 
 ---
 
