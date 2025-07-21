@@ -5971,7 +5971,7 @@ end)
  
 
 SpecialHud:setPosition({y = SPCy+50, x =  SPCx+300})
-
+    
 
 setDefaultTab("Main")
 
@@ -5981,6 +5981,6 @@ info('loaded')
 end
 
 UI.Separator()
-version = 1.4
+version = 1.3
 UI.Label('PainTaylor')
 UI.Label(version)
