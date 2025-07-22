@@ -1215,7 +1215,7 @@ if player:getTitle() == ('Hyoga [Cisne Divino]') then
 end
 
 if player:getTitle() == ('Seiya [Odin]') then
- storage.elemento = 'Water'
+ storage.elemento = 'Light'
  storage.combo1 = 'meteoro de odin'
  storage.combo2 = 'cometa de odin'
  storage.combo3 = 'balmung'
@@ -3704,27 +3704,27 @@ end
 modaltravel = function(checkpoint)
 local modalpanel = modules.game_modaldialog.modalDialog
 
-if modalpanel then
+    if modalpanel then
 
     local choiceList = modalpanel:getChildById('choiceList')
 
-    if choiceList then
+        if choiceList then
 
-        for i, widget in pairs(choiceList:getChildren()) do
+            for i, widget in pairs(choiceList:getChildren()) do
 
-            if (widget:getText() == checkpoint) then
+                if (widget:getText() == checkpoint) then
 
-                choiceList:focusChild(widget)
+                    choiceList:focusChild(widget)
 
-                modalpanel:onEnter()
+                    modalpanel:onEnter()
 
-end
+                end
 
-end
+            end
 
-end
+        end
 
-end
+    end
 
 end
 
