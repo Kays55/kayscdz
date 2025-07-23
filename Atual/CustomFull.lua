@@ -4392,6 +4392,22 @@ macro(100, "Change fight mode", function()
   end
 end)
 
+MagiapowerDown = 'Burn Cosmo'
+
+powerDownMacro = macro(200,'PowerDown',function()
+    if manapercent() >= 70 then
+        say(MagiapowerDown)
+    end
+end)
+
+onTalk(function(name, level, mode, text, channelId, pos)
+    if mode == 1 then
+        if text == MagiapowerDown then
+            powerDownMacro.setOff()
+        end
+    end
+end)
+
 UI.Label("Auto Follow Name")
 addTextEdit("followleader", storage.followLeader or "player name", function(widget, text)
 storage.followLeader = text
@@ -5037,6 +5053,15 @@ local toKeep = {
   [15077] = {'Incomum','Raro','Épico','Lendario','Mitico'},
   [15078] = {'Incomum','Raro','Épico','Lendario','Mitico'},
   [15079] = {'Incomum','Raro','Épico','Lendario','Mitico'},
+  --[14861] = {'Incomum','Raro','Épico','Lendario','Mitico'},
+
+  --Cancer NextDimension
+  [15778] = {'Incomum','Raro','Épico','Lendario','Mitico'},
+  [15779] = {'Incomum','Raro','Épico','Lendario','Mitico'},
+  [15774] = {'Incomum','Raro','Épico','Lendario','Mitico'},
+  [15775] = {'Incomum','Raro','Épico','Lendario','Mitico'},
+  [15776] = {'Incomum','Raro','Épico','Lendario','Mitico'},
+  [15777] = {'Incomum','Raro','Épico','Lendario','Mitico'},
   --[14861] = {'Incomum','Raro','Épico','Lendario','Mitico'},
 }
 moveequipsdrops = macro(1000, "Move Rarity", function()
