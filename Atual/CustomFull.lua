@@ -3654,7 +3654,7 @@ for i, healingInfo in ipairs({ storage.hpitem1, storage.hpitem2, storage.manaite
   local healingmacro = macro(20, function ()
     local hp = i <= 2 and player:getHealthPercent() or math.min(100, math.floor(100 * (player:getMana() / player:getMaxMana())))
     if healingInfo.max >= hp and hp >= healingInfo.min then
-        use(healingInfo.item)
+        useWith(healingInfo.item, player)
     end
   end)
 
@@ -4102,14 +4102,14 @@ deaths:setPosition({y = yth, x =  xth})
 
 
 schedule(300, function()
-    use(storage.nhpitem)
+    useWith(storage.nhpitem, player)
 end)
 
 onTextMessage(function(mode, text)
-    if text:find('rainbow') and text:find('Using one of') then
+    if text:find('great health') and text:find('Using one of') then
         storage.potaamout = tonumber(text:match('%d+'))
     end
-    if text:find('Using the last') and text:find('rainbow') then
+    if text:find('Using the last') and text:find('great health') then
         storage.potaamout = 0
     end
 end)
