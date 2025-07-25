@@ -612,7 +612,7 @@ if player:getTitle() == ('Geki [Urso]') then
  storage.combo3 = 'kuma no hoyo'
  storage.combo4 = 'ultimate ' .. storage.elemento --contelação:  urso'
  storage.sspell = nil
- storage.ultimate = nil
+ storage.ultimate = 'poder selvagem'
  storage.sense = 'sense'
   info('Load: ' .. player:getTitle())
 end
