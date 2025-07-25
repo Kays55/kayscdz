@@ -3683,6 +3683,12 @@ healmacro.setOn()
 
 setDefaultTab("Cave")
 
+macro(200, 'Sair da Cave', function()
+    if ((storage.durability and storage.durability < tonumber(storage.mindurability)) or stamina() <= 40*60) and TargetBot.isOn() then
+        TargetBot.setOff()
+    end
+end)
+
 onTalk(function(name, level, mode, text, channelId, pos)
     if text:find('SwitchReconect') and mode == 4 then
         g_ui.getRootWidget():recursiveGetChildById("autoReconnect").onClick(widget)
