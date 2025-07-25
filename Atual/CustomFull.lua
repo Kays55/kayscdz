@@ -2879,7 +2879,7 @@ setDefaultTab("Atk")
 
 storage.cdrultimate = now
 specialcast = macro(100, 'Spam Special', function()
-  if not g_game.isAttacking() then return end
+  if not g_game.isAttacking() or not storage.ultimate then return end
   if storage.cdrultimate <= now then
     say(storage.ultimate)
     storage.cdrultimate = now + 1000
@@ -2891,7 +2891,7 @@ macro(250, "Melee Special", function()
   if not g_game.isAttacking() then return end
   local target = g_game.getAttackingCreature()
   local dist = getDistanceBetween(pos(),target:getPosition())
-  if dist == 1 then
+  if dist == 1 and storage.ultimate then
     say(storage.ultimate)
     delay(1000)
   end
@@ -2910,7 +2910,7 @@ local autoWave = macro(100,"Special Reta", function()
   local maxDist = tonumber(config.maxDist)
   local spell = storage.ultimate
   local enemy = target()
-  if not enemy then return true end
+  if not enemy or not storage.ultimate then return true end
   local pos = player:getPosition()
   local cpos = enemy:getPosition()
   if getDistanceBetween(pos,cpos) > maxDist then return true end
