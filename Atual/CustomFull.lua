@@ -1913,6 +1913,53 @@ if player:getTitle() == ('Albafica [Peixes]') then
   info('Load: ' .. player:getTitle())
 end
 
+if player:getTitle() == ('Shaka [Virgem Divino]') then
+  storage.elemento = 'Dark'
+  storage.combo1 = 'Satori Impact'
+  storage.combo2 = 'Kanmuryou No Renge'
+  storage.combo3 = 'Tenbu Horin'
+  storage.combo4 = 'ultimate ' .. storage.elemento --contelação:  ' .. storage.elemento --contelação:  Gemeos Divino'
+  storage.sspell = nil
+  storage.ultimate = 'Tesouro Do Ceu'
+  storage.sense = 'sense'
+  info('Load: ' .. player:getTitle())
+end
+
+if player:getTitle() == ('Apolo [Deus Do Sol]') then
+  storage.elemento = 'Light'
+  storage.combo1 = 'Julgamento Solar'
+  storage.combo2 = 'Helios Nova'
+  storage.combo3 = 'Melody Of Ruin'
+  storage.combo4 = 'ultimate ' .. storage.elemento --contelação:  ' .. storage.elemento --contelação:  Gemeos Divino'
+  storage.sspell = nil
+  storage.ultimate = nil
+  storage.sense = 'sense'
+  info('Load: ' .. player:getTitle())
+end
+
+if player:getTitle() == ('Camus [Aquario Divino]') then
+  storage.elemento = 'Light'
+  storage.combo1 = 'Frozen Diamond Dust'
+  storage.combo2 = 'Frozen Aurora'
+  storage.combo3 = 'Arctic Punishment'
+  storage.combo4 = 'ultimate ' .. storage.elemento --contelação:  ' .. storage.elemento --contelação:  Gemeos Divino'
+  storage.sspell = nil
+  storage.ultimate = 'Muralha Celestial'
+  storage.sense = 'sense'
+  info('Load: ' .. player:getTitle())
+end
+
+if player:getTitle() == ('Aldebaran [Touro Divino]') then
+  storage.elemento = 'Light'
+  storage.combo1 = 'Impacto Estelar'
+  storage.combo2 = 'Pisada Sismica'
+  storage.combo3 = 'Ira Do Touro Divino'
+  storage.combo4 = 'ultimate ' .. storage.elemento --contelação:  ' .. storage.elemento --contelação:  Gemeos Divino'
+  storage.sspell = nil
+  storage.ultimate = 'Impacto Divino'
+  storage.sense = 'sense'
+  info('Load: ' .. player:getTitle())
+end
 
 end)
 
