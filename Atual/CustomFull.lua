@@ -5146,191 +5146,314 @@ moveequipsdrops = macro(1000, "Move Rarity", function()
 end)
 
 ----------------------------------------------------
+-- 1. Biblioteca de Referência
+local itemStats = {
+  ["dubhe"] = {
+    armor  = { arm = 245, club = 0, hpRegen = 3300, mpRegen = 3300 },
+    weapon = { atk = 175, club = 34 },
+    ring   = { arm = 35, shielding = 4, hpMax = 5000 },
+    shield = { def = 210, shielding = 5 },
+  },
+  ["esfinge"] = {
+    armor  = { arm = 250, club = 2, hpRegen = 3350, mpRegen = 3350 },
+    weapon = { atk = 180, club = 35 },
+    ring   = { arm = 40, shielding = 4, hpMax = 5000 },
+    shield = { def = 210, shielding = 5 },
+  },
+  ["aqueronte"] = {
+    armor  = { arm = 250, club = 2, hpRegen = 3350, mpRegen = 3350 },
+    weapon = { atk = 180, club = 35 },
+    ring   = { arm = 40, shielding = 4, hpMax = 5000 },
+    shield = { def = 210, shielding = 5 },
+  },
+  ["touro retro"] = {
+    armor  = { arm = 265, club = 4, hpRegen = 3500, mpRegen = 3500 },
+    weapon = { atk = 185, club = 35 },
+    ring   = { arm = 50, shielding = 5, hpMax = 5000 },
+    shield = { def = 210, shielding = 5 },
+  },
+  ["touro"] = {
+    armor  = { arm = 265, club = 4, hpRegen = 3500, mpRegen = 3500 },
+    weapon = { atk = 185, club = 35 },
+    ring   = { arm = 50, shielding = 5, hpMax = 5000 },
+    shield = { def = 210, shielding = 5 },
+  },
+  ["sereia"] = {
+    armor = { arm = 265, club = 4, hpRegen = 3300, mpRegen = 3300 },
+    weapon = { atk = 190, club = 35 },
+    ring   = { arm = 50, shielding = 5, hpMax = 5000 },
+    shield = { def = 215, shielding = 5 },
+  },
+  ["cancer"] = {
+    armor = { arm = 270, club = 4, hpRegen = 3600, mpRegen = 3600 },
+    weapon = { atk = 195, club = 27 },
+    ring   = { arm = 50, shielding = 5, hpMax =  5000},
+    shield = { def = 225, shielding = 8 },
+  },
+  ["chrysaor"] = {
+    armor = { arm = 270, club = 4, hpRegen = 3600, mpRegen = 3600 },
+    weapon = { atk = 195, club = 27 },
+    --ring   = { arm = , shielding = , hpMax =  },
+    --shield = { def = 225, shielding = 8 },
+  },
+    ["lymnades"] = {
+    armor = { arm = 270, club = 4, hpRegen = 3600, mpRegen = 3600 },
+    weapon = { atk = 195, club = 27 },
+    shield = { def = 225, shielding = 8 },
+  },
+  ["peixes"] = {
+    armor = { arm = 270, club = 4, hpRegen = 3650, mpRegen = 3650 },
+    weapon = { atk = 200, club = 30 },
+    shield = { def = 235, shielding = 8 },
+  },
+  ["aquario"] = {
+    armor   = { arm = 275, club = 4, hpRegen = 3650, mpRegen = 3650 },
+    weapon = { atk = 205, club = 32 },
+    shield = { def = 240, shielding = 5 },
+  },
+  ["kraken"] = {
+    armor   = { arm = 280, club = 4, hpRegen = 3775, mpRegen = 3775 },
+    weapon = { atk = 215, club = 35 },
+    shield = { def = 250 , shielding =  8},
+    ring   = { arm = 60, shielding = 8, hpMax = 6700 },
+  },
+  ["lira"] = {
+    armor   = { arm = 280, club = 4, hpRegen = 3775, mpRegen = 3775 },
+    weapon = { atk = 215, club =  34},
+    --shield = { def = 260, shielding =  8},
+  },
+  ["golem"] = {
+    armor   = { arm = 280, club = 4, hpRegen = 3775, mpRegen = 3775 },
+    --weapon = { atk = , club =  },
+    shield = { def = 250, shielding =  8},
+  },
+  ["capricornio"] = {
+    armor   = { arm = 290, club = 5, hpRegen = 3850, mpRegen = 3850 },
+    weapon = { atk = 220, club =  36},
+    shield = { def = 260, shielding =  8},
+  },
+  ["scylla"] = {
+    armor   = { arm = 295, club = 5, hpRegen = 3900, mpRegen = 3900 },
+    weapon = { atk = 225, club =  36},
+    --shield = { def = 260, shielding =  8},
+  },
+  ["escorpiao"] = {
+    armor  = { arm = 300, club = 5, hpRegen = 3950, mpRegen = 3950 },
+    weapon = { atk = 230, club = 36 },
+    ring   = { arm = 60, shielding = 8, hpMax = 7000 },
+    shield = { def = 275, shielding = 8 },
+  },
+  ["aries"] = {
+    armor  = { arm = 300, club = 6, hpRegen = 4350, mpRegen = 4350 },
+    weapon = { atk = 255, club = 45 },
+    ring   = { arm = 65, shielding = 8, hpMax = 7000 },
+    shield = { def = 310, shielding = 8, hpMax = 0 },
+  },
+  ["moon"] = {
+    armor  = { arm = 300, club = 6, hpRegen = 4350, mpRegen = 4350 },
+    weapon = { atk = 255, club = 45 },
+    --ring   = { arm = 65, shielding = 8, hpMax = 7000 },
+    --shield = { def = 310, shielding = 8, hpMax = 0 },
+  },
+  ["pappilon"] = {
+    armor  = { arm = 300, club = 6, hpRegen = 4350, mpRegen = 4350 },
+    weapon = { atk = 240, club = 38 },
+    --ring   = { arm = 65, shielding = 8, hpMax = 7000 },
+    shield = { def = 300, shielding = 8, hpMax = 0 },
+  },
+  ["libra"] = {
+    armor  = { arm = 325, club = 6, hpRegen = 4425, mpRegen = 4425 },
+    weapon = { atk = 260, club = 48 },
+    ring   = { arm = 65, shielding = 8, hpMax = 7000 },
+    shield = { def = 315, shielding = 8 },
+  },
+  ["benu"] = {
+    armor = { arm = 335, club = 6, hpRegen = 4475, mpRegen = 4475 },
+    weapon = { atk = 265, club = 50},
+    --ring   = { arm = , shielding = , hpMax =  },
+    shield = { def = 350, shielding = 8, hpMax = 5000 },
+  },
+  ["sagitario"] = {
+    armor = { arm = 335, club = 6, hpRegen = 4475, mpRegen = 4475 },
+    weapon = { atk = 265, club = 50 },
+    ring   = { arm = 70, shielding = 8, hpMax = 7200 },
+    shield = { def = 350, shielding = 8, hpMax = 5000 },
+  },
+  ["griffon"] = {
+    armor = { arm = 340, club = 8, hpRegen = 4500, mpRegen = 4500 },
+    weapon = { atk = 270, club = 51 },
+    --ring   = { arm = 70, shielding = 8, hpMax = 7200 },
+    shield = { def = 365, shielding = 8, hpMax = 5000 },
+  },
+  ["sirene"] = {
+    armor = { arm = 345, club = 8, hpRegen = 4525, mpRegen = 4525 },
+    weapon = { atk = 275, club = 52 },
+    ring   = { arm = 75, shielding = 8, hpMax = 8000 },
+  },
+  ["leao retro"] = {
+    armor = { arm = 345, club = 8, hpRegen = 4600 , mpRegen = 4600  },
+    weapon = { atk = 275, club = 52 },
+    shield = { def = 375, shielding = 8, hpMax = 5000 },
+  },
+  ["leao"] = {
+    armor = { arm = 345, club = 8, hpRegen = 4600 , mpRegen = 4600  },
+    weapon = { atk = 280, club = 52 },
+    ring   = { arm = 75, shielding = 8, hpMax = 8500 },
+    shield = { def = 375, shielding = 8, hpMax = 5000 },
+  },
+  ["garuda"] = {
+    armor  = { arm = 350, club = 8, hpRegen = 4800, mpRegen = 4800 },
+    weapon = { atk = 290, club = 53 },
+    shield = { def = 385, shielding = 8, hpMax = 5000 },
+  },
+  ["dragao marinho"] = {
+    armor  = { arm = 350, club = 9, hpRegen = 5000, mpRegen = 5000 },
+    weapon = { atk = 295, club = 53 },
+    shield = { def = 400, shielding = 8, hpMax = 5000 },
+  },
+  ["virgem"] = {
+    armor  = { arm = 350, club = 10, hpRegen = 5200, mpRegen = 5200 },
+    weapon = { atk = 300, club = 56 },
+    ring   = { arm = 100, shielding = 15, hpMax = 15000 },
+    shield = { def = 400, shielding = 10, hpMax = 5000 },
+  },
+  ["virgem two"] = {
+    armor  = { arm = 350, club = 10, hpRegen = 5200, mpRegen = 5200 },
+    weapon = { atk = 300, club = 56 },
+    shield = { def = 400, shielding = 10, hpMax = 5000 },
+  },
+  ["sapuris gemeos"] = {
+    armor  = { arm = 350, club = 10, hpRegen = 5200, mpRegen = 5200 },
+    weapon = { atk = 300, club = 56 },
+    ring   = { arm = 100, shielding = 17, hpMax = 20000 },
+    shield = { def = 400, shielding = 10, hpMax = 5000 },
+  },
+  ["gemeos"] = {
+    armor  = { arm = 350, club = 10, hpRegen = 5200, mpRegen = 5200 },
+    weapon = { atk = 300, club = 56 },
+    ring   = { arm = 100, shielding = 17, hpMax = 20000 },
+    shield = { def = 400, shielding = 10, hpMax = 5000 },
+  },
+  ["wyvern"] = {
+    armor  = { arm = 350, club = 11, hpRegen = 5400, mpRegen = 5400 },
+    weapon = { atk = 300, club = 56 },
+    ring   = { arm = 100, shielding = 15, hpMax = 15000 },
+    shield = { def = 425, shielding = 10, hpMax = 6500 },
+  },
+  ["cancer next dimension"] = {
+    armor  = { arm = 360, club = 12, hpRegen = 5600, mpRegen = 5600 },
+    weapon = { atk = 310, club = 57 },
+    shield = { def = 450, shielding = 10, hpMax = 6500 },
+  }
+}
+
+
+
+
+
 onTextMessage(function(mode, text)
-local _, startIndex = text:find('Arm:');
-local endIndex, _ = text:find(',');
-local _, efistartIndex = text:find('Durability: ');
-local efiendIndex, _ = text:find('It');
-if text:find('ring') or text:find('glove') or text:find('shield') or text:find('sword') or text:find('reaper') then return end
-  if text:find('You see a') and startIndex and endIndex then
-    storage.ActualArm = tonumber(text:sub(startIndex+1, endIndex-1))
-    if (text:find('dubhe')) and text:find('Arm:') then
-      storage.BaseArm = 245
+  if not text:find('You see a') then return end
+
+  local itemName = text:lower():gsub("[%[%]]", "")
+  local matchedStats = nil
+  for key, stats in pairs(itemStats) do
+    if itemName:find(key) then
+      matchedStats = stats
+      break
     end
-    if (text:find('sereia')) and text:find('Arm:') then
-      storage.BaseArm = 265
+  end
+  if not matchedStats then return end
+
+  local function extractValue(str, pattern)
+    local match = str:match(pattern)
+    return match and tonumber(match)
+  end
+
+  local atk = extractValue(text, 'Atk:(%d+)')
+
+  local def = nil
+  local defPatterns = {
+    '[Dd]ef:?%s*(%d+)',
+    '[Dd]ef%s*%(?%d+%)?',
+    '[(,]%s*[Dd]ef:?%s*(%d+)'
+  }
+
+  for _, pattern in ipairs(defPatterns) do
+    local match = text:match(pattern)
+    if match then
+      def = tonumber(match)
+      break
     end
-    if (text:find('odin mith')) and text:find('Arm:') then
-      storage.BaseArm = 265
+  end
+
+  if not def and text:find("\n") then
+    for line in text:gmatch("[^\r\n]+") do
+      for _, pattern in ipairs(defPatterns) do
+        local match = line:match(pattern)
+        if match then
+          def = tonumber(match)
+          break
+        end
+      end
+      if def then break end
     end
-    if (text:find('touro')) and text:find('Arm:') then
-      storage.BaseArm = 265
+  end
+
+  local arm = extractValue(text, 'Arm:(%d+)')
+  local club = extractValue(text, 'club fighting %+?(%d+)')
+  local shielding = extractValue(text, 'shielding %+?(%d+)')
+  local hpRegen = extractValue(text, 'HP Regen%. (%d+)/s')
+  local mpRegen = extractValue(text, 'MP Regen%. (%d+)/s')
+  local hpMax = extractValue(text, 'max health %+?(%d+)')
+
+  local tipo = nil
+  if atk then
+    tipo = "weapon"
+  elseif def then
+    tipo = "shield"
+  elseif hpMax and shielding then
+    tipo = "ring"
+  elseif arm and (text:find("boots") or text:find("legs") or text:find("helmet") or text:find("armor")) then
+    tipo = "armor"
+  end
+
+  local function calcularEficiencia(valorAtual, valorMaximo)
+    if not valorAtual or not valorMaximo then return nil end
+    return math.ceil(((valorAtual * 100) / valorMaximo) - 100)
+  end
+
+  local function exibirEficiencia(nome, valor)
+    if valor then
+      modules.game_textmessage.displayGameMessage("Eficiencia de " .. nome .. ": " .. valor .. "%")
     end
-    if (text:find('cancer')) and text:find('Arm:') then
-      storage.BaseArm = 270
-    end
-    if (text:find('peixes')) and text:find('Arm:') then
-      storage.BaseArm = 270
-    end
-    if (text:find('chrysaor')) and text:find('Arm:') then
-      storage.BaseArm = 270
-    end
-    if (text:find('aquario')) and text:find('Arm:') then
-      storage.BaseArm = 275
-    end
-    if (text:find('kraken')) and text:find('Arm:') then
-      storage.BaseArm = 280
-    end
-    if (text:find('capricornio')) and text:find('Arm:') then
-      storage.BaseArm = 290
-    end
-    if (text:find('escorpiao')) and text:find('Arm:') then
-      storage.BaseArm = 300
-    end
-    if (text:find('aries')) and text:find('Arm:') then
-      storage.BaseArm = 300
-    end
-    if (text:find('libra')) and text:find('Arm:') then
-      storage.BaseArm = 325
-    end
-    if (text:find('sagitario')) and text:find('Arm:') then
-      storage.BaseArm = 335
-    end
-    if (text:find('sirene')) and text:find('Arm:') then
-      storage.BaseArm = 340
-    end
-    if (text:find('griffon')) and text:find('Arm:') then
-      storage.BaseArm = 340
-    end
-    if (text:find('leao')) and text:find('Arm:') then
-      storage.BaseArm = 345
-    end
-    if (text:find('dragao marinho')) and text:find('Arm:') then
-      storage.BaseArm = 350
-    end
-    if (text:find('virgem')) and text:find('Arm:') then
-      storage.BaseArm = 350
-    end
-    if (text:find('gemeos')) and text:find('Arm:') then
-      storage.BaseArm = 350
-    end
-    if (text:find('wyvern')) and text:find('Arm:') then
-      storage.BaseArm = 350
-    end
-    storage.CalcEficience = (((storage.ActualArm*(100))/storage.BaseArm))
-    if storage.CalcEficience then
-        adaptformula = storage.CalcEficience - 100
-      modules.game_textmessage.displayGameMessage('A Eficiencia da Raridade: ' .. math.ceil(adaptformula) .. '%')
-    end
+  end
+
+  local ref = matchedStats[tipo]
+
+  if tipo == "weapon" then
+    exibirEficiencia("Atk", calcularEficiencia(atk, ref.atk))
+    exibirEficiencia("Club", calcularEficiencia(club, ref.club))
+  elseif tipo == "shield" then
+    exibirEficiencia("Def", calcularEficiencia(def, ref.def))
+    exibirEficiencia("Shielding", calcularEficiencia(shielding, ref.shielding))
+    exibirEficiencia("HP Máximo", calcularEficiencia(hpMax, ref.hpMax))
+  elseif tipo == "ring" then
+    exibirEficiencia("Arm", calcularEficiencia(arm, ref.arm))
+    exibirEficiencia("Shielding", calcularEficiencia(shielding, ref.shielding))
+    exibirEficiencia("HP Máximo", calcularEficiencia(hpMax, ref.hpMax))
+  elseif tipo == "armor" then
+    exibirEficiencia("Arm", calcularEficiencia(arm, ref.arm))
+    exibirEficiencia("Club", calcularEficiencia(club, ref.club))
+    exibirEficiencia("HP Regen", calcularEficiencia(hpRegen, ref.hpRegen))
+    exibirEficiencia("MP Regen", calcularEficiencia(mpRegen, ref.mpRegen))
+  end
+
+  local durability = extractValue(text, 'Durability: (%d+)%%')
+  if durability and durability < 100 then
+    modules.game_textmessage.displayGameMessage("Possivel imprecisao: durabilidade do item esta em " .. durability .. "%")
   end
 end)
 
-onTextMessage(function(mode, text)
-local _, startIndex = text:find('Atk:');
-local endIndex, _ = text:find(',');
-local clubindexi = text:find('%).')
-local clubindexf = text:find('club fighting +')
-  if text:find('You see a') and startIndex and endIndex and clubindexi and clubindexf then
-    ActualAtk = tonumber(text:sub(startIndex+1, endIndex-1))
-    clubvalue = tonumber(text:sub(text:find('club fighting +')+15,text:find('%).')-1))
-    -- if (text:find('dubhe')) then
-    --   ataque = 0
-    --   skill = 0
-    -- end
-    -- if (text:find('sereia')) then
-    --   ataque = 0
-    --   skill = 0
-    -- end
-    -- if (text:find('odin mith')) then
-    --   ataque = 0
-    --   skill = 0
-    -- end
-    -- if (text:find('touro')) then
-    --   ataque = 0
-    --   skill = 0
-    -- end
-    -- if (text:find('cancer')) then
-    --   ataque = 0
-    --   skill = 0
-    -- end
-    -- if (text:find('peixes')) then
-    --   ataque = 0
-    --   skill = 0
-    -- end
-    -- if (text:find('chrysaor')) then
-    --   ataque = 0
-    --   skill = 0
-    -- end
-    -- if (text:find('aquario')) then
-    --   ataque = 0
-    --   skill = 0
-    -- end
-    -- if (text:find('kraken')) then
-    --   ataque = 0
-    --   skill = 0
-    -- end
-    -- if (text:find('capricornio')) then
-    --   ataque = 0
-    --   skill = 0
-    -- end
-    -- if (text:find('escorpiao')) then
-    --   ataque = 0
-    --   skill = 0
-    -- end
-    -- if (text:find('aries')) then
-    --   ataque = 0
-    --   skill = 0
-    -- end
-    if (text:find('libra')) then
-      ataque = 260
-      skill = 48
-    end
-    if (text:find('sagitario')) then
-      ataque = 265
-      skill = 50
-    end
-    if (text:find('griffon')) then
-      ataque = 270
-      skill = 51
-    end
-    if (text:find('sirene')) then
-      ataque = 275
-      skill = 52
-    end
-    if (text:find('leao r')) then
-      ataque = 275
-      skill = 52
-    end
-    if (text:find('leao s')) then
-      ataque = 280
-      skill = 52
-    end
-    if (text:find('dragao marinho')) then
-      ataque = 295
-      skill = 53
-    end
-    if (text:find('virgem')) then
-      ataque = 300
-      skill = 56
-    end
-    if (text:find('gemeos')) then
-      ataque = 300
-      skill = 56
-    end
-    if (text:find('wyvern')) then
-      ataque = 300
-      skill = 56
-    end
-    EficienceAtk = ((ActualAtk*100)/ataque)
-    EficienceClub = ((clubvalue*100)/skill)
-    if EficienceAtk then
-        AdaptAtkFormula = EficienceAtk - 100
-        AdaptClubFormula = EficienceClub - 100
-      modules.game_textmessage.displayGameMessage('A Eficiencia do Atk: ' .. math.ceil(AdaptAtkFormula) .. '%')
-      modules.game_textmessage.displayGameMessage('A Eficiencia do Club: ' .. math.ceil(AdaptClubFormula) .. '%')
-    end
-  end
-end)
 
 
 
@@ -6060,9 +6183,35 @@ end)
  
 
 SpecialHud:setPosition({y = SPCy+50, x =  SPCx+300})
-    
 
 setDefaultTab("Main")
+
+local playername = player:getName()
+local filePath = "/" .. playername .. "_attacks_log.txt"
+
+local function appendToFile(text)
+  local existingContent = ""
+  if g_resources.fileExists(filePath) then
+    existingContent = g_resources.readFileContents(filePath) or ""
+  end
+
+  local newContent = existingContent .. text .. "\n"
+  g_resources.writeFileContents(filePath, newContent)
+end
+
+local function isPlayerName(name)
+  return not name:find(" ") and not name:match("^[a-z]+$")
+end
+
+onTextMessage(function(mode, text)
+  local attacker = text:match("You lose %d+ hitpoints due to an attack by (.+)%.")
+  if attacker and isPlayerName(attacker) then
+    appendToFile("=== INÍCIO DO ATAQUE [" .. os.date("%d/%m/%Y %H:%M:%S") .. "] ===")
+    appendToFile(text)
+    return
+  end
+end)
+
 
 loaded = true
 if loaded == true then
