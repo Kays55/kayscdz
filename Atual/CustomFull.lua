@@ -6202,7 +6202,7 @@ end
 
 onTextMessage(function(mode, text)
   local attacker = text:match("You lose %d+ hitpoints due to an attack by (.+)%.")
-  if attacker and isPlayerName(attacker) then
+  if attacker then
     for _, p in ipairs(getSpectators(posz())) do
         if attacker == p:getName() then
             appendToFile("=== INÍCIO DO ATAQUE [" .. os.date("%d/%m/%Y %H:%M:%S") .. "] ===")
