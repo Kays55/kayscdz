@@ -5346,113 +5346,99 @@ local itemStats = {
     shield = { def = 450, shielding = 10, hpMax = 6500 },
   }
 }
-
-
-
-
-
 onTextMessage(function(mode, text)
   if not text:find('You see a') then return end
+  local lower = text:lower()
 
-  local itemName = text:lower():gsub("[%[%]]", "")
+  -- 1) Tentar classes Next Dimension explicitamente
   local matchedStats = nil
   for key, stats in pairs(itemStats) do
-    if itemName:find(key) then
-      matchedStats = stats
-      break
+    if key:find("next dimension", 1, true) then
+      local class = key:match("^(.-)%s+next dimension$")
+      if class and lower:find(class, 1, true) and lower:find("next dimension", 1, true) then
+        matchedStats = stats
+        break
+      end
+    end
+  end
+
+  -- 2) Se não achou Next Dimension, Busca genérica normal
+  if not matchedStats then
+    local baseName = lower:gsub("[%[%]()]", "")
+    for key, stats in pairs(itemStats) do
+      if not key:find("next dimension", 1, true) and baseName:find(key, 1, true) then
+        matchedStats = stats
+        break
+      end
     end
   end
   if not matchedStats then return end
 
+  -- Função para extrair número
   local function extractValue(str, pattern)
-    local match = str:match(pattern)
-    return match and tonumber(match)
+    local m = str:match(pattern)
+    return m and tonumber(m)
   end
 
-  local atk = extractValue(text, 'Atk:(%d+)')
-
-  local def = nil
-  local defPatterns = {
-    '[Dd]ef:?%s*(%d+)',
-    '[Dd]ef%s*%(?%d+%)?',
-    '[(,]%s*[Dd]ef:?%s*(%d+)'
-  }
-
-  for _, pattern in ipairs(defPatterns) do
-    local match = text:match(pattern)
-    if match then
-      def = tonumber(match)
-      break
-    end
+  local atk       = extractValue(text, 'Atk:%s*(%d+)')
+  -- extrai Def com vírgula ou parêntese
+  local def
+  for _, p in ipairs({ '[Dd]ef:?%s*(%d+)', '[Dd]ef:?%s*(%d+),?', '[(,]%s*[Dd]ef:?%s*(%d+)' }) do
+    local m = text:match(p)
+    if m then def = tonumber(m) break end
   end
 
-  if not def and text:find("\n") then
-    for line in text:gmatch("[^\r\n]+") do
-      for _, pattern in ipairs(defPatterns) do
-        local match = line:match(pattern)
-        if match then
-          def = tonumber(match)
-          break
-        end
-      end
-      if def then break end
-    end
-  end
-
-  local arm = extractValue(text, 'Arm:(%d+)')
-  local club = extractValue(text, 'club fighting %+?(%d+)')
+  local arm       = extractValue(text, 'Arm:%s*(%d+)')
+  local club      = extractValue(text, 'club fighting %+?(%d+)')
   local shielding = extractValue(text, 'shielding %+?(%d+)')
-  local hpRegen = extractValue(text, 'HP Regen%. (%d+)/s')
-  local mpRegen = extractValue(text, 'MP Regen%. (%d+)/s')
-  local hpMax = extractValue(text, 'max health %+?(%d+)')
+  local hpRegen   = extractValue(text, 'HP Regen%.?%s*(%d+)/s')
+  local mpRegen   = extractValue(text, 'MP Regen%.?%s*(%d+)/s')
+  local hpMax     = extractValue(text, 'max health %+?(%d+)')
 
-  local tipo = nil
+  -- detecta tipo
+  local tipo
   if atk then
     tipo = "weapon"
   elseif def then
     tipo = "shield"
   elseif hpMax and shielding then
     tipo = "ring"
-  elseif arm and (text:find("boots") or text:find("legs") or text:find("helmet") or text:find("armor")) then
+  elseif arm then
     tipo = "armor"
   end
-
-  local function calcularEficiencia(valorAtual, valorMaximo)
-    if not valorAtual or not valorMaximo then return nil end
-    return math.ceil(((valorAtual * 100) / valorMaximo) - 100)
-  end
-
-  local function exibirEficiencia(nome, valor)
-    if valor then
-      modules.game_textmessage.displayGameMessage("Eficiencia de " .. nome .. ": " .. valor .. "%")
-    end
-  end
+  if not tipo then return end
 
   local ref = matchedStats[tipo]
+  if not ref then return end
+
+  -- cálculo e exibição
+  local function calc(val, mx) if not val or not mx then return end return math.ceil(((val*100)/mx)-100) end
+  local function show(n, v) if v then modules.game_textmessage.displayGameMessage("Eficiencia de "..n..": "..v.."%") end end
 
   if tipo == "weapon" then
-    exibirEficiencia("Atk", calcularEficiencia(atk, ref.atk))
-    exibirEficiencia("Club", calcularEficiencia(club, ref.club))
+    show("Atk",  calc(atk,  ref.atk))
+    show("Club", calc(club, ref.club))
   elseif tipo == "shield" then
-    exibirEficiencia("Def", calcularEficiencia(def, ref.def))
-    exibirEficiencia("Shielding", calcularEficiencia(shielding, ref.shielding))
-    exibirEficiencia("HP Máximo", calcularEficiencia(hpMax, ref.hpMax))
+    show("Def",       calc(def,       ref.def))
+    show("Shielding", calc(shielding, ref.shielding))
+    show("HP Máximo", calc(hpMax,     ref.hpMax))
   elseif tipo == "ring" then
-    exibirEficiencia("Arm", calcularEficiencia(arm, ref.arm))
-    exibirEficiencia("Shielding", calcularEficiencia(shielding, ref.shielding))
-    exibirEficiencia("HP Máximo", calcularEficiencia(hpMax, ref.hpMax))
+    show("Arm",       calc(arm,       ref.arm))
+    show("Shielding", calc(shielding, ref.shielding))
+    show("HP Máximo", calc(hpMax,     ref.hpMax))
   elseif tipo == "armor" then
-    exibirEficiencia("Arm", calcularEficiencia(arm, ref.arm))
-    exibirEficiencia("Club", calcularEficiencia(club, ref.club))
-    exibirEficiencia("HP Regen", calcularEficiencia(hpRegen, ref.hpRegen))
-    exibirEficiencia("MP Regen", calcularEficiencia(mpRegen, ref.mpRegen))
+    show("Arm",      calc(arm,     ref.arm))
+    show("Club",     calc(club,    ref.club))
+    show("HP Regen", calc(hpRegen, ref.hpRegen))
+    show("MP Regen", calc(mpRegen, ref.mpRegen))
   end
 
-  local durability = extractValue(text, 'Durability: (%d+)%%')
+  local durability = extractValue(text, 'Durability:%s*(%d+)%%')
   if durability and durability < 100 then
-    modules.game_textmessage.displayGameMessage("Possivel imprecisao: durabilidade do item esta em " .. durability .. "%")
+    modules.game_textmessage.displayGameMessage("Possível imprecisão: durabilidade em "..durability.."%")
   end
 end)
+
 
 
 
