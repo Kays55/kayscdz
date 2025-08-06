@@ -112,7 +112,7 @@ local NCharges = tonumber(charges)
 return NCharges
 end
 
-Vocations
+--Vocations
 
 local VOCATION_CLASS_BRONZE = 1;
 local VOCATION_CLASS_SILVER = 2;
