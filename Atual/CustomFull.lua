@@ -3127,6 +3127,39 @@ end)
 
 ----Frags
 
+if type(storage.runeatk1) ~= "table" then
+  storage.runeatk1 = { on = false, title = "HP%", item = 3197, min = 0, max = 100 }
+end
+if type(storage.runeatk2) ~= "table" then
+  storage.runeatk2 = { on = false, title = "HP%", item = 3168, min = 0, max = 100 }
+end
+if type(storage.runeatk3) ~= "table" then
+  storage.runeatk3 = { on = false, title = "HP%", item = 3173, min = 0, max = 100 }
+end
+if type(storage.runeatk4) ~= "table" then
+  storage.runeatk4 = { on = false, title = "HP%", item = 3194, min = 0, max = 100 }
+end
+
+for i, healingInfo in ipairs({ storage.runeatk1, storage.runeatk2, storage.runeatk3, storage.runeatk4 }) do
+  local healingmacro = macro(20, function ()
+    if not g_game.isAttacking() then return end
+        local target = g_game.getAttackingCreature()
+        targethp = target:getHealthPercent()
+    if target and healingInfo.max >= targethp and targethp >= healingInfo.min then
+        useWith(healingInfo.item, target)
+    end
+  end)
+
+  healingmacro.setOn(healingInfo.on)
+
+  UI.DualScrollItemPanel(healingInfo, function (widget, newParams)
+    healingInfo = newParams
+    healingmacro.setOn(healingInfo.on and healingInfo.item > 100)
+  end)
+end
+
+UI.Separator()
+
 
 say('!frags')
 TFragdiario = 0
