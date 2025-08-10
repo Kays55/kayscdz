@@ -3219,590 +3219,335 @@ onTextMessage(function(mode, text)
   end
 end)
 --
+UI.Label("Enemys")
 
+macro(1, "Chicletinho 90%", function()
 
-----------------------------------------------
+for _,pla in ipairs(getSpectators(posz())) do
 
+attacked = g_game.getAttackingCreature()
 
-setDefaultTab('War')
+if not attacked or attacked:isMonster() or attacked:isPlayer() and pla:getHealthPercent() < attacked:getHealthPercent()*0.6 then
+if pla:isPlayer() and pla:getHealthPercent() < 90 and pla:getEmblem() ~= 1 and pla:getSkull() <= 3 then 
+g_game.attack(pla)
+end
+end
 
-doAttack = function(target)
-    if not target or not g_game.getLocalPlayer() then
-        return 
-    end
-    if not g_game.canPerformGameAction() or target:getId() == g_game.getLocalPlayer():getId() then
-        return 
-    end
-    if g_game.getFollowingCreature() and g_game.getFollowingCreature():getId() == target:getId() then
-        g_game.cancelFollow()
-    end
-    if g_game.getAttackingCreature() and g_game.getAttackingCreature():getId() == target:getId() then
-        g_game.cancelAttack()
-        local message = OutputMessage.create()
-        message:addU8(0xBE)
-        message:addU32(target:getId())
-        g_game.getProtocolGame():send(message)
+end
 
-    else
-    g_game.attack(target)
-        local message = OutputMessage.create()
-        message:addU8(0xF4)
-        message:addU32(target:getId())
-        g_game.getProtocolGame():send(message)
-    end
+delay(100)
+
+end)
+
+------------------------------------------------------------------------------------
+
+local friendList = {'toei', 'ryan', 'darknuss', ''}
+
+--- nao editar nada abaixo disso
+
+for index, friendName in ipairs(friendList) do
+     friendList[friendName:lower():trim()] = true
+    friendList[index] = nil
 end
 
 
-AtkTarget = {
-    targetId = nil,
-    lastTargetTime = 0,
-    MESSAGE_NOT_SHOOTING_SKILLS = {
-        'you can only use it on creatures.',
-        'pode usar isso em criaturas.',
-    }, 
-    lastCast = 0,
-    lastRecast = 0,
-};
 
-macro(1, function()
-    local target = g_game.getAttackingCreature();
-    if (target) then
-        if (not AtkTarget.targetId or target:getId() ~= AtkTarget.targetId) then
-            AtkTarget.targetId = target:getId();
+
+
+macro(1, 'Chiclete Ryan', function()
+  local possibleTarget = false
+  for _, creature in ipairs(getSpectators(posz())) do
+    local specHP = creature:getHealthPercent()
+    if creature:isPlayer() and specHP and specHP > 0 and specHP <= 90 then
+      if not friendList[creature:getName():lower()] and creature:getEmblem() ~= 1 then
+        if creature:canShoot() then
+          if not possibleTarget or possibleTargetHP > specHP or (possibleTargetHP == specHP and possibleTarget:getId() < creature:getId()) then
+            possibleTarget = creature
+            possibleTargetHP = possibleTarget:getHealthPercent()
+          end
         end
-    end
-end);
-
-macro(1, 'AtkTarget By Neox', function()
-    if (isInPz()) then return; end
-    local currentTarget = g_game.getAttackingCreature();
-    if (not AtkTarget.targetId) then return; end
-    if (g_game.isAttacking()) then return; end
-    if (AtkTarget.lastCast >= now) then return; end
-    for _, creature in pairs(getSpectators()) do
-        if (creature:isPlayer()) then
-            if (creature:getId() == AtkTarget.targetId) then
-                doAttack(creature);
-                AtkTarget.lastCast = now + 500;
-            end
-        end
-    end
-end);
-
-onKeyDown(function(key)
-    if (key == 'Escape') then
-        local target = g_game.getAttackingCreature();
-        if (not target or target:getId() == AtkTarget.targetId) then
-            g_game.cancelAttackAndFollow();
-            AtkTarget.targetId = nil;
-        end
-    end
-end);
-
-onTextMessage(function (mode, text)
-    text = text:lower();
-    if (AtkTarget.lastRecast >= now) then return; end
-    for _, message in ipairs(AtkTarget.MESSAGE_NOT_SHOOTING_SKILLS) do
-        if (text:find(message) and g_game.isAttacking() and AtkTarget.targetId) then
-            g_game.cancelAttack();
-            AtkTarget.lastRecast = now + 250;
-        end
-    end
-end);
-
-
-setDefaultTab("War")
-
-
--- Tools UI (Activate & Setup);
-enemybotPanelName = "enemybot"
-
-local ui = setupUI([[
-Panel
-  height: 17
-  BotSwitch
-    id: title
-    anchors.top: parent.top
-    anchors.left: parent.left
-    text-align: center
-    width: 130
-    !text: tr('Enemy')
-
-  Button
-    id: settings
-    anchors.top: prev.top
-    anchors.left: prev.right
-    anchors.right: parent.right
-    margin-left: 3
-    height: 17
-    text: Setup
-]])
-ui:setId(enemybotPanelName);
-
-local windowUI = setupUI([[
-MainWindow
-  !text: tr('Enemy by neoX - VictorNeox#4112')
-  size: 408 475
-  id: MainPanel
-
-  Label
-    anchors.right: FriendList.right
-    anchors.top: parent.top
-    anchors.left: FriendList.left
-    text-align: center
-    text: Friend List
-    margin-left: 3   
-
-  TextList
-    id: FriendList
-    anchors.top: parent.top
-    anchors.left: parent.left
-    margin-top: 15
-    margin-bottom: 5
-    margin-right: 3
-    padding: 1
-    width: 180
-    height: 160
-    vertical-scrollbar: FriendListScrollBar
-
-  VerticalScrollBar
-    id: FriendListScrollBar
-    anchors.top: FriendList.top
-    anchors.bottom: FriendList.bottom
-    anchors.right: FriendList.right
-    step: 14
-    pixels-scroll: true
-
-  TextEdit
-    id: FriendName
-    anchors.right: FriendList.right
-    anchors.left: FriendList.left
-    anchors.top: FriendList.bottom
-    margin-right: 3    
-    margin-top: 5
-
-  Button
-    id: AddFriend
-    !text: tr('Add Friend')
-    anchors.right: FriendList.right
-    anchors.left: FriendList.left
-    anchors.top: prev.bottom
-    margin-right: 3    
-    margin-top: 3
-
-  Label
-    anchors.right: EnemyList.right
-    anchors.top: parent.top
-    anchors.left: EnemyList.left
-    text-align: center
-    text: Enemy List
-    margin-left: 3     
-
-  TextList
-    id: EnemyList
-    anchors.top: parent.top
-    anchors.left: FriendList.right
-    margin-top: 15
-    margin-bottom: 5
-    margin-left: 15
-    padding: 1
-    width: 180
-    height: 160
-    vertical-scrollbar: EnemyListScrollBar
-
-  VerticalScrollBar
-    id: EnemyListScrollBar
-    anchors.top: EnemyList.top
-    anchors.bottom: EnemyList.bottom
-    anchors.right: EnemyList.right
-    step: 14
-    pixels-scroll: true
-
-  TextEdit
-    id: EnemyName
-    anchors.left: EnemyList.left
-    anchors.right: EnemyList.right
-    anchors.top: EnemyList.bottom
-    margin-left: 3    
-    margin-top: 5
-
-  Button
-    id: AddEnemy
-    !text: tr('Add Enemy')
-    anchors.left: EnemyList.left
-    anchors.right: EnemyList.right
-    anchors.top: prev.bottom
-    margin-left: 3    
-    margin-top: 3
-
-  HorizontalSeparator
-    id: separator
-    anchors.top: AddEnemy.bottom
-    anchors.left: parent.left
-    anchors.right: parent.right
-    margin-top: 8  
-
-  Label
-    id: prioritiesLabel
-    anchors.top: separator.bottom
-    anchors.left: parent.left
-    text-align: center
-    text: Priorities
-    margin-top: 8
-    margin-left: 60
-
-  HorizontalScrollBar
-    id: distance
-    anchors.left: parent.left
-    anchors.horizontalCenter: prioritiesLabel.horizontalCenter
-    anchors.top: prioritiesLabel.bottom
-    width: 125
-    margin-top: 8
-    minimum: 1
-    maximum: 9
-    step: 1
-    margin-top: 40
-
-  Label
-    id: distanceLabel
-    anchors.bottom: distance.top
-    anchors.horizontalCenter: distance.horizontalCenter
-    text-align: center
-    text: Minimum Distance
-    margin-bottom: 8
-
-  Label
-    id: distanceCountLabel
-    anchors.horizontalCenter: distance.horizontalCenter
-    anchors.top: distance.bottom
-    text: 1
-    width: 10
-    margin-top: 5
-
-  HorizontalSeparator
-    id: secondHoSeparator
-    anchors.top: distanceCountLabel.bottom
-    anchors.left: distance.left
-    anchors.right: distance.right
-    margin-top: 8 
-
-  HorizontalScrollBar
-    id: minimumHp
-    anchors.left: distance.left
-    anchors.top: distanceCountLabel.bottom
-    width: 125
-    margin-top: 8
-    minimum: 1
-    maximum: 100
-    step: 1
-    margin-top: 40
-
-  Label
-    id: minimumHpLabel
-    anchors.bottom: minimumHp.top
-    anchors.horizontalCenter: minimumHp.horizontalCenter
-    text-align: center
-    width: 125
-    text: Minimum HP
-    margin-bottom: 8
-    
-  Label
-    id: minimumHpCountLabel
-    anchors.horizontalCenter: minimumHp.horizontalCenter
-    anchors.top: minimumHp.bottom
-    anchors.verticalCenter: minimumHp.verticalCenter
-    text: 1%
-    width: 35
-    margin-top: 20
-    margin-left: 8
-
-  VerticalSeparator
-    id: vertSeparator
-    anchors.top: separator.bottom
-    anchors.bottom: parent.bottom
-    anchors.left: secondHoSeparator.right
-    margin-left: 40
-    margin-bottom: 5
-
-  Label
-    id: activatableLabel
-    anchors.top: separator.bottom
-    anchors.left: vertSeparator.left
-    text-align: center
-    text: Activatable
-    margin-top: 8
-    margin-left: 60
-
-  BotSwitch
-    id: AttackNotFriends    
-    anchors.top: activatableLabel.bottom
-    anchors.horizontalCenter: activatableLabel.horizontalCenter
-    width: 135
-    text-align: center
-    text: Attack Not Friends
-    margin-top: 25
-
-  BotSwitch
-    id: AttackWhite    
-    anchors.top: prev.bottom
-    anchors.horizontalCenter: activatableLabel.horizontalCenter
-    width: 135
-    margin-top: 8
-    text-align: center
-    text: Attack White Skull
-
-  BotSwitch
-    id: AttackYellow    
-    anchors.top: prev.bottom
-    anchors.horizontalCenter: activatableLabel.horizontalCenter
-    width: 135
-    margin-top: 8
-    text-align: center
-    text: Attack Yellow Skull
-
-  BotSwitch
-    id: AttackParty    
-    anchors.top: prev.bottom
-    anchors.horizontalCenter: activatableLabel.horizontalCenter
-    width: 135
-    margin-top: 8
-    text-align: center
-    text: Attack Party  
-
-  BotSwitch
-    id: AttackGuild    
-    anchors.top: prev.bottom
-    anchors.horizontalCenter: activatableLabel.horizontalCenter
-    width: 135
-    margin-top: 8
-    text-align: center
-    text: Attack Guild
-
-  Button
-    id: closeButton
-    !text: tr('Close')
-    font: cipsoftFont
-    anchors.right: parent.right
-    anchors.bottom: parent.bottom
-    size: 45 21
-    margin-top: 15
-    margin-right: 5 
-
-]], g_ui.getRootWidget());
-
-windowUI:hide();
-EnemyBot = {}
-
--- Caminho do arquivo de configuração
-local configName = modules.game_bot.contentsPanel.config:getCurrentOption().text
-
--- Configuração padrão
-EnemyBotConfig = {
-  enemies = {},
-  friends = {},
-  minimumDistance = 1,
-  minimumHp = 1,
-  enabled = false,
-  attackNotFriends = false,
-  attackParty = false,
-  attackGuild = false,
-  attackWhite = false,
-  attackYellow = false
-}
-
--- Leitura e escrita usando storage nativo do OTC
-local function loadConfig()
-  local data = storage["enemybot_config_" .. configName]
-  if type(data) == "table" then
-    for k, v in pairs(data) do
-      EnemyBotConfig[k] = v
-    end
-  end
-end
-
-local function saveConfig()
-  storage["enemybot_config_" .. configName] = EnemyBotConfig
-end
-
-loadConfig()
-
-function EnemyBot.save()
-  saveConfig()
-end
-
-ui.title:setOn(EnemyBotConfig.enabled)
-ui.title.onClick = function(widget)
-  EnemyBotConfig.enabled = not EnemyBotConfig.enabled
-  widget:setOn(EnemyBotConfig.enabled)
-  EnemyBot.save()
-end
-
-ui.settings.onClick = function(widget)
-  windowUI:show()
-  windowUI:raise()
-  windowUI:focus()
-end
-
-windowUI.closeButton.onClick = function(widget)
-  windowUI:hide()
-  EnemyBot.save()
-end
-
-MainPanel = windowUI
-
-MainPanel.AttackNotFriends:setOn(EnemyBotConfig.attackNotFriends)
-MainPanel.AttackNotFriends.onClick = function(widget)
-  EnemyBotConfig.attackNotFriends = not EnemyBotConfig.attackNotFriends
-  widget:setOn(EnemyBotConfig.attackNotFriends)
-  EnemyBot.save()
-end
-
-MainPanel.AttackWhite:setOn(EnemyBotConfig.attackWhite)
-MainPanel.AttackWhite.onClick = function(widget)
-  EnemyBotConfig.attackWhite = not EnemyBotConfig.attackWhite
-  widget:setOn(EnemyBotConfig.attackWhite)
-  EnemyBot.save()
-end
-
-MainPanel.AttackYellow:setOn(EnemyBotConfig.attackYellow)
-MainPanel.AttackYellow.onClick = function(widget)
-  EnemyBotConfig.attackYellow = not EnemyBotConfig.attackYellow
-  widget:setOn(EnemyBotConfig.attackYellow)
-  EnemyBot.save()
-end
-
-MainPanel.AttackGuild:setOn(EnemyBotConfig.attackGuild)
-MainPanel.AttackGuild.onClick = function(widget)
-  EnemyBotConfig.attackGuild = not EnemyBotConfig.attackGuild
-  widget:setOn(EnemyBotConfig.attackGuild)
-  EnemyBot.save()
-end
-
-MainPanel.AttackParty:setOn(EnemyBotConfig.attackParty)
-MainPanel.AttackParty.onClick = function(widget)
-  EnemyBotConfig.attackParty = not EnemyBotConfig.attackParty
-  widget:setOn(EnemyBotConfig.attackParty)
-  EnemyBot.save()
-end
-
-MainPanel.distance:setValue(EnemyBotConfig.minimumDistance)
-MainPanel.distanceCountLabel:setText(EnemyBotConfig.minimumDistance)
-MainPanel.distance.onValueChange = function(scroll, value)
-  EnemyBotConfig.minimumDistance = value
-  MainPanel.distanceCountLabel:setText(value)
-  EnemyBot.save()
-end
-
-MainPanel.minimumHp:setValue(EnemyBotConfig.minimumHp)
-MainPanel.minimumHpCountLabel:setText(EnemyBotConfig.minimumHp .. '%')
-MainPanel.minimumHp.onValueChange = function(scroll, value)
-  EnemyBotConfig.minimumHp = value
-  MainPanel.minimumHpCountLabel:setText(value .. '%')
-  EnemyBot.save()
-end
-
-function EnemyBot.getListChildren(type)
-  return (type == 'enemies') and MainPanel.EnemyList:getChildren() or MainPanel.FriendList:getChildren()
-end
-
-function EnemyBot.refreshList(type)
-  if (type ~= 'enemies' and type ~= 'friends') then return end
-  if EnemyBotConfig[type] then
-    for _, child in pairs(EnemyBot.getListChildren(type)) do
-      child:destroy()
-    end
-    for name, _ in pairs(EnemyBotConfig[type]) do
-      local label = UI.createWidget('PlayerName', (type == 'enemies') and MainPanel.EnemyList or MainPanel.FriendList)
-      label.remove.onClick = function()
-        EnemyBotConfig[type][name] = nil
-        reindexTable(EnemyBotConfig[type])
-        label:destroy()
-        EnemyBot.save()
-      end
-      label:setText(name)
-    end
-  end
-end
-
-function EnemyBot.fullRefresh()
-  EnemyBot.refreshList('enemies')
-  EnemyBot.refreshList('friends')
-end
-
-function EnemyBot.addToTheList(type)
-  local charName = ((type == 'enemies') and MainPanel.EnemyName:getText() or MainPanel.FriendName:getText()):trim():lower()
-  if not charName or charName:len() == 0 then
-    return warn('EnemyBot: Digite um nome válido.')
-  end
-  EnemyBotConfig[type][charName] = { enabled = true }
-  EnemyBot.refreshList(type)
-  EnemyBot.save()
-end
-
-MainPanel.AddFriend.onClick = function(widget)
-  EnemyBot.addToTheList('friends')
-end
-
-MainPanel.AddEnemy.onClick = function(widget)
-  EnemyBot.addToTheList('enemies')
-end
-
-function EnemyBot.init()
-  EnemyBot.fullRefresh()
-end
-
-EnemyBot.init()
-
-function EnemyBot.checkConditions(creature)
-  if creature:getName() == player:getName() then return false end
-  if not creature:isPlayer() then return false end
-  if not creature:canShoot() then return false end
-  if getDistanceBetween(pos(), creature:getPosition()) > EnemyBotConfig.minimumDistance then return false end
-  if creature:getHealthPercent() > EnemyBotConfig.minimumHp then return false end
-
-  local name = creature:getName():lower()
-  if EnemyBotConfig.enemies[name] then return true end
-
-  if EnemyBotConfig.attackWhite and creature:getSkull() == 3 and creature:getShield() ~= 1 and creature:getShield() < 3 then
-    return true
-  end
-  if EnemyBotConfig.attackYellow and creature:getSkull() == 1 and creature:getShield() ~= 1 and creature:getShield() < 3 then
-    return true
-  end
-  if EnemyBotConfig.attackNotFriends and not EnemyBotConfig.friends[name] then
-    if not EnemyBotConfig.attackGuild and creature:getEmblem() == 1 then return false end
-    if not EnemyBotConfig.attackParty and creature:getShield() > 2 then return false end
-    return true
-  end
-  if EnemyBotConfig.attackGuild and creature:getShield() == 1 then return true end
-  if EnemyBotConfig.attackParty and creature:getShield() >= 3 then return true end
-
-  return false
-end
-
-EnemyBot.lastTry = nil
-
-EnemyBot.macro = macro(100, function()
-  if not ui.title:isOn() or isInPz() then return end
-  if EnemyBot.lastTry and EnemyBot.lastTry > now then return end
-
-  local currentTarget = g_game.getAttackingCreature()
-  local betterPlayerToAttack = nil
-
-  for _, creature in pairs(getSpectators()) do
-    if EnemyBot.checkConditions(creature) then
-      if not betterPlayerToAttack or creature:getHealthPercent() <= betterPlayerToAttack:getHealthPercent() then
-        betterPlayerToAttack = creature
       end
     end
   end
+  if possibleTarget and g_game.getAttackingCreature() ~= possibleTarget then
+    g_game.attack(possibleTarget)
+end
+end)
 
-  if betterPlayerToAttack and (not currentTarget or currentTarget:getId() ~= betterPlayerToAttack:getId()) then
-    doAttack(betterPlayerToAttack)
-    EnemyBot.lastTry = now + 500
+
+
+------------------------------------------------------------------------------------
+
+local friendList = {'Low Farmer', 'ryan', 'darknuss', ''}
+
+--- nao editar nada abaixo disso
+
+for index, friendName in ipairs(friendList) do
+     friendList[friendName:lower():trim()] = true
+    friendList[index] = nil
+end
+
+
+
+
+
+macro(1, 'ChicleteNpParty', function()
+  local possibleTarget = false
+  for _, creature in ipairs(getSpectators(posz())) do
+    local specHP = creature:getHealthPercent()
+    if creature:isPlayer() and specHP and specHP > 0 and specHP <= 90 then
+      if not friendList[creature:getName():lower()] and (creature:getShield() < 3) then
+        if creature:canShoot() then
+          if not possibleTarget or possibleTargetHP > specHP or (possibleTargetHP == specHP and possibleTarget:getId() < creature:getId()) then
+            possibleTarget = creature
+            possibleTargetHP = possibleTarget:getHealthPercent()
+          end
+        end
+      end
+    end
+  end
+  if possibleTarget and g_game.getAttackingCreature() ~= possibleTarget then
+    g_game.attack(possibleTarget)
+end
+end)
+
+
+
+----------------------------------------------------------------------------------------
+
+local friendList = {'toei', 'ryan', 'darknuss', ''}
+
+--- nao editar nada abaixo disso
+
+for index, friendName in ipairs(friendList) do
+     friendList[friendName:lower():trim()] = true
+    friendList[index] = nil
+end
+
+
+
+
+
+macro(1, 'Enemy Full', function()
+  local possibleTarget = false
+  for _, creature in ipairs(getSpectators(posz())) do
+    local specHP = creature:getHealthPercent()
+    if creature:isPlayer() and specHP then
+      if not friendList[creature:getName():lower()] and creature:getEmblem() ~= 1 then
+        if creature:canShoot() then
+          if not possibleTarget or possibleTargetHP > specHP or (possibleTargetHP == specHP and possibleTarget:getId() < creature:getId()) then
+            possibleTarget = creature
+            possibleTargetHP = possibleTarget:getHealthPercent()
+          end
+        end
+      end
+    end
+  end
+  if possibleTarget and g_game.getAttackingCreature() ~= possibleTarget then
+    g_game.attack(possibleTarget)
+end
+end)
+
+--------------------------------------------------------------------------------
+
+local friendList = {'toei', 'ryan', 'darknuss', ''}
+
+--- nao editar nada abaixo disso
+
+for index, friendName in ipairs(friendList) do
+     friendList[friendName:lower():trim()] = true
+    friendList[index] = nil
+end
+
+
+
+
+
+macro(1, 'Ant-Caveira', function()
+  local possibleTarget = false
+  for _, creature in ipairs(getSpectators(posz())) do
+    local specHP = creature:getHealthPercent()
+    if creature:isPlayer() and specHP then
+      if not friendList[creature:getName():lower()] and (creature:getSkull() ~= 0) and (creature:getShield() == 0) and (creature:getEmblem() ~= 1) then
+        if creature:canShoot() then
+          if not possibleTarget or possibleTargetHP > specHP or (possibleTargetHP == specHP and possibleTarget:getId() < creature:getId()) then
+            possibleTarget = creature
+            possibleTargetHP = possibleTarget:getHealthPercent()
+          end
+        end
+      end
+    end
+  end
+  if possibleTarget and g_game.getAttackingCreature() ~= possibleTarget then
+    g_game.attack(possibleTarget)
+end
+end)
+
+--------------------------------------------------------------------------------
+
+local friendList = {'toei', 'ryan', 'darknuss', ''}
+
+--- nao editar nada abaixo disso
+
+for index, friendName in ipairs(friendList) do
+     friendList[friendName:lower():trim()] = true
+    friendList[index] = nil
+end
+
+
+
+
+
+macro(1, 'Chiclete Ryan Friend', function()
+  local possibleTarget = false
+  for _, creature in ipairs(getSpectators(posz())) do
+    local specHP = creature:getHealthPercent()
+    if creature:isPlayer() and specHP and specHP > 0 and specHP <= 90 then
+      if (not friendList[creature:getName():lower()] and not isFriend(creature)) and creature:getEmblem() ~= 1 then
+        if creature:canShoot() then
+          if not possibleTarget or possibleTargetHP > specHP or (possibleTargetHP == specHP and possibleTarget:getId() < creature:getId()) then
+            possibleTarget = creature
+            possibleTargetHP = possibleTarget:getHealthPercent()
+          end
+        end
+      end
+    end
+  end
+  if possibleTarget and g_game.getAttackingCreature() ~= possibleTarget then
+    g_game.attack(possibleTarget)
+end
+end)
+
+--------------------------------------------------------------------------------
+
+stopbotonattack = macro(200, 'StopBotOnAttack', function()end)
+onTextMessage(function(mode, text)
+  if stopbotonattack.isOff() then return end
+ for _, p in ipairs(getSpectators(posz())) do
+  if p:isPlayer() and text:find(p:getName()) and text:find('attack by') then
+    CaveBot.setOff()
+    TargetBot.setOff()
+  end
+end
+end)
+
+
+--------------------------------------------------------------------------------
+
+
+UI.TextEdit(storage.ntarget or "Nejia", function(widget, newText)
+storage.ntarget = newText
+end)
+
+UI.TextEdit(storage.ntarget2 or "Nejia", function(widget, newText)
+storage.ntarget2 = newText
+end)
+
+atkname = macro(100, 'AttackName', function() 
+if g_game.isAttacking() or g_game.isFollowing() then return end
+  for _, spec in ipairs(getSpectators()) do
+    local specifytarget = spec:getName()
+    if (specifytarget == storage.ntarget or specifytarget == storage.ntarget2) and spec:isPlayer()  then
+g_game.attack(spec)
+    end
   end
 end)
 
+----
+
+UI.Label("Follow")
+
+UI.TextEdit(storage.follow or "Sealed Crystal East", function(widget, newText)
+storage.follow = newText
+end)
+
+UI.TextEdit(storage.follow2 or "Sealed Crystal West", function(widget, newText)
+storage.follow2 = newText
+end)
+
+macro(100, 'Follow Name', function() 
+if g_game.isAttacking() or g_game.isFollowing() then return end
+  for _, spec in ipairs(getSpectators()) do
+    if spec:getName() == storage.follow or spec:getName() == storage.follow2 then
+g_game.follow(spec)
+    end
+  end
+end)
+
+
+
+----------------------------------------------------------------------------
+
+UI.Label("Revide")
+
+Revidetext = macro(200000, 'Revide PK',function()end)
+onTextMessage(function(mode, text)
+  if Revidetext.isOff() then return end
+    for _, p in ipairs(getSpectators(posz())) do
+  if g_game.isAttacking() and p:isPlayer() and t then
+    if p:getName() == g_game.getAttackingCreature():getName() then return end
+  end
+    if p:isPlayer() and text:find(p:getName()) and text:find('attack by') and p:getSkull() ~= 0 then
+      TargetBot.setOff()
+      holdtarget.setOff()
+      Target.Id = nil
+      Target.get = nil
+      g_game.cancelAttack()
+      CaveBot.setOff()
+      g_game.setChaseMode(1)
+      g_game.setSafeFight(false)
+      NameTarget = p:getName()
+      g_game.attack(p)
+    end
+  end
+end)
+
+-----------------------------------------------------------
+
+autodesligaratkname = macro(2000, 'Desligar atk name ao fragar', function()end)
+onTextMessage(function(mode, text)
+  if autodesligaratkname.isOff() then return end
+  if text:find('Warning!') and (text:find(storage.ntarget2) or text:find(storage.ntarget)) then
+    atkname.setOff()
+      if (FragSemanal < FragSlimit) or (Fragdiario < Fragdlimit) or (FragMensal < FragMlimit) then
+        schedule(900000, function()
+          atkname.setOn()
+        end)
+      end
+    end
+  end)
+
+-----------------------------------------------------------
+
+autoatackcave = macro(200000, 'AutoRevide',function()end)
+autoatackcave2 = macro(200000, 'AutoATKCave',function()end)
+
+
+onAttackingCreatureChange(function(creature, oldCreature)
+  if autoatackcave2.isOff() then return end
+  if creature and creature:isPlayer() then
+    TargetBot.setOff()
+    CaveBot.setOff()
+    g_game.setChaseMode(1)
+    g_game.setSafeFight(false)
+  end
+  if oldCreature and oldCreature:isPlayer() then
+    TargetBot.setOn()
+    CaveBot.setOn()
+    g_game.setChaseMode(0)
+    g_game.setSafeFight(true)
+  end
+end)
+
+onCreatureDisappear(function(creature)
+  if autoatackcave.isOff() then return end
+  if creature:getName() == NameTarget then
+    TargetBot.setOn()
+    CaveBot.setOn()
+    g_game.setChaseMode(0)
+    g_game.setSafeFight(true)
+  end
+end)
 -------------------------------------------------------------
 
 --
