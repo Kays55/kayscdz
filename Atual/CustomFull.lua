@@ -6297,7 +6297,7 @@ function getArmLeft()   return extractInfo(SlotLeft, "Arm") end
 function getArmRing()   return extractInfo(SlotFinger,"Arm") end
 
 
-infoX = 300
+infoX = 200
 infoy = 10
 
 local widget = setupUI([[
@@ -6318,7 +6318,7 @@ HeadUi:setPosition({y = infoy, x =  infoX})
 
 macro(1, function()
     if getDurabilityHelmet() > 80 then
-      HeadUi:setColor('blue')
+      HeadUi:setColor('white')
     else
       HeadUi:setColor('red')
     end
@@ -6345,7 +6345,7 @@ BodyUi:setPosition({y = infoy+15, x =  infoX})
 
 macro(1, function()
     if getDurabilityArmor() > 80 then
-      BodyUi:setColor('blue')
+      BodyUi:setColor('white')
     else
       BodyUi:setColor('red')
     end
@@ -6372,7 +6372,7 @@ LegsUi:setPosition({y = infoy+30, x =  infoX})
 
 macro(1, function()
     if getDurabilityLegs() > 80 then
-      LegsUi:setColor('blue')
+      LegsUi:setColor('white')
     else
       LegsUi:setColor('red')
     end
@@ -6399,7 +6399,7 @@ FeetUi:setPosition({y = infoy+45, x =  infoX})
 
 macro(1, function()
     if getDurabilityBoots() > 80 then
-      FeetUi:setColor('blue')
+      FeetUi:setColor('white')
     else
       FeetUi:setColor('red')
     end
@@ -6426,7 +6426,7 @@ FingerUi:setPosition({y = infoy+60, x =  infoX})
 
 macro(1, function()
     if getDurabilityRing() > 80 then
-      FingerUi:setColor('blue')
+      FingerUi:setColor('white')
     else
       FingerUi:setColor('red')
     end
