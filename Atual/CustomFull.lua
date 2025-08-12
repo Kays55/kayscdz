@@ -6297,113 +6297,143 @@ function getArmLeft()   return extractInfo(SlotLeft, "Arm") end
 function getArmRing()   return extractInfo(SlotFinger,"Arm") end
 
 
-
-
--- posição inicial e espaçamento
 xth = 700
 yth = 10
-local spacing = 15
 
-local root = g_ui.getRootWidget()
+local widget = setupUI([[
+Panel
+  height: 400
+  width: 900
+]], g_ui.getRootWidget())
 
--- cria a label no root (ou usa existente)
-local function ensureLabel(var, posX, posY)
-  if var and not var:isDestroyed() then return var end
-
-  local xml = [[
+local HeadUi = g_ui.loadUIFromString([[
 Label
-  width: 260
   color: white
   background-color: black
   opacity: 0.85
-  text-horizontal-auto-resize: true
-  text-vertical-align: center
-  text-wrap: false
-]]
-  local lbl = g_ui.loadUIFromString(xml, root)
-  lbl:setPosition({ x = posX, y = posY })
-  return lbl
-end
+  text-horizontal-auto-resize: true  
+]], widget)
 
--- mantém referências (reutilizáveis caso reexecute o script)
-if not labelHead or labelHead:isDestroyed() then labelHead = ensureLabel(labelHead, xth, yth) end
-if not labelBody or labelBody:isDestroyed() then labelBody = ensureLabel(labelBody, xth, yth + spacing) end
-if not labelLegs or labelLegs:isDestroyed() then labelLegs = ensureLabel(labelLegs, xth, yth + spacing * 2) end
-if not labelFeet or labelFeet:isDestroyed() then labelFeet = ensureLabel(labelFeet, xth, yth + spacing * 3) end
-if not labelRing or labelRing:isDestroyed() then labelRing = ensureLabel(labelRing, xth, yth + spacing * 4) end
-if not labelTotal or labelTotal:isDestroyed() then labelTotal = ensureLabel(labelTotal, xth, yth + spacing * 5) end
+HeadUi:setPosition({y = yth, x =  xth})
 
--- função segura para chamar suas funções (evita crash se algo faltar)
-local function safeCall(func)
-  if type(func) ~= "function" then return 0 end
-  local ok, res = pcall(func)
-  if not ok then return 0 end
-  return res or 0
-end
+macro(1, function()
+    HeadUi:setText("HeadArm: " .. getTrueArmHelmet() .. ' Durability: ' .. getDurabilityHelmet())
+end)
 
-local function fmtLine(arm, dur)
-  if (arm == 0 and dur == 0) then
-    return "- (no item)"
-  else
-    return string.format("%.1f | Dur: %d%%", arm, math.floor(dur + 0.5))
+--------------------------------------------------
+
+local widget = setupUI([[
+Panel
+  height: 400
+  width: 900
+]], g_ui.getRootWidget())
+
+local BodyUi = g_ui.loadUIFromString([[
+Label
+  color: white
+  background-color: black
+  opacity: 0.85
+  text-horizontal-auto-resize: true  
+]], widget)
+
+BodyUi:setPosition({y = yth+15, x =  xth})
+
+macro(1, function()
+    BodyUi:setText("BodyArm: " .. getTrueArmArmor() .. ' Durability: ' .. getDurabilityArmor())
+end)
+
+--------------------------------------------------
+
+local widget = setupUI([[
+Panel
+  height: 400
+  width: 900
+]], g_ui.getRootWidget())
+
+local LegsUi = g_ui.loadUIFromString([[
+Label
+  color: white
+  background-color: black
+  opacity: 0.85
+  text-horizontal-auto-resize: true  
+]], widget)
+
+LegsUi:setPosition({y = yth+30, x =  xth})
+
+macro(1, function()
+    LegsUi:setText("LegsArm: " .. getTrueArmLegs() .. ' Durability: ' .. getDurabilityLegs())
+end)
+
+--------------------------------------------------
+
+local widget = setupUI([[
+Panel
+  height: 400
+  width: 900
+]], g_ui.getRootWidget())
+
+local FeetUi = g_ui.loadUIFromString([[
+Label
+  color: white
+  background-color: black
+  opacity: 0.85
+  text-horizontal-auto-resize: true  
+]], widget)
+
+FeetUi:setPosition({y = yth+45, x =  xth})
+
+macro(1, function()
+    FeetUi:setText("FeetArm: " .. getTrueArmBoots() .. ' Durability: ' .. getDurabilityBoots())
+end)
+
+--------------------------------------------------
+
+local widget = setupUI([[
+Panel
+  height: 400
+  width: 900
+]], g_ui.getRootWidget())
+
+local FingerUi = g_ui.loadUIFromString([[
+Label
+  color: white
+  background-color: black
+  opacity: 0.85
+  text-horizontal-auto-resize: true  
+]], widget)
+
+FingerUi:setPosition({y = yth+60, x =  xth})
+
+macro(1, function()
+    FingerUi:setText("FingerArm: " .. getTrueArmRing() .. ' Durability: ' .. getDurabilityRing())
+end)
+
+--------------------------------------------------
+
+local widget = setupUI([[
+Panel
+  height: 400
+  width: 900
+]], g_ui.getRootWidget())
+
+local FingerUi = g_ui.loadUIFromString([[
+Label
+  color: white
+  background-color: black
+  opacity: 0.85
+  text-horizontal-auto-resize: true  
+]], widget)
+
+FingerUi:setPosition({y = yth+75, x =  xth})
+
+macro(1, function()
+  if getTrueArmHelmet() and getTrueArmArmor() and getTrueArmLegs() and getTrueArmBoots() and getTrueArmRing() then
+    ArmTotal = getTrueArmHelmet() + getTrueArmArmor() + getTrueArmLegs() + getTrueArmBoots() + getTrueArmRing()
+    FingerUi:setText("Total Arm: " .. ArmTotal)
   end
-end
-
-local function colorForDur(d)
-  if d == 0 then return "gray" end
-  if d <= 25 then return "red" end
-  if d <= 50 then return "yellow" end
-  return "white"
-end
-
--- atualiza as labels periodicamente
-macro(500, function()
-  local headArm = safeCall(getTrueArmHelmet)
-  local headDur = safeCall(getDurabilityHelmet)
-
-  local bodyArm = safeCall(getTrueArmArmor)
-  local bodyDur = safeCall(getDurabilityArmor)
-
-  local legsArm = safeCall(getTrueArmLegs)
-  local legsDur = safeCall(getDurabilityLegs)
-
-  local feetArm = safeCall(getTrueArmBoots)
-  local feetDur = safeCall(getDurabilityBoots)
-
-  local ringArm = safeCall(getTrueArmRing)
-  local ringDur = safeCall(getDurabilityRing)
-
-  local totalArm = headArm + bodyArm + legsArm + feetArm + ringArm
-
-  labelHead:setText("Head: " .. fmtLine(headArm, headDur))
-  labelHead:setColor(colorForDur(headDur))
-
-  labelBody:setText("Body: " .. fmtLine(bodyArm, bodyDur))
-  labelBody:setColor(colorForDur(bodyDur))
-
-  labelLegs:setText("Legs: " .. fmtLine(legsArm, legsDur))
-  labelLegs:setColor(colorForDur(legsDur))
-
-  labelFeet:setText("Feet: " .. fmtLine(feetArm, feetDur))
-  labelFeet:setColor(colorForDur(feetDur))
-
-  labelRing:setText("Ring: " .. fmtLine(ringArm, ringDur))
-  labelRing:setColor(colorForDur(ringDur))
-
-  labelTotal:setText(string.format("Total Actual Arm: %.1f", totalArm))
-  labelTotal:setColor(totalArm <= 100 and "yellow" or "white")
 end)
 
--- remove as labels ao deslogar
-onLogout(function()
-  if labelHead then labelHead:destroy() end
-  if labelBody then labelBody:destroy() end
-  if labelLegs then labelLegs:destroy() end
-  if labelFeet then labelFeet:destroy() end
-  if labelRing then labelRing:destroy() end
-  if labelTotal then labelTotal:destroy() end
-end)
-
+--------------------------------------------------
 
 
 loaded = true
