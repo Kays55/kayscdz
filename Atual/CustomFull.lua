@@ -6242,13 +6242,10 @@ local function extractInfo(slot, infoType)
     if not tooltip then return 0 end
 
     if infoType == "Durability" then
-        local startIndex = tooltip:find("Durability: ")
-        local endIndex = tooltip:find("%%")
-        if startIndex and endIndex then
-            local durability = tooltip:sub(startIndex + 11, endIndex - 1)
-            return tonumber(durability) or 0
-        end
-
+        -- Captura número entre "Durability:" e "%"
+        local durability = tooltip:match("Durability:%s*(%d+)%%")
+        return tonumber(durability) or 0
+    
     elseif infoType == "Arm" then
         local startIndex = tooltip:find("Arm:")
         if startIndex then
@@ -6316,7 +6313,7 @@ Label
 
 HeadUi:setPosition({y = infoy, x =  infoX})
 
-macro(1, function()
+macro(500, function()
     if getDurabilityHelmet() > 80 then
       HeadUi:setColor('white')
     else
@@ -6343,7 +6340,7 @@ Label
 
 BodyUi:setPosition({y = infoy+15, x =  infoX})
 
-macro(1, function()
+macro(500, function()
     if getDurabilityArmor() > 80 then
       BodyUi:setColor('white')
     else
@@ -6370,7 +6367,7 @@ Label
 
 LegsUi:setPosition({y = infoy+30, x =  infoX})
 
-macro(1, function()
+macro(500, function()
     if getDurabilityLegs() > 80 then
       LegsUi:setColor('white')
     else
@@ -6397,7 +6394,7 @@ Label
 
 FeetUi:setPosition({y = infoy+45, x =  infoX})
 
-macro(1, function()
+macro(500, function()
     if getDurabilityBoots() > 80 then
       FeetUi:setColor('white')
     else
@@ -6424,7 +6421,7 @@ Label
 
 FingerUi:setPosition({y = infoy+60, x =  infoX})
 
-macro(1, function()
+macro(500, function()
     if getDurabilityRing() > 80 then
       FingerUi:setColor('white')
     else
@@ -6451,7 +6448,7 @@ Label
 
 FingerUi:setPosition({y = infoy+75, x =  infoX})
 
-macro(1, function()
+macro(500, function()
   if getTrueArmHelmet() and getTrueArmArmor() and getTrueArmLegs() and getTrueArmBoots() and getTrueArmRing() then
     ArmTotal = getTrueArmHelmet() + getTrueArmArmor() + getTrueArmLegs() + getTrueArmBoots() + getTrueArmRing()
     FingerUi:setText("Total Arm: " .. ArmTotal)
