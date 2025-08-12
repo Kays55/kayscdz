@@ -6297,8 +6297,8 @@ function getArmLeft()   return extractInfo(SlotLeft, "Arm") end
 function getArmRing()   return extractInfo(SlotFinger,"Arm") end
 
 
-xth = 700
-yth = 10
+infoX = 300
+infoy = 10
 
 local widget = setupUI([[
 Panel
@@ -6314,7 +6314,7 @@ Label
   text-horizontal-auto-resize: true  
 ]], widget)
 
-HeadUi:setPosition({y = yth, x =  xth})
+HeadUi:setPosition({y = infoy, x =  infoX})
 
 macro(1, function()
     HeadUi:setText("HeadArm: " .. getTrueArmHelmet() .. ' Durability: ' .. getDurabilityHelmet())
@@ -6336,7 +6336,7 @@ Label
   text-horizontal-auto-resize: true  
 ]], widget)
 
-BodyUi:setPosition({y = yth+15, x =  xth})
+BodyUi:setPosition({y = infoy+15, x =  infoX})
 
 macro(1, function()
     BodyUi:setText("BodyArm: " .. getTrueArmArmor() .. ' Durability: ' .. getDurabilityArmor())
@@ -6358,7 +6358,7 @@ Label
   text-horizontal-auto-resize: true  
 ]], widget)
 
-LegsUi:setPosition({y = yth+30, x =  xth})
+LegsUi:setPosition({y = infoy+30, x =  infoX})
 
 macro(1, function()
     LegsUi:setText("LegsArm: " .. getTrueArmLegs() .. ' Durability: ' .. getDurabilityLegs())
@@ -6380,7 +6380,7 @@ Label
   text-horizontal-auto-resize: true  
 ]], widget)
 
-FeetUi:setPosition({y = yth+45, x =  xth})
+FeetUi:setPosition({y = infoy+45, x =  infoX})
 
 macro(1, function()
     FeetUi:setText("FeetArm: " .. getTrueArmBoots() .. ' Durability: ' .. getDurabilityBoots())
@@ -6402,7 +6402,7 @@ Label
   text-horizontal-auto-resize: true  
 ]], widget)
 
-FingerUi:setPosition({y = yth+60, x =  xth})
+FingerUi:setPosition({y = infoy+60, x =  infoX})
 
 macro(1, function()
     FingerUi:setText("FingerArm: " .. getTrueArmRing() .. ' Durability: ' .. getDurabilityRing())
@@ -6424,7 +6424,7 @@ Label
   text-horizontal-auto-resize: true  
 ]], widget)
 
-FingerUi:setPosition({y = yth+75, x =  xth})
+FingerUi:setPosition({y = infoy+75, x =  infoX})
 
 macro(1, function()
   if getTrueArmHelmet() and getTrueArmArmor() and getTrueArmLegs() and getTrueArmBoots() and getTrueArmRing() then
