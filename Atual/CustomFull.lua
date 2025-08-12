@@ -6317,6 +6317,11 @@ Label
 HeadUi:setPosition({y = infoy, x =  infoX})
 
 macro(1, function()
+    if getDurabilityHelmet() > 80 then
+      HeadUi:setColor('blue')
+    else
+      HeadUi:setColor('red')
+    end
     HeadUi:setText("HeadArm: " .. getTrueArmHelmet() .. ' Durability: ' .. getDurabilityHelmet())
 end)
 
@@ -6339,6 +6344,11 @@ Label
 BodyUi:setPosition({y = infoy+15, x =  infoX})
 
 macro(1, function()
+    if getDurabilityArmor() > 80 then
+      BodyUi:setColor('blue')
+    else
+      BodyUi:setColor('red')
+    end
     BodyUi:setText("BodyArm: " .. getTrueArmArmor() .. ' Durability: ' .. getDurabilityArmor())
 end)
 
@@ -6361,6 +6371,11 @@ Label
 LegsUi:setPosition({y = infoy+30, x =  infoX})
 
 macro(1, function()
+    if getDurabilityLegs() > 80 then
+      LegsUi:setColor('blue')
+    else
+      LegsUi:setColor('red')
+    end
     LegsUi:setText("LegsArm: " .. getTrueArmLegs() .. ' Durability: ' .. getDurabilityLegs())
 end)
 
@@ -6383,6 +6398,11 @@ Label
 FeetUi:setPosition({y = infoy+45, x =  infoX})
 
 macro(1, function()
+    if getDurabilityBoots() > 80 then
+      FeetUi:setColor('blue')
+    else
+      FeetUi:setColor('red')
+    end
     FeetUi:setText("FeetArm: " .. getTrueArmBoots() .. ' Durability: ' .. getDurabilityBoots())
 end)
 
@@ -6405,6 +6425,11 @@ Label
 FingerUi:setPosition({y = infoy+60, x =  infoX})
 
 macro(1, function()
+    if getDurabilityRing() > 80 then
+      FingerUi:setColor('blue')
+    else
+      FingerUi:setColor('red')
+    end
     FingerUi:setText("FingerArm: " .. getTrueArmRing() .. ' Durability: ' .. getDurabilityRing())
 end)
 
