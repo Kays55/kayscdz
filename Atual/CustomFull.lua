@@ -4231,7 +4231,7 @@ macro(1, function()
 end)
  
 
-ammoutpot:setPosition({y = Poty+50, x =  Potx})
+ammoutpot:setPosition({y = Poty+20, x =  Potx})
 
 
 macro(200, 'No Pot Stop', function()
