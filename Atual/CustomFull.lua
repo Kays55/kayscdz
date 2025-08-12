@@ -4200,7 +4200,7 @@ onTextMessage(function(mode, text)
     end
 end)
 
-Potx,Poty = 100, 0
+Potx,Poty = 50, 0
 
 
 local widget = setupUI([[
