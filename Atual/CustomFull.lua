@@ -6233,6 +6233,179 @@ onTextMessage(function(mode, text)
 end)
 
 
+-- Função interna para extrair informação do tooltip
+local function extractInfo(slot, infoType)
+    local item = getInventoryItem(slot)
+    if not item then return 0 end
+
+    local tooltip = item:getTooltip()
+    if not tooltip then return 0 end
+
+    if infoType == "Durability" then
+        local startIndex = tooltip:find("Durability: ")
+        local endIndex = tooltip:find("%%")
+        if startIndex and endIndex then
+            local durability = tooltip:sub(startIndex + 11, endIndex - 1)
+            return tonumber(durability) or 0
+        end
+
+    elseif infoType == "Arm" then
+        local startIndex = tooltip:find("Arm:")
+        if startIndex then
+            local after = tooltip:sub(startIndex + 4)
+            local value = after:match("(%d+)")
+            return tonumber(value) or 0
+        end
+    end
+
+    return 0
+end
+
+local function getTrueArm(slot)
+    local arm = extractInfo(slot, "Arm")
+    local durability = extractInfo(slot, "Durability")
+    return arm * (durability / 100)
+end
+
+
+-- Funções específicas para cada slot
+function getTrueArmHelmet() return getTrueArm(SlotHead) end
+function getTrueArmArmor()  return getTrueArm(SlotBody) end
+function getTrueArmLegs()   return getTrueArm(SlotLeg) end
+function getTrueArmBoots()  return getTrueArm(SlotFeet) end
+function getTrueArmRight()  return getTrueArm(SlotRight) end
+function getTrueArmLeft()   return getTrueArm(SlotLeft) end
+function getTrueArmRing()   return getTrueArm(SlotFinger) end
+
+
+-- Funções específicas para DURAÇÃO
+function getDurabilityHelmet() return extractInfo(SlotHead, "Durability") end
+function getDurabilityArmor()  return extractInfo(SlotBody, "Durability") end
+function getDurabilityLegs()   return extractInfo(SlotLeg,  "Durability") end
+function getDurabilityBoots()  return extractInfo(SlotFeet, "Durability") end
+function getDurabilityRight()  return extractInfo(SlotRight,"Durability") end
+function getDurabilityLeft()   return extractInfo(SlotLeft, "Durability") end
+function getDurabilityRing()   return extractInfo(SlotFinger,"Durability") end
+
+-- Funções específicas para ARM
+function getArmHelmet() return extractInfo(SlotHead, "Arm") end
+function getArmArmor()  return extractInfo(SlotBody, "Arm") end
+function getArmLegs()   return extractInfo(SlotLeg,  "Arm") end
+function getArmBoots()  return extractInfo(SlotFeet, "Arm") end
+function getArmRight()  return extractInfo(SlotRight,"Arm") end
+function getArmLeft()   return extractInfo(SlotLeft, "Arm") end
+function getArmRing()   return extractInfo(SlotFinger,"Arm") end
+
+
+
+
+-- posição inicial e espaçamento
+xth = 700
+yth = 10
+local spacing = 15
+
+local root = g_ui.getRootWidget()
+
+-- cria a label no root (ou usa existente)
+local function ensureLabel(var, posX, posY)
+  if var and not var:isDestroyed() then return var end
+
+  local xml = [[
+Label
+  width: 260
+  color: white
+  background-color: black
+  opacity: 0.85
+  text-horizontal-auto-resize: true
+  text-vertical-align: center
+  text-wrap: false
+]]
+  local lbl = g_ui.loadUIFromString(xml, root)
+  lbl:setPosition({ x = posX, y = posY })
+  return lbl
+end
+
+-- mantém referências (reutilizáveis caso reexecute o script)
+if not labelHead or labelHead:isDestroyed() then labelHead = ensureLabel(labelHead, xth, yth) end
+if not labelBody or labelBody:isDestroyed() then labelBody = ensureLabel(labelBody, xth, yth + spacing) end
+if not labelLegs or labelLegs:isDestroyed() then labelLegs = ensureLabel(labelLegs, xth, yth + spacing * 2) end
+if not labelFeet or labelFeet:isDestroyed() then labelFeet = ensureLabel(labelFeet, xth, yth + spacing * 3) end
+if not labelRing or labelRing:isDestroyed() then labelRing = ensureLabel(labelRing, xth, yth + spacing * 4) end
+if not labelTotal or labelTotal:isDestroyed() then labelTotal = ensureLabel(labelTotal, xth, yth + spacing * 5) end
+
+-- função segura para chamar suas funções (evita crash se algo faltar)
+local function safeCall(func)
+  if type(func) ~= "function" then return 0 end
+  local ok, res = pcall(func)
+  if not ok then return 0 end
+  return res or 0
+end
+
+local function fmtLine(arm, dur)
+  if (arm == 0 and dur == 0) then
+    return "- (no item)"
+  else
+    return string.format("%.1f | Dur: %d%%", arm, math.floor(dur + 0.5))
+  end
+end
+
+local function colorForDur(d)
+  if d == 0 then return "gray" end
+  if d <= 25 then return "red" end
+  if d <= 50 then return "yellow" end
+  return "white"
+end
+
+-- atualiza as labels periodicamente
+macro(500, function()
+  local headArm = safeCall(getTrueArmHelmet)
+  local headDur = safeCall(getDurabilityHelmet)
+
+  local bodyArm = safeCall(getTrueArmArmor)
+  local bodyDur = safeCall(getDurabilityArmor)
+
+  local legsArm = safeCall(getTrueArmLegs)
+  local legsDur = safeCall(getDurabilityLegs)
+
+  local feetArm = safeCall(getTrueArmBoots)
+  local feetDur = safeCall(getDurabilityBoots)
+
+  local ringArm = safeCall(getTrueArmRing)
+  local ringDur = safeCall(getDurabilityRing)
+
+  local totalArm = headArm + bodyArm + legsArm + feetArm + ringArm
+
+  labelHead:setText("Head: " .. fmtLine(headArm, headDur))
+  labelHead:setColor(colorForDur(headDur))
+
+  labelBody:setText("Body: " .. fmtLine(bodyArm, bodyDur))
+  labelBody:setColor(colorForDur(bodyDur))
+
+  labelLegs:setText("Legs: " .. fmtLine(legsArm, legsDur))
+  labelLegs:setColor(colorForDur(legsDur))
+
+  labelFeet:setText("Feet: " .. fmtLine(feetArm, feetDur))
+  labelFeet:setColor(colorForDur(feetDur))
+
+  labelRing:setText("Ring: " .. fmtLine(ringArm, ringDur))
+  labelRing:setColor(colorForDur(ringDur))
+
+  labelTotal:setText(string.format("Total Actual Arm: %.1f", totalArm))
+  labelTotal:setColor(totalArm <= 100 and "yellow" or "white")
+end)
+
+-- remove as labels ao deslogar
+onLogout(function()
+  if labelHead then labelHead:destroy() end
+  if labelBody then labelBody:destroy() end
+  if labelLegs then labelLegs:destroy() end
+  if labelFeet then labelFeet:destroy() end
+  if labelRing then labelRing:destroy() end
+  if labelTotal then labelTotal:destroy() end
+end)
+
+
+
 loaded = true
 if loaded == true then
 info('loaded')
