@@ -1465,7 +1465,7 @@ schedule(1000, function()
       info('Load: ' .. player:getTitle())
     end
 
-    if player:getTitle() == ('Mascara da Morte Renegado [Cancer]') then
+    if player:getTitle() == ('MDM Renegado [Cancer]') then
       storage.elemento = 'Water'
       storage.combo1 = 'akubensu'
       storage.combo2 = 'sekishiki meikai'
