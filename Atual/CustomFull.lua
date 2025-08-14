@@ -6294,6 +6294,30 @@ function getArmLeft()   return extractInfo(SlotLeft, "Arm") end
 function getArmRing()   return extractInfo(SlotFinger,"Arm") end
 
 
+SetUiMacro = macro(200, 'SetUiVis', function()end)
+
+macro(500, function()
+    if SetUiMacro.isOn() then return end
+    if HeadUi then
+        HeadUi.destroy()
+    end
+    if BodyUi then
+        BodyUi.destroy()
+    end
+    if LegsUi then
+        LegsUi.destroy()
+    end
+    if FeetUi then
+        FeetUi.destroy()
+    end
+    if FingerUi then
+        FingerUi.destroy()
+    end
+    if TotalUI then
+        TotalUI.destroy()
+    end
+end)
+
 infoX = 200
 infoy = 10
 
@@ -6303,7 +6327,7 @@ Panel
   width: 900
 ]], g_ui.getRootWidget())
 
-local HeadUi = g_ui.loadUIFromString([[
+HeadUi = g_ui.loadUIFromString([[
 Label
   color: white
   background-color: black
@@ -6314,6 +6338,7 @@ Label
 HeadUi:setPosition({y = infoy, x =  infoX})
 
 macro(500, function()
+    if SetUiMacro.isOff() then return end
     if getDurabilityHelmet() > 80 then
       HeadUi:setColor('white')
     else
@@ -6330,7 +6355,7 @@ Panel
   width: 900
 ]], g_ui.getRootWidget())
 
-local BodyUi = g_ui.loadUIFromString([[
+BodyUi = g_ui.loadUIFromString([[
 Label
   color: white
   background-color: black
@@ -6341,6 +6366,7 @@ Label
 BodyUi:setPosition({y = infoy+15, x =  infoX})
 
 macro(500, function()
+    if SetUiMacro.isOff() then return end
     if getDurabilityArmor() > 80 then
       BodyUi:setColor('white')
     else
@@ -6357,7 +6383,7 @@ Panel
   width: 900
 ]], g_ui.getRootWidget())
 
-local LegsUi = g_ui.loadUIFromString([[
+LegsUi = g_ui.loadUIFromString([[
 Label
   color: white
   background-color: black
@@ -6368,6 +6394,7 @@ Label
 LegsUi:setPosition({y = infoy+30, x =  infoX})
 
 macro(500, function()
+    if SetUiMacro.isOff() then return end
     if getDurabilityLegs() > 80 then
       LegsUi:setColor('white')
     else
@@ -6384,7 +6411,7 @@ Panel
   width: 900
 ]], g_ui.getRootWidget())
 
-local FeetUi = g_ui.loadUIFromString([[
+FeetUi = g_ui.loadUIFromString([[
 Label
   color: white
   background-color: black
@@ -6395,6 +6422,7 @@ Label
 FeetUi:setPosition({y = infoy+45, x =  infoX})
 
 macro(500, function()
+    if SetUiMacro.isOff() then return end
     if getDurabilityBoots() > 80 then
       FeetUi:setColor('white')
     else
@@ -6411,7 +6439,7 @@ Panel
   width: 900
 ]], g_ui.getRootWidget())
 
-local FingerUi = g_ui.loadUIFromString([[
+FingerUi = g_ui.loadUIFromString([[
 Label
   color: white
   background-color: black
@@ -6422,6 +6450,7 @@ Label
 FingerUi:setPosition({y = infoy+60, x =  infoX})
 
 macro(500, function()
+    if SetUiMacro.isOff() then return end
     if getDurabilityRing() > 80 then
       FingerUi:setColor('white')
     else
@@ -6438,7 +6467,7 @@ Panel
   width: 900
 ]], g_ui.getRootWidget())
 
-local FingerUi = g_ui.loadUIFromString([[
+TotalUI = g_ui.loadUIFromString([[
 Label
   color: white
   background-color: black
@@ -6446,12 +6475,13 @@ Label
   text-horizontal-auto-resize: true  
 ]], widget)
 
-FingerUi:setPosition({y = infoy+75, x =  infoX})
+TotalUI:setPosition({y = infoy+75, x =  infoX})
 
 macro(500, function()
+    if SetUiMacro.isOff() then return end
   if getTrueArmHelmet() and getTrueArmArmor() and getTrueArmLegs() and getTrueArmBoots() and getTrueArmRing() then
     ArmTotal = getTrueArmHelmet() + getTrueArmArmor() + getTrueArmLegs() + getTrueArmBoots() + getTrueArmRing()
-    FingerUi:setText("Total Arm: " .. ArmTotal)
+    TotalUI:setText("Total Arm: " .. ArmTotal)
   end
 end)
 
