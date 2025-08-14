@@ -4894,7 +4894,7 @@ info(targetsense)
 end)
 
 
-local ItemsToMove = {11755,13302,12272,13294,13298,13368,13882,13369,13831,13295,13882,13928,13881,13879,14251,13660,13297,13299,13194,13713,14824,13305,13304,13375,13880,12271,13657,14601,14594,14342,14599,14592,14602,13832,14088,13772,13773,14027,14090,14586,14089,13522,14936,13372,13373,13300,15129,15120,15119,15132,15099,15109,15136,15123,15133,15126,15134,15141,15131,15127,15144,15128,15112,15139,13303,15130,12270,15103,15135,14115,15137,15124,15092,13370,15107,15108,13371,15164,15165,15149,15163,15111,15110,15145,15105,15100,14087,15101,13296,15363,15364,15166,15167,15374,15375,15143,13480,14343,15477,15384,15385,14766,15138,15772,15773,13301,15140,13863,15104}
+local ItemsToMove = {11755,13302,12272,13294,13298,13368,13882,13369,13831,13295,13882,13928,13881,13879,14251,13660,13297,13299,13194,13713,14824,13305,13304,13375,13880,12271,13657,14601,14594,14342,14599,14592,14602,13832,14088,13772,13773,14027,14090,14586,14089,13522,14936,13372,13373,13300,15129,15120,15119,15132,15099,15109,15136,15123,15133,15126,15134,15141,15131,15127,15144,15128,15112,15139,13303,15130,12270,15103,15135,14115,15137,15124,15092,13370,15107,15108,13371,15164,15165,15149,15163,15111,15110,15145,15105,15100,14087,15101,13296,15363,15364,15166,15167,15374,15375,15143,13480,14343,15477,15384,15385,14766,15138,15772,15773,13301,15140,13863,15104,15121,14756}
 
 local function searchAndMoveItems()
     for _, container in pairs(getContainers()) do
@@ -6294,8 +6294,63 @@ function getArmLeft()   return extractInfo(SlotLeft, "Arm") end
 function getArmRing()   return extractInfo(SlotFinger,"Arm") end
 
 
-SetUiMacro = macro(200, 'SetUiVis', function()end)
-SetUiMacro.setOn()
+SetUiMacro = macro(200, 'SetUiVis', function()
+    if not HeadUi then
+        HeadUi = g_ui.loadUIFromString([[
+        Label
+          color: white
+          background-color: black
+          opacity: 0.85
+          text-horizontal-auto-resize: true  
+        ]], widget)
+    end
+    if not BodyUi then
+        BodyUi = g_ui.loadUIFromString([[
+        Label
+          color: white
+          background-color: black
+          opacity: 0.85
+          text-horizontal-auto-resize: true  
+        ]], widget)
+    end
+    if not LegsUi then
+        LegsUi = g_ui.loadUIFromString([[
+        Label
+          color: white
+          background-color: black
+          opacity: 0.85
+          text-horizontal-auto-resize: true  
+        ]], widget)
+    end
+    if not FeetUi then
+        FeetUi = g_ui.loadUIFromString([[
+        Label
+          color: white
+          background-color: black
+          opacity: 0.85
+          text-horizontal-auto-resize: true  
+        ]], widget)
+    end
+    if not FingerUi then
+        FingerUi = g_ui.loadUIFromString([[
+        Label
+          color: white
+          background-color: black
+          opacity: 0.85
+          text-horizontal-auto-resize: true  
+        ]], widget)
+    end
+    if not TotalUI then
+        TotalUI = g_ui.loadUIFromString([[
+        Label
+          color: white
+          background-color: black
+          opacity: 0.85
+          text-horizontal-auto-resize: true  
+        ]], widget)
+    end
+end)
+
 macro(500, function()
     if SetUiMacro.isOn() then return end
     if HeadUi then
