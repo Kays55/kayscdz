@@ -6295,7 +6295,7 @@ function getArmRing()   return extractInfo(SlotFinger,"Arm") end
 
 
 SetUiMacro = macro(200, 'SetUiVis', function()end)
-
+SetUiMacro.setOn()
 macro(500, function()
     if SetUiMacro.isOn() then return end
     if HeadUi then
