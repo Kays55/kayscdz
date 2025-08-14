@@ -6299,22 +6299,22 @@ SetUiMacro = macro(200, 'SetUiVis', function()end)
 macro(500, function()
     if SetUiMacro.isOn() then return end
     if HeadUi then
-        HeadUi.destroy()
+        HeadUi:destroy()
     end
     if BodyUi then
-        BodyUi.destroy()
+        BodyUi:destroy()
     end
     if LegsUi then
-        LegsUi.destroy()
+        LegsUi:destroy()
     end
     if FeetUi then
-        FeetUi.destroy()
+        FeetUi:destroy()
     end
     if FingerUi then
-        FingerUi.destroy()
+        FingerUi:destroy()
     end
     if TotalUI then
-        TotalUI.destroy()
+        TotalUI:destroy()
     end
 end)
 
