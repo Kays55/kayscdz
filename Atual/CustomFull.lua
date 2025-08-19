@@ -1739,7 +1739,7 @@ schedule(1000, function()
       storage.combo3 = 'Tempestade De Asgard'
       storage.combo4 = 'ultimate ' .. storage.elemento --contelação:  ' .. storage.elemento --contelação:  Gemeos Divino'
       storage.sspell = nil
-      storage.ultimate = 'Aniquilacao Divina De Pegasus'
+      storage.ultimate = ''
       storage.sense = 'sense'
       info('Load: ' .. player:getTitle())
     end
@@ -1958,6 +1958,30 @@ schedule(1000, function()
       storage.sspell = nil
       storage.ultimate = 'Impacto Divino'
       storage.sense = 'sense'
+      info('Load: ' .. player:getTitle())
+    end
+
+    if player:getTitle() == ('Deathtoll [Cancer]') then
+      storage.elemento = 'Fire'
+      storage.combo1 = 'Chamas Funebres'
+      storage.combo2 = 'Cry Of Dead'
+      storage.combo3 = 'Abraco Do Yomotsu'
+      storage.combo4 = 'ultimate ' .. storage.elemento --contelação:  ' .. storage.elemento --contelação:  Gemeos Divino'
+      storage.sspell = nil
+      storage.ultimate = nil
+      storage.sense = 'sense'
+      info('Load: ' .. player:getTitle())
+    end
+
+    if player:getTitle() == ('Shun [Virgem]') then
+      storage.elemento = 'Earth'
+      storage.combo1 = 'Ar Nebuloso'
+      storage.combo2 = 'Tempestade Nebulosa'
+      storage.combo3 = 'Protecao Nebulosa'
+      storage.combo4 = 'ultimate ' .. storage.elemento --contelação:  ' .. storage.elemento --contelação:  Gemeos Divino'
+      storage.sspell = nil
+      storage.ultimate = nil
+      storage.sense = 'Chain Sense'
       info('Load: ' .. player:getTitle())
     end
 
