@@ -1985,6 +1985,18 @@ schedule(1000, function()
       info('Load: ' .. player:getTitle())
     end
 
+    if player:getTitle() == ('Iwan [Troll]') then
+      storage.elemento = 'Fire'
+      storage.combo1 = 'Troll Slam'
+      storage.combo2 = 'Breath Of Ruin'
+      storage.combo3 = 'Greatest Perestroika'
+      storage.combo4 = 'ultimate ' .. storage.elemento --contelação:  ' .. storage.elemento --contelação:  Gemeos Divino'
+      storage.sspell = nil
+      storage.ultimate = nil
+      storage.sense = 'Chain Sense'
+      info('Load: ' .. player:getTitle())
+    end
+
 end)
 
 configmode = false
