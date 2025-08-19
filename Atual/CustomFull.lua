@@ -1993,7 +1993,7 @@ schedule(1000, function()
       storage.combo4 = 'ultimate ' .. storage.elemento --contelação:  ' .. storage.elemento --contelação:  Gemeos Divino'
       storage.sspell = nil
       storage.ultimate = nil
-      storage.sense = 'Chain Sense'
+      storage.sense = 'Sense'
       info('Load: ' .. player:getTitle())
     end
 
